@@ -6,7 +6,7 @@
   <title>Hollywood Schoolhouse | Hosted Hangouts</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & Playfair Display -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -37,7 +37,6 @@
     }
   </script>
   <style>
-    /* Custom scrollbar and smooth transitions */
     html { scroll-behavior: smooth; }
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #F1EFEA; }
@@ -57,45 +56,75 @@
   </aside>
 
   <!-- Navigation Header -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <!-- Logo & Identity -->
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-2xl bg-hshNavy flex items-center justify-center text-amber-400 shadow-md ring-2 ring-amber-400/30">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-hshNavy flex items-center justify-center text-amber-400 shadow-md ring-2 ring-amber-400/30 group-hover:scale-105 transition-transform">
           <i class="ph-bold ph-graduation-cap text-2xl"></i>
         </div>
         <div>
           <span class="block text-xs font-bold uppercase tracking-wider text-amber-600">Hollywood Schoolhouse</span>
           <span class="font-serif font-bold text-xl sm:text-2xl text-hshNavy leading-none">Hosted Hangouts</span>
         </div>
-      </div>
+      </a>
 
       <!-- Navigation Links & Actions -->
       <div class="flex items-center gap-2 sm:gap-4">
         <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600 mr-2">
           <a href="#browse-hangouts" class="hover:text-hshNavy transition-colors">Browse Hangouts</a>
-          <a href="#calendar-section" class="hover:text-hshNavy transition-colors">Calendar</a>
+          <!-- Fixed Calendar Link -->
+          <button onclick="goToCalendarView()" class="hover:text-hshNavy transition-colors font-semibold">Calendar</button>
           <a href="#recap-gallery" class="hover:text-hshNavy transition-colors">Past Highlights</a>
-          <a href="#faq-section" class="hover:text-hshNavy transition-colors">How It Works</a>
+          <a href="https://www.hshla.org/calendar" target="_blank" rel="noopener noreferrer" class="hover:text-amber-700 transition-colors flex items-center gap-1 text-xs text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
+            <span>HSH Official Calendar</span>
+            <i class="ph-bold ph-arrow-square-out text-[11px]"></i>
+          </a>
         </nav>
 
         <button onclick="openHostModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95">
           <i class="ph-bold ph-plus-circle text-base"></i>
-          <span>Host a Hangout</span>
+          <span>Pitch a Hangout</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-b from-white via-slate-50 to-hshSand pt-12 pb-16 border-b border-slate-200">
+  <section class="relative bg-gradient-to-b from-white via-slate-50 to-hshSand pt-10 pb-14 border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Top Guest / Host Selection Banner -->
+      <div class="bg-gradient-to-r from-hshNavy to-hshNavyLight p-4 sm:p-5 rounded-2xl shadow-lg border border-amber-400/30 mb-10 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5 text-center md:text-left">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/30 flex items-center justify-center text-2xl flex-shrink-0">
+            <i class="ph-bold ph-sparkle"></i>
+          </div>
+          <div>
+            <h2 class="font-serif font-bold text-lg text-white">How would you like to participate today?</h2>
+            <p class="text-xs text-slate-300">Join fellow parents as an attendee or host an activity to raise tuition funds!</p>
+          </div>
+        </div>
+
+        <!-- Prominent Guest & Host Buttons -->
+        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto justify-center">
+          <a href="#browse-hangouts" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs bg-white text-hshNavy hover:bg-amber-50 shadow-md transition-all active:scale-95">
+            <i class="ph-bold ph-users-three text-amber-600 text-base"></i>
+            <span>Are you a Guest? (Browse & Sign Up)</span>
+          </a>
+          <button onclick="openHostModal()" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-md transition-all active:scale-95">
+            <i class="ph-bold ph-hand-heart text-base"></i>
+            <span>Are you a Host? (Pitch an Idea)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <!-- Hero Text -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs font-bold uppercase tracking-wide">
             <i class="ph-fill ph-heart text-amber-600"></i>
-            Community Driven • LA Made
+            HSH Parent Community • 100% Tax Deductible
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-hshNavy tracking-tight leading-[1.15]">
             Unforgettable moments, <br>
@@ -111,10 +140,11 @@
               <i class="ph-bold ph-magnifying-glass"></i>
               <span>Explore Hangouts</span>
             </a>
-            <a href="#calendar-section" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-5 py-3.5 rounded-xl font-semibold shadow-sm transition-all">
-              <i class="ph-bold ph-calendar"></i>
+            <!-- Fixed Hero View Calendar Button -->
+            <button onclick="goToCalendarView()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-5 py-3.5 rounded-xl font-semibold shadow-sm transition-all">
+              <i class="ph-bold ph-calendar text-amber-600"></i>
               <span>View Calendar</span>
-            </a>
+            </button>
           </div>
         </div>
 
@@ -133,13 +163,12 @@
                 </span>
               </div>
 
-              <!-- Big Number -->
+              <!-- Total Raised -->
               <div>
                 <span class="text-xs uppercase font-bold text-slate-400 tracking-wider">Total Raised To Date</span>
                 <div class="text-4xl sm:text-5xl font-black text-hshNavy font-sans tracking-tight mt-1" id="stat-raised">
                   $34,250
                 </div>
-                <!-- Progress Bar -->
                 <div class="mt-3">
                   <div class="flex justify-between text-xs font-semibold text-slate-600 mb-1">
                     <span>Campaign Goal: $50,000</span>
@@ -182,16 +211,72 @@
         <p class="text-sm text-slate-600 mt-1">Pick an experience, reserve your spots, and connect with your HSH family.</p>
       </div>
 
-      <!-- View Switcher (Grid vs Calendar) -->
-      <div class="inline-flex bg-slate-200/80 p-1 rounded-xl self-start md:self-auto border border-slate-300">
-        <button id="viewGridBtn" onclick="switchView('grid')" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm">
-          <i class="ph-bold ph-squares-four"></i>
-          <span>Card View</span>
-        </button>
-        <button id="viewCalBtn" onclick="switchView('calendar')" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy">
-          <i class="ph-bold ph-calendar"></i>
-          <span>Calendar View</span>
-        </button>
+      <!-- Quick Dropdown Menu & View Switcher -->
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Browse Hangouts Dropdown Menu -->
+        <div class="relative inline-block text-left">
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Quick Menu</label>
+          <div class="relative">
+            <select 
+              id="quickMenuSelect" 
+              onchange="handleQuickMenu(this.value)" 
+              aria-label="Browse Hangouts Quick Menu"
+              class="appearance-none bg-white border border-slate-300 font-semibold text-xs text-hshNavy py-2 pl-3 pr-8 rounded-xl shadow-sm hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+            >
+              <option value="all">⚡ Browse All Hangouts</option>
+              <option value="parents-only">🥂 Parents Only</option>
+              <option value="sort-date">📅 Sort by Date</option>
+              <option value="sort-grade">🎓 Sort by Grade</option>
+              <option value="sort-cost">💲 Sort by Cost</option>
+              <option value="view-calendar">🗓️ View Calendar</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+              <i class="ph-bold ph-caret-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade Filter Dropdown -->
+        <div class="relative inline-block text-left">
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Filter by Grade</label>
+          <div class="relative">
+            <select 
+              id="gradeSelect" 
+              onchange="handleGradeFilter(this.value)" 
+              aria-label="Filter by Grade"
+              class="appearance-none bg-white border border-slate-300 font-semibold text-xs text-hshNavy py-2 pl-3 pr-8 rounded-xl shadow-sm hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+            >
+              <option value="all">All Grades & Families</option>
+              <option value="Preschool">Early Childhood / Preschool / K-Prep</option>
+              <option value="Kindergarten">Kindergarten</option>
+              <option value="1st Grade">1st Grade</option>
+              <option value="2nd Grade">2nd Grade</option>
+              <option value="3rd Grade">3rd Grade</option>
+              <option value="4th Grade">4th Grade</option>
+              <option value="5th Grade">5th Grade</option>
+              <option value="6th Grade">6th Grade</option>
+              <option value="Parents">Parents / Adults Only</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+              <i class="ph-bold ph-funnel text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Switcher (Grid vs Calendar) -->
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Layout</label>
+          <div class="inline-flex bg-slate-200/80 p-1 rounded-xl border border-slate-300">
+            <button id="viewGridBtn" onclick="switchView('grid')" class="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm">
+              <i class="ph-bold ph-squares-four"></i>
+              <span>Cards</span>
+            </button>
+            <button id="viewCalBtn" onclick="switchView('calendar')" class="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy">
+              <i class="ph-bold ph-calendar"></i>
+              <span>Calendar</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -226,7 +311,7 @@
           type="text" 
           id="searchInput" 
           oninput="handleSearch(this.value)" 
-          placeholder="Search host, event, grade..." 
+          placeholder="Search host, title, student..." 
           class="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 shadow-sm transition-all"
         >
       </div>
@@ -244,8 +329,8 @@
       <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mx-auto mb-4 text-3xl">
         <i class="ph-bold ph-magnifying-glass"></i>
       </div>
-      <h3 class="font-serif font-bold text-xl text-hshNavy">No hangouts match your criteria</h3>
-      <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Try clearing your filters or search terms, or be the first parent to host an event in this category!</p>
+      <h3 class="font-serif font-bold text-xl text-hshNavy">No hangouts match your filters</h3>
+      <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Try selecting another grade, category, or pitch this idea yourself as a host parent!</p>
       <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all">
         Reset All Filters
       </button>
@@ -254,12 +339,35 @@
 
   <!-- Main Content: Interactive Calendar Section -->
   <section id="calendar-section" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex-1 w-full">
+    <!-- Official School Calendar Sync Banner -->
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl flex-shrink-0">
+          <i class="ph-bold ph-calendar-check"></i>
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-slate-900 text-sm sm:text-base">Sync with Official Hollywood Schoolhouse Calendar</h3>
+          <p class="text-xs text-slate-600">Hangout dates are scheduled around official HSH school holidays, teacher workdays, and breaks.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 w-full md:w-auto">
+        <a href="https://www.hshla.org/calendar" target="_blank" rel="noopener noreferrer" class="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition-all">
+          <span>View HSHLA.org Calendar</span>
+          <i class="ph-bold ph-arrow-square-out"></i>
+        </a>
+        <button onclick="exportAllCalendarIcs()" class="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 border border-blue-300 text-blue-900 font-bold text-xs shadow-sm transition-all">
+          <i class="ph-bold ph-download-simple"></i>
+          <span>Add to Apple / Google Cal</span>
+        </button>
+      </div>
+    </div>
+
     <div class="bg-white rounded-3xl shadow-md border border-slate-200 p-6 sm:p-8">
       <!-- Calendar Controls -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
         <div>
           <h2 class="font-serif font-bold text-2xl sm:text-3xl text-hshNavy" id="calMonthYear">November 2026</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Click any date or event chip to view details and reserve</p>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Click any hangout event chip to view attendees and reserve your spot</p>
         </div>
         <div class="flex items-center gap-2">
           <button onclick="prevMonth()" class="p-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-600 transition-all">
@@ -311,7 +419,6 @@
           <div class="aspect-video relative overflow-hidden bg-slate-800">
             <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Hollywood Hills Wine & DJ Night" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" onerror="this.src='https://placehold.co/800x450/0f2644/fef3c7?text=Wine+DJ+Night'">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-            <!-- Play Button Overlay -->
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-14 h-14 rounded-full bg-amber-500/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-amber-500 transition-all">
                 <i class="ph-fill ph-play text-2xl ml-1"></i>
@@ -373,10 +480,10 @@
     </div>
   </section>
 
-  <!-- How It Works / FAQ Accordion -->
+  <!-- How It Works Section -->
   <section id="faq-section" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
     <div class="text-center mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Easy As 1-2-3</span>
+      <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Community Powered</span>
       <h2 class="font-serif font-bold text-3xl sm:text-4xl text-hshNavy mt-2">How Hosted Hangouts Work</h2>
     </div>
 
@@ -387,7 +494,7 @@
         </div>
         <h3 class="font-serif font-bold text-lg text-hshNavy">1. Pitch an Activity</h3>
         <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-          Got a talent, kitchen, pool, or favorite spot? Pick an activity, choose how many spots you can host, and set a donation price.
+          Parents propose an experience (cooking class, soccer drills, wine night) with dates and ticket donation amounts.
         </p>
       </div>
 
@@ -397,7 +504,7 @@
         </div>
         <h3 class="font-serif font-bold text-lg text-hshNavy">2. Sign Up & Pay</h3>
         <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-          Parents browse, see which other school families are attending, and book spots using Credit Card or direct school Venmo.
+          Browse by student grade, see which friends are going, and donate via Credit Card or school Venmo.
         </p>
       </div>
 
@@ -407,7 +514,7 @@
         </div>
         <h3 class="font-serif font-bold text-lg text-hshNavy">3. 100% Back to HSH</h3>
         <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-          Hosts generously donate their time and supplies so every cent goes to financial aid and tuition assistance for our students.
+          Hosts generously donate their time so 100% of registrations provide financial aid and tuition assistance.
         </p>
       </div>
     </div>
@@ -429,13 +536,13 @@
         <div class="flex items-center gap-4 text-xs text-slate-400">
           <span>Parent Association Committee</span>
           <span>•</span>
-          <a href="#" class="hover:text-amber-400 transition-colors">Tax ID 501(c)(3)</a>
+          <a href="https://www.hshla.org/calendar" target="_blank" class="hover:text-amber-400 transition-colors">School Calendar</a>
           <span>•</span>
-          <a href="#" class="hover:text-amber-400 transition-colors">Contact Coordinator</a>
+          <a href="mailto:hangouts@hshla.org" class="hover:text-amber-400 transition-colors">Contact Chairs</a>
         </div>
       </div>
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-        <p>© 2026 Hollywood Schoolhouse. Built with love by and for HSH parents.</p>
+        <p>© 2026 Hollywood Schoolhouse. Built by and for HSH parents.</p>
         <p class="flex items-center gap-1">
           Made for our kids <i class="ph-fill ph-heart text-red-400"></i> in Los Angeles
         </p>
@@ -448,7 +555,6 @@
   <!-- BOOKING & ATTENDEE MODAL -->
   <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8 transform transition-all">
-      <!-- Modal Header -->
       <div class="bg-hshNavy p-6 text-white relative">
         <button onclick="closeBookingModal()" class="absolute right-5 top-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
           <i class="ph-bold ph-x text-lg"></i>
@@ -460,9 +566,7 @@
         <p id="bmHost" class="text-xs text-amber-100/90 mt-1">Hosted by Host Name</p>
       </div>
 
-      <!-- Modal Body -->
       <div class="p-6 max-h-[75vh] overflow-y-auto space-y-6">
-        <!-- Event Quick Summary Info -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
           <div>
             <span class="text-slate-400 font-medium block">Date & Time</span>
@@ -482,13 +586,12 @@
           </div>
         </div>
 
-        <!-- Description -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">About This Hangout</h4>
           <p id="bmDescription" class="text-sm text-slate-600 leading-relaxed"></p>
         </div>
 
-        <!-- Current Attendees List ("Who is going") -->
+        <!-- Current Attendees List -->
         <div class="border-t border-slate-100 pt-4">
           <div class="flex items-center justify-between mb-3">
             <h4 class="text-sm font-bold text-hshNavy flex items-center gap-1.5">
@@ -497,9 +600,7 @@
             </h4>
             <span class="text-xs text-slate-400">See your fellow HSH families!</span>
           </div>
-          <div id="bmAttendeesList" class="flex flex-wrap gap-2 max-h-36 overflow-y-auto p-1">
-            <!-- Dynamic attendee pills -->
-          </div>
+          <div id="bmAttendeesList" class="flex flex-wrap gap-2 max-h-36 overflow-y-auto p-1"></div>
         </div>
 
         <!-- Reservation Form -->
@@ -535,10 +636,10 @@
 
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-1">Special Notes / Dietary / Allergies</label>
-            <input type="text" id="bfNotes" placeholder="Optional notes for the host parent..." class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="text" id="bfNotes" placeholder="Optional notes for host..." class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
 
-          <!-- Payment Options Toggle -->
+          <!-- Payment Options -->
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Donation Payment</span>
@@ -546,7 +647,7 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <label class="cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card bg-amber-50/60 border-amber-500 ring-2 ring-amber-500/20" id="optCardLabel">
+              <label class="cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all bg-amber-50/60 border-amber-500 ring-2 ring-amber-500/20" id="optCardLabel">
                 <input type="radio" name="paymentMethod" value="card" checked onchange="togglePaymentUi('card')" class="hidden">
                 <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
                   <i class="ph-bold ph-credit-card text-base text-amber-600"></i>
@@ -555,7 +656,7 @@
                 <span class="text-[10px] text-slate-500">Instant Online Checkout</span>
               </label>
 
-              <label class="cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card border-slate-200 bg-white hover:border-slate-300" id="optVenmoLabel">
+              <label class="cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all border-slate-200 bg-white hover:border-slate-300" id="optVenmoLabel">
                 <input type="radio" name="paymentMethod" value="venmo" onchange="togglePaymentUi('venmo')" class="hidden">
                 <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
                   <i class="ph-bold ph-paper-plane-tilt text-base text-blue-500"></i>
@@ -565,75 +666,76 @@
               </label>
             </div>
 
-            <!-- Card Fields Placeholder -->
             <div id="cardDetailsSection" class="pt-2 space-y-2">
               <input type="text" placeholder="Card Number •••• •••• •••• 4242" class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white" value="4000 1234 5678 9010">
               <div class="grid grid-cols-2 gap-2">
                 <input type="text" placeholder="MM/YY" class="text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white" value="12/28">
                 <input type="text" placeholder="CVC" class="text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white" value="842">
               </div>
-              <p class="text-[11px] text-slate-400 flex items-center gap-1">
-                <i class="ph-fill ph-lock-simple"></i> Encrypted 256-bit sandbox checkout. Funds go to HSH.
-              </p>
             </div>
 
-            <!-- Venmo Instructions (Hidden by default) -->
-            <div id="venmoDetailsSection" class="hidden pt-2 p-3 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-blue-900 space-y-2">
-              <div class="flex items-center gap-2">
-                <i class="ph-fill ph-info text-blue-600 text-lg"></i>
-                <p class="font-semibold">Venmo Handle: <span class="bg-white px-2 py-0.5 rounded font-mono text-blue-700 border border-blue-200">@HollywoodSchoolhouse-Hangouts</span></p>
-              </div>
+            <div id="venmoDetailsSection" class="hidden pt-2 p-3 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-blue-900 space-y-1.5">
+              <p class="font-semibold">School Venmo Handle: <span class="bg-white px-2 py-0.5 rounded font-mono text-blue-700 border border-blue-200">@HollywoodSchoolhouse-Hangouts</span></p>
               <p class="text-[11px] text-blue-800">
-                When you click "Confirm & Pay With Venmo", we will register your spot immediately and you can complete the transfer in your Venmo app with memo: <span id="venmoMemo" class="font-bold underline">#Hangout</span>
+                Confirm your spot here, then open your Venmo App to transfer donation with note: <span id="venmoMemo" class="font-bold underline">#Hangout</span>
               </p>
             </div>
           </div>
 
-          <!-- Submit Button -->
-          <div class="pt-2">
-            <button type="submit" id="submitBookingBtn" class="w-full bg-hshNavy hover:bg-hshNavyLight text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
-              <i class="ph-bold ph-check-circle text-lg"></i>
-              <span id="submitBookingBtnText">Confirm Reservation & Donate $0</span>
-            </button>
-            <p class="text-center text-[11px] text-slate-400 mt-2">
-              Receipt with host's exact address will be emailed immediately.
-            </p>
-          </div>
+          <button type="submit" id="submitBookingBtn" class="w-full bg-hshNavy hover:bg-hshNavyLight text-white py-3.5 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <i class="ph-bold ph-check-circle text-lg"></i>
+            <span id="submitBookingBtnText">Confirm Reservation</span>
+          </button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- HOST A HANGOUT PROPOSAL MODAL -->
+  <!-- HOST A HANGOUT PITCH MODAL (With Auto-Generated Email) -->
   <div id="hostModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8">
       <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white relative">
         <button onclick="closeHostModal()" class="absolute right-5 top-5 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-all">
           <i class="ph-bold ph-x text-lg"></i>
         </button>
-        <span class="text-xs uppercase font-bold tracking-wider text-amber-200">Give Back to HSH</span>
-        <h3 class="font-serif font-bold text-2xl mt-0.5">Host Your Own Hangout</h3>
-        <p class="text-xs text-amber-100/90 mt-1">Share an experience, invite parents or kids, and set the donation amount!</p>
+        <span class="text-xs uppercase font-bold tracking-wider text-amber-200">Hosted Hangout Committee Submission</span>
+        <h3 class="font-serif font-bold text-2xl mt-0.5">Pitch Your Hangout Idea</h3>
+        <p class="text-xs text-amber-100/90 mt-1">This will publish the hangout to the platform and autogenerate an email to the school chairs.</p>
       </div>
 
       <form id="hostForm" onsubmit="submitNewHangout(event)" class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
         <div>
           <label class="block text-xs font-semibold text-slate-700 mb-1">Hangout Title *</label>
-          <input type="text" id="hfTitle" required placeholder="e.g., Mom's Backyard Taco & Margarita Fiesta" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" id="hfTitle" required placeholder="e.g., Mom's Backyard Taco & Margarita Fiesta or Soccer Clinic" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name(s) *</label>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Host Parent Name(s) *</label>
             <input type="text" id="hfHost" required placeholder="e.g., Elena & Marco Rossi" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Your Student's Grade *</label>
-            <input type="text" id="hfGrade" required placeholder="e.g., 1st Grade & Pre-K" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Host Email Address *</label>
+            <input type="email" id="hfEmail" required placeholder="e.g., elena@example.com" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Target Grade Level *</label>
+            <select id="hfGrade" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+              <option value="Parents Only">Parents / Adults Only</option>
+              <option value="Preschool / K-Prep">Preschool / Early Childhood / K-Prep</option>
+              <option value="Kindergarten">Kindergarten</option>
+              <option value="1st Grade">1st Grade</option>
+              <option value="2nd Grade">2nd Grade</option>
+              <option value="3rd Grade">3rd Grade</option>
+              <option value="4th Grade">4th Grade</option>
+              <option value="5th Grade">5th Grade</option>
+              <option value="6th Grade">6th Grade</option>
+              <option value="All Grades">All Grades Welcome</option>
+            </select>
+          </div>
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-1">Category *</label>
             <select id="hfCategory" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
@@ -644,37 +746,46 @@
               <option value="Fitness">🧘 Wellness & Fitness</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Date & Time *</label>
-            <input type="datetime-local" id="hfDateTime" required class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
-          </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Price Per Spot ($) *</label>
-            <input type="number" id="hfPrice" min="10" step="5" required placeholder="e.g., 75" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Date & Time *</label>
+            <input type="datetime-local" id="hfDateTime" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Total Spots Capacity *</label>
-            <input type="number" id="hfCapacity" min="2" max="100" required placeholder="e.g., 15" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Price / Spot ($) *</label>
+            <input type="number" id="hfPrice" min="10" step="5" required placeholder="e.g. 75" class="w-full text-sm px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Capacity (Spots) *</label>
+            <input type="number" id="hfCapacity" min="2" max="100" required placeholder="e.g. 15" class="w-full text-sm px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-semibold text-slate-700 mb-1">Location / Neighborhood *</label>
-          <input type="text" id="hfLocation" required placeholder="e.g., Host's Backyard (Los Feliz) or Pan Pacific Park" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" id="hfLocation" required placeholder="e.g., Host Backyard in Los Feliz or Griffith Park Field" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">Hangout Description *</label>
-          <textarea id="hfDescription" rows="3" required placeholder="Describe what attendees will enjoy, what is included, what to wear/bring..." class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Hangout Description & What's Included *</label>
+          <textarea id="hfDescription" rows="3" required placeholder="Explain the activity, food/drinks included, what attendees should bring..." class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+        </div>
+
+        <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 text-xs text-amber-900 space-y-1">
+          <p class="font-bold flex items-center gap-1">
+            <i class="ph-bold ph-envelope-simple"></i> Automatic Committee Notification
+          </p>
+          <p class="text-[11px] text-amber-800">
+            Submitting this form publishes your hangout for preview and opens your email client with an autogenerated draft addressed to <strong>hangouts@hshla.org</strong> for final school review.
+          </p>
         </div>
 
         <div class="pt-2">
           <button type="submit" class="w-full bg-hshGold hover:bg-hshGoldHover text-white py-3.5 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
             <i class="ph-bold ph-paper-plane-right text-lg"></i>
-            <span>Publish Hangout for Signups</span>
+            <span>Submit Pitch & Generate Chairs Email</span>
           </button>
         </div>
       </form>
@@ -689,9 +800,7 @@
       </button>
 
       <div class="aspect-video w-full bg-black relative flex items-center justify-center">
-        <!-- Interactive Mock Video Player -->
         <div id="videoContainer" class="w-full h-full flex flex-col items-center justify-center text-center p-8 text-white relative">
-          <!-- Animated backdrop representation -->
           <div id="videoBackground" class="absolute inset-0 bg-cover bg-center opacity-40"></div>
           
           <div class="relative z-10 space-y-4 max-w-md">
@@ -705,7 +814,6 @@
             </div>
           </div>
 
-          <!-- Video playback bar simulation -->
           <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent flex items-center gap-3 text-xs text-slate-300">
             <i class="ph-fill ph-pause text-amber-400"></i>
             <div class="flex-1 bg-white/20 h-1.5 rounded-full overflow-hidden">
@@ -735,12 +843,13 @@
 
   <!-- JavaScript Logic -->
   <script>
-    // Initial Seed Data with Real-Life Hollywood Schoolhouse vibe
+    // Initial Seed Data with Real-Life Hollywood Schoolhouse events & grades
     const INITIAL_HANGOUTS = [
       {
         id: "hangout-1",
         title: "Sunset Wine & Vinyl DJ Party in the Hills",
         category: "Parents",
+        targetGrade: "Parents Only",
         hostName: "Carlos & Maya Morales",
         hostGrade: "3rd & 5th Grade Parents",
         date: "2026-11-14T18:30:00",
@@ -773,6 +882,7 @@
         id: "hangout-2",
         title: "Saturday Soccer Skills Clinic & Scrimmage",
         category: "Kids",
+        targetGrade: "1st Grade",
         hostName: "Coach Dave Sterling (Pro-Am Dad)",
         hostGrade: "1st & 4th Grade Dad",
         date: "2026-11-21T09:30:00",
@@ -799,6 +909,7 @@
         id: "hangout-3",
         title: "Artisanal Sourdough & Focaccia Masterclass",
         category: "Culinary",
+        targetGrade: "Kindergarten",
         hostName: "Chef Francesca Bianchi",
         hostGrade: "Kindergarten Mom",
         date: "2026-11-18T17:00:00",
@@ -806,7 +917,7 @@
         location: "Francesca's Kitchen, Hancock Park",
         price: 85,
         capacity: 10,
-        description: "Roll up your sleeves! Francesca will teach her signature 72-hour sourdough fermentation, stretching techniques, and decorative focaccia scoring with edible flowers. Everyone takes home a sourdough starter and warm bread.",
+        description: "Roll up your sleeves! Francesca will teach her signature 72-hour sourdough fermentation, stretching techniques, and decorative focaccia scoring with edible flowers. Everyone takes home sourdough starter and warm bread.",
         image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
         attendees: [
           { name: "Sarah & David Miller", grade: "Kindergarten" },
@@ -822,6 +933,7 @@
         id: "hangout-4",
         title: "Rooftop Hip-Hop & Commercial Dance Workshop",
         category: "Fitness",
+        targetGrade: "2nd Grade",
         hostName: "Jade Robinson (Tour Choreographer)",
         hostGrade: "2nd Grade Mom",
         date: "2026-11-22T11:00:00",
@@ -845,6 +957,7 @@
         id: "hangout-5",
         title: "Backyard Pizza Night & Giant Outdoor Movie",
         category: "Family",
+        targetGrade: "3rd Grade",
         hostName: "The Sterling & Chen Families",
         hostGrade: "K-Prep & 3rd Grade Parents",
         date: "2026-11-28T17:30:00",
@@ -868,6 +981,7 @@
         id: "hangout-6",
         title: "Parent Paddle Tennis Tournament & Social",
         category: "Fitness",
+        targetGrade: "Parents Only",
         hostName: "Brad Hastings & Tom Lindqvist",
         hostGrade: "4th Grade Dads",
         date: "2026-12-05T14:00:00",
@@ -891,11 +1005,12 @@
     // App State
     let hangouts = [...INITIAL_HANGOUTS];
     let selectedCategory = 'all';
+    let selectedGrade = 'all';
+    let currentSort = 'none';
     let searchQuery = '';
     let currentSelectedHangout = null;
     let currentCalMonth = new Date(2026, 10, 1); // November 2026
 
-    // Category Badge Helpers
     const categoryIcons = {
       'Parents': 'ph-martini',
       'Kids': 'ph-soccer-ball',
@@ -912,7 +1027,6 @@
       'Fitness': 'bg-rose-100 text-rose-800 border-rose-200'
     };
 
-    // Calculate live fundraising stats
     function recalculateStats() {
       let totalRaised = 0;
       let totalBooked = 0;
@@ -923,7 +1037,6 @@
         totalRaised += (booked * h.price);
       });
 
-      // Update UI
       const goal = 50000;
       const percent = Math.min(100, ((totalRaised / goal) * 100)).toFixed(1);
       
@@ -940,17 +1053,46 @@
       const emptyState = document.getElementById('emptyState');
       container.innerHTML = '';
 
-      const filtered = hangouts.filter(item => {
+      let filtered = hangouts.filter(item => {
+        // Category filter
         const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+        
+        // Grade filter
+        let matchesGrade = true;
+        if (selectedGrade !== 'all') {
+          if (selectedGrade === 'Parents') {
+            matchesGrade = item.category === 'Parents' || (item.targetGrade && item.targetGrade.includes('Parents'));
+          } else if (selectedGrade === 'Preschool') {
+            matchesGrade = (item.targetGrade && (item.targetGrade.includes('Preschool') || item.targetGrade.includes('K-Prep'))) ||
+                           (item.hostGrade && (item.hostGrade.includes('Pre-K') || item.hostGrade.includes('K-Prep')));
+          } else {
+            matchesGrade = (item.targetGrade && item.targetGrade.includes(selectedGrade)) ||
+                           (item.hostGrade && item.hostGrade.includes(selectedGrade)) ||
+                           item.attendees.some(a => a.grade && a.grade.includes(selectedGrade));
+          }
+        }
+
+        // Search filter
         const q = searchQuery.toLowerCase();
         const matchesSearch = !q || 
           item.title.toLowerCase().includes(q) ||
           item.hostName.toLowerCase().includes(q) ||
-          item.hostGrade.toLowerCase().includes(q) ||
+          (item.hostGrade && item.hostGrade.toLowerCase().includes(q)) ||
           item.location.toLowerCase().includes(q) ||
-          item.attendees.some(a => a.name.toLowerCase().includes(q) || a.grade.toLowerCase().includes(q));
-        return matchesCategory && matchesSearch;
+          (item.targetGrade && item.targetGrade.toLowerCase().includes(q)) ||
+          item.attendees.some(a => a.name.toLowerCase().includes(q) || (a.grade && a.grade.toLowerCase().includes(q)));
+
+        return matchesCategory && matchesGrade && matchesSearch;
       });
+
+      // Apply Sorting
+      if (currentSort === 'date') {
+        filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (currentSort === 'cost') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (currentSort === 'grade') {
+        filtered.sort((a, b) => (a.targetGrade || '').localeCompare(b.targetGrade || ''));
+      }
 
       if (filtered.length === 0) {
         emptyState.classList.remove('hidden');
@@ -964,7 +1106,6 @@
         const isSoldOut = spotsLeft === 0;
         const pctFilled = Math.min(100, Math.round((h.attendees.length / h.capacity) * 100));
 
-        // Generate sample avatars for attendees
         const attendeesPreview = h.attendees.slice(0, 4);
         const extraAttendees = h.attendees.length - attendeesPreview.length;
 
@@ -982,18 +1123,24 @@
             />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
 
-            <!-- Category Badge -->
-            <span class="absolute top-3 left-3 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${categoryColors[h.category] || 'bg-slate-100 text-slate-800'} shadow-sm">
-              <i class="ph-bold ${categoryIcons[h.category] || 'ph-star'} mr-1"></i>
-              ${h.category}
-            </span>
+            <!-- Category & Grade Badge -->
+            <div class="absolute top-3 left-3 flex flex-wrap gap-1">
+              <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${categoryColors[h.category] || 'bg-slate-100 text-slate-800'} shadow-sm">
+                <i class="ph-bold ${categoryIcons[h.category] || 'ph-star'} mr-1"></i>
+                ${h.category}
+              </span>
+              ${h.targetGrade ? `
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-slate-900/80 text-amber-300 border border-amber-400/30 badge-blur">
+                  ${h.targetGrade}
+                </span>
+              ` : ''}
+            </div>
 
             <!-- Price Tag -->
             <span class="absolute top-3 right-3 bg-white/95 text-hshNavy font-bold text-xs px-3 py-1.5 rounded-full shadow-md">
-              $${h.price} <span class="text-[10px] text-slate-500 font-normal">/ person</span>
+              $${h.price} <span class="text-[10px] text-slate-500 font-normal">/ spot</span>
             </span>
 
-            <!-- Date on Bottom of Image -->
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-medium">
               <span class="flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded-lg backdrop-blur-sm">
                 <i class="ph-bold ph-calendar-blank text-amber-400"></i>
@@ -1019,7 +1166,7 @@
               </p>
             </div>
 
-            <!-- Who is Going Preview -->
+            <!-- Attendees Preview -->
             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
               <div class="flex items-center justify-between text-xs mb-2">
                 <span class="font-semibold text-slate-700 flex items-center gap-1">
@@ -1030,10 +1177,9 @@
                 </span>
               </div>
 
-              <!-- Avatars & Names -->
               <div class="flex items-center justify-between">
                 <div class="flex items-center -space-x-2">
-                  ${attendeesPreview.map((att, idx) => `
+                  ${attendeesPreview.map(att => `
                     <div title="${att.name} (${att.grade})" class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-amber-700 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white uppercase shadow-sm">
                       ${att.name.charAt(0)}
                     </div>
@@ -1049,7 +1195,6 @@
                 </button>
               </div>
 
-              <!-- Capacity bar -->
               <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mt-2.5">
                 <div class="bg-gradient-to-r from-amber-500 to-amber-600 h-full rounded-full" style="width: ${pctFilled}%;"></div>
               </div>
@@ -1075,6 +1220,48 @@
       });
     }
 
+    // Quick Menu Dropdown Handler
+    function handleQuickMenu(val) {
+      if (val === 'all') {
+        selectedCategory = 'all';
+        selectedGrade = 'all';
+        currentSort = 'none';
+        document.getElementById('gradeSelect').value = 'all';
+        setCategoryFilter('all');
+        switchView('grid');
+      } else if (val === 'parents-only') {
+        setCategoryFilter('Parents');
+        switchView('grid');
+      } else if (val === 'sort-date') {
+        currentSort = 'date';
+        renderHangouts();
+        switchView('grid');
+      } else if (val === 'sort-grade') {
+        currentSort = 'grade';
+        renderHangouts();
+        switchView('grid');
+      } else if (val === 'sort-cost') {
+        currentSort = 'cost';
+        renderHangouts();
+        switchView('grid');
+      } else if (val === 'view-calendar') {
+        goToCalendarView();
+      }
+    }
+
+    // Grade Filter Handler
+    function handleGradeFilter(grade) {
+      selectedGrade = grade;
+      renderHangouts();
+    }
+
+    // Calendar Switching and Scrolling Helper
+    function goToCalendarView() {
+      switchView('calendar');
+      const calSection = document.getElementById('calendar-section');
+      calSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
     // Interactive Calendar Logic
     function renderCalendar() {
       const calGrid = document.getElementById('calendarGrid');
@@ -1089,7 +1276,7 @@
       const lastDayDate = new Date(year, month + 1, 0).getDate();
       const prevLastDayDate = new Date(year, month, 0).getDate();
 
-      // Previous month filler days
+      // Previous month days
       for (let i = firstDayIndex; i > 0; i--) {
         const dayCell = document.createElement('div');
         dayCell.className = "min-h-[95px] p-2 bg-slate-50/50 rounded-xl border border-slate-100 text-slate-300 text-xs font-semibold";
@@ -1110,7 +1297,6 @@
         cellHeader.innerHTML = `<span class="text-xs font-bold ${isCurrentDay ? 'text-amber-700 bg-amber-100 w-5 h-5 rounded-full flex items-center justify-center' : 'text-slate-600'}">${day}</span>`;
         dayCell.appendChild(cellHeader);
 
-        // Find events on this day
         const cellDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const dayEvents = hangouts.filter(h => h.date.startsWith(cellDateStr));
 
@@ -1156,14 +1342,14 @@
       if (view === 'calendar') {
         grid.classList.add('hidden');
         calendar.classList.remove('hidden');
-        calBtn.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm";
-        gridBtn.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy";
+        calBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm";
+        gridBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy";
         renderCalendar();
       } else {
         calendar.classList.add('hidden');
         grid.classList.remove('hidden');
-        gridBtn.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm";
-        calBtn.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy";
+        gridBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all bg-white text-hshNavy shadow-sm";
+        calBtn.className = "flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-hshNavy";
       }
     }
 
@@ -1195,9 +1381,44 @@
 
     function resetFilters() {
       selectedCategory = 'all';
+      selectedGrade = 'all';
       searchQuery = '';
+      currentSort = 'none';
       document.getElementById('searchInput').value = '';
+      document.getElementById('gradeSelect').value = 'all';
+      document.getElementById('quickMenuSelect').value = 'all';
       setCategoryFilter('all');
+    }
+
+    // Export All Hangouts as standard iCal (.ics)
+    function exportAllCalendarIcs() {
+      let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Hollywood Schoolhouse//Hosted Hangouts//EN\nCALSCALE:GREGORIAN\n";
+      hangouts.forEach(h => {
+        const startDate = new Date(h.date);
+        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // 2 hours duration
+        
+        const formatICS = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        
+        icsContent += "BEGIN:VEVENT\n";
+        icsContent += `SUMMARY:HSH Hangout: ${h.title}\n`;
+        icsContent += `DESCRIPTION:${h.description.replace(/\n/g, ' ')} (Hosted by ${h.hostName})\n`;
+        icsContent += `LOCATION:${h.location}\n`;
+        icsContent += `DTSTART:${formatICS(startDate)}\n`;
+        icsContent += `DTEND:${formatICS(endDate)}\n`;
+        icsContent += "STATUS:CONFIRMED\n";
+        icsContent += "END:VEVENT\n";
+      });
+      icsContent += "END:VCALENDAR";
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', 'HSH-Hosted-Hangouts.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast("Calendar File Downloaded!", "Import HSH-Hosted-Hangouts.ics into Apple or Google Calendar.");
     }
 
     // Booking Modal Operations
@@ -1206,7 +1427,6 @@
       if (!hangout) return;
       currentSelectedHangout = hangout;
 
-      // Populate details
       document.getElementById('bmCategory').textContent = hangout.category;
       document.getElementById('bmCategory').className = `inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border mb-2 ${categoryColors[hangout.category] || 'bg-slate-100 text-slate-800'}`;
       document.getElementById('bmTitle').textContent = hangout.title;
@@ -1220,7 +1440,6 @@
       document.getElementById('bmDescription').textContent = hangout.description;
       document.getElementById('bmAttendeeCount').textContent = hangout.attendees.length;
 
-      // Render attendee pills
       const attendeesContainer = document.getElementById('bmAttendeesList');
       attendeesContainer.innerHTML = '';
       if (hangout.attendees.length === 0) {
@@ -1240,7 +1459,6 @@
         });
       }
 
-      // Quantity selector options based on spots left
       const qtySelect = document.getElementById('bfQuantity');
       qtySelect.innerHTML = '';
       const maxSelect = Math.min(4, Math.max(1, spotsLeft));
@@ -1251,7 +1469,6 @@
         qtySelect.appendChild(opt);
       }
 
-      // Venmo memo update
       document.getElementById('venmoMemo').textContent = `#Hangout-${hangout.title.substring(0, 14)}`;
 
       updateBookingTotal();
@@ -1280,13 +1497,13 @@
       if (type === 'card') {
         cardSec.classList.remove('hidden');
         venmoSec.classList.add('hidden');
-        cardLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card bg-amber-50/60 border-amber-500 ring-2 ring-amber-500/20";
-        venmoLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card border-slate-200 bg-white hover:border-slate-300";
+        cardLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all bg-amber-50/60 border-amber-500 ring-2 ring-amber-500/20";
+        venmoLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all border-slate-200 bg-white hover:border-slate-300";
       } else {
         cardSec.classList.add('hidden');
         venmoSec.classList.remove('hidden');
-        venmoLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card bg-blue-50/60 border-blue-500 ring-2 ring-blue-500/20";
-        cardLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all payment-opt-card border-slate-200 bg-white hover:border-slate-300";
+        venmoLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all bg-blue-50/60 border-blue-500 ring-2 ring-blue-500/20";
+        cardLabel.className = "cursor-pointer border rounded-xl p-3 flex flex-col items-center gap-1.5 transition-all border-slate-200 bg-white hover:border-slate-300";
       }
     }
 
@@ -1300,7 +1517,6 @@
       const qty = parseInt(document.getElementById('bfQuantity').value) || 1;
       const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
 
-      // Add to attendee list
       for (let i = 0; i < qty; i++) {
         currentSelectedHangout.attendees.push({
           name: qty > 1 ? `${parentName} (${i + 1}/${qty})` : parentName,
@@ -1310,23 +1526,20 @@
 
       const totalDonation = qty * currentSelectedHangout.price;
 
-      // Re-render UI
       recalculateStats();
       renderHangouts();
       renderCalendar();
       closeBookingModal();
 
-      // Show toast confirmation
       const toastText = paymentMethod === 'card' 
-        ? `Reserved ${qty} spot(s)! $${totalDonation} charged to your card.`
-        : `Reserved ${qty} spot(s)! Remember to send $${totalDonation} to @HollywoodSchoolhouse-Hangouts.`;
+        ? `Reserved ${qty} spot(s)! $${totalDonation} processed for Tuition Assistance.`
+        : `Reserved ${qty} spot(s)! Complete donation by sending $${totalDonation} to @HollywoodSchoolhouse-Hangouts.`;
       
-      showToast(toastText, `You're on the list! Host address sent to ${email}`);
+      showToast(toastText, `Host address & info sent to ${email}`);
     }
 
-    // Host a Hangout Modal Operations
+    // Host Pitch Modal Operations
     function openHostModal() {
-      // Set default date to 2 weeks out
       const defaultDate = new Date();
       defaultDate.setDate(defaultDate.getDate() + 14);
       defaultDate.setHours(18, 0, 0, 0);
@@ -1339,12 +1552,14 @@
       document.getElementById('hostForm').reset();
     }
 
+    // Submit New Hangout Pitch & Auto-Generate Email to Chairs
     function submitNewHangout(event) {
       event.preventDefault();
 
       const title = document.getElementById('hfTitle').value.trim();
       const host = document.getElementById('hfHost').value.trim();
-      const grade = document.getElementById('hfGrade').value.trim();
+      const email = document.getElementById('hfEmail').value.trim();
+      const grade = document.getElementById('hfGrade').value;
       const category = document.getElementById('hfCategory').value;
       const dateVal = document.getElementById('hfDateTime').value;
       const price = parseInt(document.getElementById('hfPrice').value);
@@ -1356,7 +1571,6 @@
       const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
       const formattedDate = parsedDate.toLocaleDateString('en-US', options);
 
-      // Default curated stock photo based on category
       const imageMap = {
         'Parents': 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80',
         'Kids': 'https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=800&q=80',
@@ -1369,6 +1583,7 @@
         id: `hangout-${Date.now()}`,
         title: title,
         category: category,
+        targetGrade: grade,
         hostName: host,
         hostGrade: `${grade} Parent`,
         date: dateVal,
@@ -1379,7 +1594,7 @@
         description: description,
         image: imageMap[category] || 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80',
         attendees: [
-          { name: host, grade: grade } // Host automatically attends their event!
+          { name: host, grade: grade }
         ]
       };
 
@@ -1389,13 +1604,42 @@
       renderCalendar();
       closeHostModal();
 
-      showToast(`Hangout Published!`, `Your event "${title}" is live for parents to book.`);
+      // Autogenerate email to Hosted Hangout Chairs
+      const emailSubject = encodeURIComponent(`Hosted Hangout Submission: ${title}`);
+      const emailBody = encodeURIComponent(
+        `Dear HSH Hosted Hangout Chairs,\n\n` +
+        `I would love to host a Hangout to support Tuition Assistance at Hollywood Schoolhouse!\n\n` +
+        `--- HANGOUT DETAILS ---\n` +
+        `Event Title: ${title}\n` +
+        `Host Parent(s): ${host}\n` +
+        `Contact Email: ${email}\n` +
+        `Target Grade Level: ${grade}\n` +
+        `Category: ${category}\n` +
+        `Proposed Date & Time: ${formattedDate}\n` +
+        `Suggested Price per Spot: $${price}\n` +
+        `Maximum Capacity: ${capacity} spots\n` +
+        `Location / Neighborhood: ${location}\n\n` +
+        `Description & Inclusions:\n${description}\n\n` +
+        `Thank you for helping organize this for our school!\n\n` +
+        `Warmly,\n${host}`
+      );
+
+      // Trigger user's email client
+      const mailtoUrl = `mailto:hangouts@hshla.org?cc=${encodeURIComponent(email)}&subject=${emailSubject}&body=${emailBody}`;
       
-      // Scroll to browse section
+      showToast(
+        `Hangout Pitch Submitted!`, 
+        `Opening draft email to the HSH chairs. Event preview is now visible in the list.`
+      );
+
+      setTimeout(() => {
+        window.location.href = mailtoUrl;
+      }, 700);
+
       document.getElementById('browse-hangouts').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Video Recap Modal Logic
+    // Video Recap Modal
     const videoData = {
       'wine': {
         title: "Hollywood Hills Sunset Wine & DJ Recap",
@@ -1427,7 +1671,6 @@
       document.getElementById('videoModal').classList.add('hidden');
     }
 
-    // Toast UI
     function showToast(msg, subMsg) {
       const toast = document.getElementById('toast');
       document.getElementById('toastMessage').textContent = msg;
@@ -1435,14 +1678,13 @@
       toast.classList.remove('hidden');
       setTimeout(() => {
         hideToast();
-      }, 5500);
+      }, 6000);
     }
 
     function hideToast() {
       document.getElementById('toast').classList.add('hidden');
     }
 
-    // Close modals on escape key or clicking backdrop
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeBookingModal();
@@ -1459,7 +1701,6 @@
       });
     });
 
-    // Initialize application on page load
     window.onload = function() {
       recalculateStats();
       renderHangouts();
