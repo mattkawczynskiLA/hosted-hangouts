@@ -6,7 +6,7 @@
   <title>Hosted Hangouts | Hollywood Schoolhouse</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Fraunces (warm editorial serif matching HSH) & DM Sans / Inter -->
+  <!-- Google Fonts: Fraunces & DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -178,11 +178,11 @@
           <i data-lucide="filter" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3.5 pointer-events-none"></i>
         </div>
 
-        <!-- Toggle View: Cards vs Calendar -->
+        <!-- Toggle View: Grid vs Calendar -->
         <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
           <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
             <i data-lucide="layout-grid" class="w-4 h-4"></i>
-            <span>Cards</span>
+            <span>Grid</span>
           </button>
           <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
             <i data-lucide="calendar" class="w-4 h-4"></i>
@@ -192,7 +192,7 @@
       </div>
     </div>
 
-    <!-- Category Pill Filters (For Cards View - Touch Friendly) -->
+    <!-- Category Pill Filters (For Grid View) -->
     <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
       <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
       <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
@@ -202,7 +202,7 @@
       <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
     </div>
 
-    <!-- Cards Catalog Grid -->
+    <!-- Grid Catalog -->
     <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-2">
       <!-- Populated dynamically via JS -->
     </div>
@@ -226,12 +226,49 @@
         </a>
       </div>
 
-      <!-- Calendar Controls & Legend -->
-      <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl border border-zinc-200 shadow-sm">
-        <div class="flex items-center gap-3">
-          <h3 class="font-bold text-lg text-zinc-900 font-heading" id="calendar-month-label">November & December 2026</h3>
-          <span class="text-xs text-zinc-400 font-medium">(Interactive Schedule)</span>
+      <!-- Calendar Header with Month Selector Dropdown & Previous/Next Month Arrows -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-zinc-200 shadow-sm">
+        
+        <!-- Left: Month Display + Arrows + Month/Year Dropdown Menu -->
+        <div class="flex items-center gap-3 flex-wrap">
+          
+          <!-- Month Shift Arrows -->
+          <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
+            <button onclick="prevMonth()" title="Previous Month" class="p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="nextMonth()" title="Next Month" class="p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Dynamic Month & Year Heading -->
+          <h3 class="font-bold text-xl text-zinc-900 font-heading min-w-[170px]" id="calendar-month-label">
+            November 2026
+          </h3>
+
+          <!-- Month/Year Dropdown Preview Similar to HSH Calendar -->
+          <div class="relative inline-block text-left">
+            <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-xs font-semibold py-2 pl-3 pr-8 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+              <option value="2026-10">October 2026</option>
+              <option value="2026-11" selected>November 2026 (Current)</option>
+              <option value="2026-12">December 2026</option>
+              <option value="2027-01">January 2027</option>
+              <option value="2027-02">February 2027</option>
+              <option value="2027-03">March 2027</option>
+              <option value="2027-04">April 2027</option>
+              <option value="2027-05">May 2027</option>
+              <option value="2027-06">June 2027</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-500 absolute right-2.5 top-2.5 pointer-events-none"></i>
+          </div>
+
+          <button onclick="jumpToCurrentMonth()" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-zinc-200 text-zinc-600 hover:bg-zinc-100 transition">
+            Jump to Today
+          </button>
         </div>
+
+        <!-- Right: Color Legend -->
         <div class="flex items-center gap-4 text-xs font-semibold">
           <span class="flex items-center gap-1.5 text-zinc-700">
             <span class="w-2.5 h-2.5 rounded-full bg-[#be1e2d]"></span> Hosted Hangout
@@ -707,15 +744,23 @@
     const schoolEvents = [
       { date: "2026-11-11", title: "Veterans Day (No Classes)", type: "school" },
       { date: "2026-11-23", title: "Thanksgiving Break Commences", type: "school" },
+      { date: "2026-11-27", title: "Thanksgiving Break (Campus Closed)", type: "school" },
       { date: "2026-12-04", title: "HSH Morning Coffee & PA Meeting", type: "school" },
       { date: "2026-12-11", title: "Early Dismissal / Faculty Planning", type: "school" },
       { date: "2026-12-17", title: "HSH Winter Sing & Holiday Concert", type: "school" },
-      { date: "2026-12-21", title: "Winter Break Commences (No Classes)", type: "school" }
+      { date: "2026-12-21", title: "Winter Break Commences (No Classes)", type: "school" },
+      { date: "2027-01-04", title: "School Resumes: First Day Back", type: "school" },
+      { date: "2027-01-18", title: "Martin Luther King Jr. Day (No Classes)", type: "school" }
     ];
 
     let currentCategory = 'all';
     let currentGrade = 'all';
     let currentSort = 'default';
+
+    // Calendar state (defaults to today's date)
+    const today = new Date();
+    let calYear = today.getFullYear();
+    let calMonth = today.getMonth();
 
     // Initialize Page
     document.addEventListener("DOMContentLoaded", () => {
@@ -725,7 +770,7 @@
       updateImpactStats();
     });
 
-    // Render Cards in Catalog
+    // Render Grid Catalog
     function renderCards() {
       const container = document.getElementById('cards-container');
       container.innerHTML = '';
@@ -799,7 +844,6 @@
             </div>
 
             <div class="pt-3 border-t border-zinc-100 space-y-3">
-              <!-- Attendee avatars + link to see who's going -->
               <div class="flex items-center justify-between">
                 <button onclick="viewAttendees(${h.id})" class="text-xs font-semibold text-zinc-600 hover:text-[#be1e2d] flex items-center gap-1.5 transition">
                   <i data-lucide="users" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
@@ -811,7 +855,6 @@
                 </button>
               </div>
 
-              <!-- Action button -->
               <button onclick="openBooking(${h.id})" ${isFull ? 'disabled' : ''} class="w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition ${isFull ? 'bg-zinc-200 text-zinc-500 cursor-not-allowed' : 'bg-[#be1e2d] hover:bg-[#d63031] text-white shadow-sm'}">
                 ${isFull ? 'Hangout Full' : `Sign Up • $${h.price}`}
               </button>
@@ -867,7 +910,7 @@
       renderCards();
     }
 
-    // Toggle View (Cards vs Calendar)
+    // Toggle View (Grid vs Calendar)
     function toggleCalendarView(showCalendar) {
       const cardsEl = document.getElementById('cards-container');
       const pillsEl = document.getElementById('category-pills-bar');
@@ -891,26 +934,94 @@
       }
     }
 
-    // Render Integrated Calendar (November & December 2026)
+    // ============================================
+    // DYNAMIC CALENDAR ENGINE WITH TODAY HIGHLIGHT
+    // ============================================
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function prevMonth() {
+      calMonth--;
+      if (calMonth < 0) {
+        calMonth = 11;
+        calYear--;
+      }
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      calMonth++;
+      if (calMonth > 11) {
+        calMonth = 0;
+        calYear++;
+      }
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function onSelectMonthDropdown(val) {
+      const [y, m] = val.split('-');
+      calYear = parseInt(y, 10);
+      calMonth = parseInt(m, 10) - 1;
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function jumpToCurrentMonth() {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function syncCalendarHeader() {
+      document.getElementById('calendar-month-label').textContent = `${monthNames[calMonth]} ${calYear}`;
+      
+      const selectMonth = document.getElementById('calendar-select-month');
+      const valStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+      if (selectMonth) {
+        selectMonth.value = valStr;
+      }
+    }
+
     function renderCalendar() {
       const grid = document.getElementById('calendar-days-grid');
       grid.innerHTML = '';
 
-      const offset = 0; // Nov 1, 2026 is Sunday
-      const daysInMonth = 30;
+      syncCalendarHeader();
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      const realToday = new Date();
+      const isCurrentMonthView = (realToday.getFullYear() === calYear && realToday.getMonth() === calMonth);
+      const realTodayDate = realToday.getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement('div');
+        blank.className = "min-h-[110px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
+        grid.appendChild(blank);
+      }
 
       for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `2026-11-${String(day).padStart(2, '0')}`;
+        const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const dayHangouts = hangouts.filter(h => h.date === dateStr);
         const daySchool = schoolEvents.filter(s => s.date === dateStr);
+        const isToday = (isCurrentMonthView && day === realTodayDate);
 
         const cell = document.createElement('div');
-        cell.className = "min-h-[105px] bg-white p-2 flex flex-col justify-between hover:bg-red-50/20 transition border-t border-zinc-100";
+        cell.className = `min-h-[110px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
+          isToday ? 'bg-red-50/60 ring-2 ring-[#be1e2d] ring-inset relative' : 'bg-white hover:bg-zinc-50'
+        }`;
         
         let eventsHtml = '';
         dayHangouts.forEach(h => {
           eventsHtml += `
-            <div onclick="openBooking(${h.id})" class="cursor-pointer text-[10px] bg-red-100 border border-red-300 text-red-950 px-1.5 py-1 rounded font-semibold truncate hover:bg-red-200 transition mb-1" title="${h.title}">
+            <div onclick="openBooking(${h.id})" class="cursor-pointer text-[10px] bg-red-100/90 border border-red-300 text-red-950 px-1.5 py-1 rounded font-semibold truncate hover:bg-red-200 transition mb-1 shadow-xs" title="${h.title}">
               🎉 ${h.title}
             </div>
           `;
@@ -926,8 +1037,13 @@
 
         cell.innerHTML = `
           <div>
-            <span class="text-xs font-bold text-zinc-700">Nov ${day}</span>
-            <div class="mt-1">${eventsHtml}</div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold ${isToday ? 'w-6 h-6 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-black' : 'text-zinc-700'}">
+                ${day}
+              </span>
+              ${isToday ? `<span class="text-[9px] font-black uppercase text-[#be1e2d] tracking-wider bg-red-100 px-1.5 py-0.5 rounded">Today</span>` : ''}
+            </div>
+            <div class="mt-1.5">${eventsHtml}</div>
           </div>
         `;
         grid.appendChild(cell);
