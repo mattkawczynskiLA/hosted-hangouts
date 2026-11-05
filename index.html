@@ -56,7 +56,7 @@
   <header class="sticky top-0 z-40 bg-[#be1e2d] border-b border-[#9e1422] text-white shadow-md transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- School Branding (Top Left Matching hshla.org) -->
+      <!-- School Branding (Top Left) -->
       <a href="#" class="flex items-center gap-3 group text-decoration-none">
         <div class="w-10 h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-2xl group-hover:scale-105 transition-transform shadow-sm">
           h
@@ -72,14 +72,21 @@
       </a>
 
       <!-- Quick Nav Buttons -->
-      <div class="flex items-center gap-2 sm:gap-4">
-        <button onclick="toggleCalendarView(true)" class="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition">
+      <div class="flex items-center gap-1.5 sm:gap-3">
+        <!-- Host Tracker Button -->
+        <button onclick="openTrackerModal()" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner" title="View prospective hosts and concepts tracker">
+          <i data-lucide="clipboard-list" class="w-4 h-4 text-white"></i>
+          <span>Tracker</span>
+        </button>
+
+        <button onclick="toggleCalendarView(true)" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition">
           <i data-lucide="calendar" class="w-4 h-4 text-white"></i>
           <span class="hidden sm:inline">Calendar</span>
         </button>
-        <button onclick="openHostModal()" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow">
+        
+        <button onclick="openHostModal()" class="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>Host a Hangout</span>
+          <span>Host</span>
         </button>
       </div>
     </div>
@@ -232,7 +239,6 @@
         <!-- Left: Month Display + Arrows + Month/Year Dropdown Menu -->
         <div class="flex items-center gap-3 flex-wrap">
           
-          <!-- Month Shift Arrows -->
           <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
             <button onclick="prevMonth()" title="Previous Month" class="p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -242,12 +248,10 @@
             </button>
           </div>
 
-          <!-- Dynamic Month & Year Heading -->
           <h3 class="font-bold text-xl text-zinc-900 font-heading min-w-[170px]" id="calendar-month-label">
             November 2026
           </h3>
 
-          <!-- Month/Year Dropdown Preview Similar to HSH Calendar -->
           <div class="relative inline-block text-left">
             <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-xs font-semibold py-2 pl-3 pr-8 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
               <option value="2026-10">October 2026</option>
@@ -555,7 +559,93 @@
     </div>
   </div>
 
-  <!-- 4. Video Player Modal -->
+  <!-- 4. Host Pipeline Tracker Modal (Doc Synced) -->
+  <div id="tracker-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
+      
+      <!-- Tracker Modal Header -->
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+            <i data-lucide="clipboard-check" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg font-heading leading-tight">Host & Concept Pipeline Tracker</h3>
+            <p class="text-xs text-red-100">Live planning tracker synced from HSH Hosted Hangouts doc</p>
+          </div>
+        </div>
+        <button onclick="closeModal('tracker-modal')" class="text-white/80 hover:text-white p-1 rounded-md hover:bg-white/10 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Tracker Filter & Search Controls -->
+      <div class="p-4 bg-zinc-50 border-b border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div class="relative w-full sm:w-72">
+          <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3 top-3 pointer-events-none"></i>
+          <input type="text" id="tracker-search-input" oninput="filterTrackerList()" placeholder="Search host, concept, or date..." class="w-full pl-9 pr-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none bg-white">
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <select id="tracker-status-select" onchange="filterTrackerList()" class="w-full sm:w-auto text-xs py-2 px-3 rounded-lg border border-zinc-300 bg-white font-medium text-zinc-700 focus:outline-none focus:ring-2 focus:ring-[#be1e2d]">
+            <option value="all">All Statuses</option>
+            <option value="Go">Status: Go / Confirmed</option>
+            <option value="Waiting">Status: Waiting / In Discussion</option>
+            <option value="Reapproach">Past Hosts to Reapproach</option>
+          </select>
+          <a href="https://docs.google.com/spreadsheets/d/1dKpKqDrgI-B4fGDtJz_ZDWGnOLgsfBUkjg0DOsZzeA4/edit?gid=0#gid=0" target="_blank" rel="noopener" class="shrink-0 px-3 py-2 rounded-lg border border-zinc-300 bg-white text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 text-xs font-semibold flex items-center gap-1.5 transition" title="Open Google Sheet">
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
+            <span class="hidden sm:inline">Google Doc</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tracker Content (Scrollable) -->
+      <div class="p-4 sm:p-6 overflow-y-auto custom-scrollbar space-y-6 flex-1">
+        
+        <!-- 2026-27 Active Hosts Section -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="font-bold text-sm sm:text-base text-zinc-900 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span>2026–27 Prospective Hosts & Active Pipeline</span>
+            </h4>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider" id="active-hosts-count">7 Concepts</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5" id="active-tracker-container">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- 2025-2026 Past Hosts / To Reapproach Section -->
+        <div class="pt-4 border-t border-zinc-200">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="font-bold text-sm sm:text-base text-zinc-900 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <span>Hosts & Concepts to Reapproach</span>
+            </h4>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Ideas Bank</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5" id="reapproach-tracker-container">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tracker Modal Footer -->
+      <div class="p-4 bg-zinc-50 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 shrink-0">
+        <div>💡 Notes and contact points synced from the official HSH committee roster.</div>
+        <button onclick="closeModal('tracker-modal')" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 font-semibold transition">
+          Close Tracker
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. Video Player Modal -->
   <div id="video-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
     <div class="bg-zinc-950 w-full max-w-2xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden">
       <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between">
@@ -740,6 +830,99 @@
       }
     ];
 
+    // Data Synced Directly from Prospective Hosts Google Spreadsheet
+    const prospectiveHosts = [
+      {
+        hosts: "Emma Ludbrook, Sarah Newkirk Simon, Ben Dickey, Matt Rodriguez, Christian Stavros and spouses",
+        concept: "DJ & Wine Night",
+        status: "Go",
+        date: "Jan 23, 2027",
+        notes: "Next steps: ticket pricing, alcohol guidelines & insurance details.",
+        contact: "emmerl@gmail.com",
+        student: "Oliver"
+      },
+      {
+        hosts: "Lauren Escobar Slater / Sam Napolitano & 2 other parents",
+        concept: "Bob Baker Marionette Theater Puppet Show",
+        status: "Go",
+        date: "Upcoming (Dates checking)",
+        notes: "Checking available dates with Bob Baker troupe.",
+        contact: "laurenmescobar@gmail.com",
+        student: "Janet"
+      },
+      {
+        hosts: "Alicia Quinonez, Daisy Hutton & Brianne Watson (Co-Pres/Governance)",
+        concept: "Living Floral Centerpiece Arrangements (An Evening in Flowers)",
+        status: "Go",
+        date: "Nov 13, 2026",
+        notes: "With Brooke Wetzel of The Plum Dahlia at Daisy Hutton's House.",
+        contact: "HSH Co-Presidents",
+        student: "Janet"
+      },
+      {
+        hosts: "Eric Etebari",
+        concept: "Volleyball Session with large gym access",
+        status: "In Progress",
+        date: "Nov 8, 15 or Dec 6",
+        notes: "Pan Pacific Gym access with Coach Andres supporting.",
+        contact: "ericetebari@hotmail.com • 310.871.4444",
+        student: "Oliver"
+      },
+      {
+        hosts: "Noelle Valdivia & Carrie Tivador",
+        concept: "Street Art with Chris",
+        status: "Waiting",
+        date: "Dec 5, 2026",
+        notes: "Pinged on 10/16. Sent suggestions, waiting for final response.",
+        contact: "noelle.valdivia@gmail.com • 818.468.6225",
+        student: "Oliver"
+      },
+      {
+        hosts: "Andrea Phillips",
+        concept: "Wine Tasting at their house",
+        status: "Waiting",
+        date: "TBD",
+        notes: "Waiting for response.",
+        contact: "714.270.3645",
+        student: "Janet"
+      },
+      {
+        hosts: "Ren",
+        concept: "Poker Night",
+        status: "Planning",
+        date: "TBD",
+        notes: "Parent social games night concept.",
+        contact: "HSH Community",
+        student: "HSH"
+      },
+      {
+        hosts: "Lauren Escobar Slater / Susan Napolitano",
+        concept: "Marbling Party",
+        status: "Canceled",
+        date: "10/7 or 10/8",
+        notes: "Holding off for now due to hosting 3rd grade parents mixer.",
+        contact: "shana.sherwood@gmail.com",
+        student: "Janet"
+      }
+    ];
+
+    const pastHostsIdeas = [
+      { host: "Ilise & Barb", concept: "Holiday Crafting" },
+      { host: "Aisha Francis", concept: "Sexy Dance Class" },
+      { host: "Carrie Clifford, Kay Lee, Lauren Delp", concept: "Hollywood Distillery Tour & Tasting" },
+      { host: "Jean Kwolek, Brandee Steger, Janet Tomiyama, Dawn Kennedy, Julie Moss", concept: "Community Ice Skating" },
+      { host: "Elizabeth Sbardellati", concept: "Rooftop Sound Bath" },
+      { host: "Andrea Phillips", concept: "Early Childhood (ECE) Family Fun" },
+      { host: "Caroline Keichian", concept: "Grown-Up & Kiddo Dance Class" },
+      { host: "Elizabeth Westlake", concept: "Backyard Adult Bingo & Game Night" },
+      { host: "Lucy Page", concept: "Apple Pie Baking Workshop" },
+      { host: "Farron Fowler", concept: "Parent Fitness Boot Camp" },
+      { host: "Lloys Frates", concept: "Books & Craft Cocktails" },
+      { host: "Shelby Rabara Shum", concept: "Feel Good Jazz Class" },
+      { host: "Past & Present Presidents (Christy, Michelle, Daisy, Alicia, Brianne)", concept: "Presidents' Karaoke Night" },
+      { host: "Sonya Boijiyan", concept: "Ceramics & Wine Night" }
+    ];
+
     // Official Hollywood Schoolhouse Calendar Events
     const schoolEvents = [
       { date: "2026-11-11", title: "Veterans Day (No Classes)", type: "school" },
@@ -757,7 +940,7 @@
     let currentGrade = 'all';
     let currentSort = 'default';
 
-    // Calendar state (defaults to today's date)
+    // Calendar state
     const today = new Date();
     let calYear = today.getFullYear();
     let calMonth = today.getMonth();
@@ -767,6 +950,7 @@
       lucide.createIcons();
       renderCards();
       renderCalendar();
+      renderTrackerList();
       updateImpactStats();
     });
 
@@ -935,7 +1119,7 @@
     }
 
     // ============================================
-    // DYNAMIC CALENDAR ENGINE WITH TODAY HIGHLIGHT
+    // DYNAMIC CALENDAR ENGINE
     // ============================================
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
@@ -980,7 +1164,6 @@
 
     function syncCalendarHeader() {
       document.getElementById('calendar-month-label').textContent = `${monthNames[calMonth]} ${calYear}`;
-      
       const selectMonth = document.getElementById('calendar-select-month');
       const valStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
       if (selectMonth) {
@@ -1048,6 +1231,105 @@
         `;
         grid.appendChild(cell);
       }
+      lucide.createIcons();
+    }
+
+    // ============================================
+    // HOST PIPELINE TRACKER ENGINE
+    // ============================================
+    function openTrackerModal() {
+      openModal('tracker-modal');
+      renderTrackerList();
+    }
+
+    function filterTrackerList() {
+      const q = document.getElementById('tracker-search-input').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('tracker-status-select').value;
+      renderTrackerList(q, statusFilter);
+    }
+
+    function renderTrackerList(searchQuery = '', statusFilter = 'all') {
+      const activeContainer = document.getElementById('active-tracker-container');
+      const pastContainer = document.getElementById('reapproach-tracker-container');
+
+      activeContainer.innerHTML = '';
+      pastContainer.innerHTML = '';
+
+      // 1. Filter and render active 2026-27 hosts
+      const filteredActive = prospectiveHosts.filter(item => {
+        const matchesQuery = !searchQuery || 
+          item.hosts.toLowerCase().includes(searchQuery) ||
+          item.concept.toLowerCase().includes(searchQuery) ||
+          item.date.toLowerCase().includes(searchQuery) ||
+          item.notes.toLowerCase().includes(searchQuery);
+
+        let matchesStatus = true;
+        if (statusFilter === 'Go') matchesStatus = item.status === 'Go';
+        else if (statusFilter === 'Waiting') matchesStatus = (item.status === 'Waiting' || item.status === 'In Progress' || item.status === 'Planning');
+        else if (statusFilter === 'Reapproach') matchesStatus = false;
+
+        return matchesQuery && matchesStatus;
+      });
+
+      document.getElementById('active-hosts-count').textContent = `${filteredActive.length} Concepts`;
+
+      if (filteredActive.length === 0) {
+        activeContainer.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-zinc-400 italic">No prospective hosts match this search.</div>`;
+      } else {
+        filteredActive.forEach(item => {
+          let badgeColor = "bg-amber-100 text-amber-900 border-amber-300";
+          if (item.status === "Go") badgeColor = "bg-emerald-100 text-emerald-900 border-emerald-300";
+          if (item.status === "Canceled") badgeColor = "bg-zinc-200 text-zinc-600 border-zinc-300";
+
+          const card = document.createElement('div');
+          card.className = "p-4 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-zinc-300 transition flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-1.5">
+                <span class="text-xs font-bold text-[#be1e2d] uppercase tracking-wide">${item.concept}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeColor} whitespace-nowrap">
+                  ${item.status}
+                </span>
+              </div>
+              <h5 class="text-sm font-bold text-zinc-900 leading-snug">${item.hosts}</h5>
+              <div class="flex items-center gap-2 text-xs text-zinc-500 mt-1">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-zinc-400"></i>
+                <span class="font-medium text-zinc-700">${item.date}</span>
+                <span>• HSH Child: ${item.student}</span>
+              </div>
+              <p class="text-xs text-zinc-600 mt-2 bg-zinc-50 p-2 rounded-lg border border-zinc-150 leading-relaxed">
+                ${item.notes}
+              </p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+              <span class="truncate max-w-[220px]" title="${item.contact}"><i data-lucide="mail" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${item.contact}</span>
+            </div>
+          `;
+          activeContainer.appendChild(card);
+        });
+      }
+
+      // 2. Filter and render past hosts to reapproach
+      if (statusFilter === 'all' || statusFilter === 'Reapproach') {
+        const filteredPast = pastHostsIdeas.filter(item => {
+          if (!searchQuery) return true;
+          return item.host.toLowerCase().includes(searchQuery) || item.concept.toLowerCase().includes(searchQuery);
+        });
+
+        filteredPast.forEach(item => {
+          const chip = document.createElement('div');
+          chip.className = "p-3 rounded-lg border border-zinc-200 bg-zinc-50/70 hover:bg-white transition flex flex-col justify-between";
+          chip.innerHTML = `
+            <div class="font-bold text-xs text-zinc-900">${item.concept}</div>
+            <div class="text-[11px] text-zinc-500 mt-1 flex items-center justify-between">
+              <span class="truncate">${item.host}</span>
+              <span class="text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 shrink-0">Reapproach</span>
+            </div>
+          `;
+          pastContainer.appendChild(chip);
+        });
+      }
+
       lucide.createIcons();
     }
 
