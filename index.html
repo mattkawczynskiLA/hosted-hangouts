@@ -53,52 +53,53 @@
 <body class="min-h-screen flex flex-col antialiased overflow-x-hidden w-full">
 
   <!-- Top Announcement Bar (HSH Crimson Red) -->
-  <div class="bg-[#9e1422] text-white text-xs sm:text-sm py-2 px-3 text-center font-medium tracking-wide">
-    🌟 100% of proceeds from Hosted Hangouts support the Hollywood Schoolhouse Tuition Assistance Fund.
+  <div class="bg-[#9e1422] text-white text-[11px] sm:text-sm py-1.5 px-3 text-center font-medium tracking-wide">
+    🌟 100% of proceeds support the Hollywood Schoolhouse Tuition Assistance Fund.
   </div>
 
-  <!-- Header Navigation (HSH Signature Red) -->
+  <!-- Header Navigation (Mobile-Optimized to Prevent Button Cut-Off) -->
   <header class="sticky top-0 z-40 bg-[#be1e2d] border-b border-[#9e1422] text-white shadow-md transition-all">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
+    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-1.5 sm:gap-4">
       
-      <!-- School Branding (Top Left) -->
-      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none shrink-0">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-xl sm:text-2xl group-hover:scale-105 transition-transform shadow-sm">
+      <!-- School Branding (Left Side - Shrinks Gracefully on Mobile) -->
+      <a href="#" class="flex items-center gap-1.5 sm:gap-3 group text-decoration-none min-w-0 shrink">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-lg sm:text-2xl group-hover:scale-105 transition-transform shadow-sm shrink-0">
           h
         </div>
-        <div class="flex flex-col">
-          <span class="font-brand font-bold text-sm sm:text-lg text-white lowercase leading-none tracking-tight group-hover:text-red-100 transition-colors">
+        <div class="flex flex-col min-w-0">
+          <span class="font-brand font-bold text-xs sm:text-lg text-white lowercase leading-tight truncate group-hover:text-red-100 transition-colors">
             hollywood schoolhouse
           </span>
-          <span class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-white/90 font-bold mt-1">
+          <span class="text-[8px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-white/90 font-bold leading-none mt-0.5 sm:mt-1 truncate">
             Hosted Hangouts
           </span>
         </div>
       </a>
 
-      <!-- Quick Nav Buttons -->
-      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-        <!-- Questions / Cheat Sheet Button -->
-        <button onclick="openCheatSheetModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20" title="Frequently Asked Questions & Cheat Sheet">
+      <!-- Quick Nav Buttons (Right Side - Guaranteed Visible on Mobile) -->
+      <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
+        
+        <!-- Questions / FAQ Button -->
+        <button onclick="openCheatSheetModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20 shrink-0" title="Questions & FAQ">
           <i data-lucide="help-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white"></i>
           <span class="hidden sm:inline">Questions</span>
           <span class="sm:hidden">FAQ</span>
         </button>
 
-        <!-- Host Tracker Button -->
-        <button onclick="openTrackerModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner" title="View prospective hosts and concepts tracker">
+        <!-- Host Pipeline Tracker Button -->
+        <button onclick="openTrackerModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-sm font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner shrink-0" title="View prospective hosts and concepts tracker">
           <i data-lucide="clipboard-list" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white"></i>
           <span>Tracker</span>
         </button>
 
-        <!-- Calendar Button -->
-        <button onclick="toggleCalendarView(true)" class="hidden md:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition">
+        <!-- Calendar Button (Desktop/Tablet) -->
+        <button onclick="toggleCalendarView(true)" class="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition shrink-0">
           <i data-lucide="calendar" class="w-4 h-4 text-white"></i>
           <span>Calendar</span>
         </button>
         
         <!-- Host a Hangout Trigger -->
-        <button onclick="openHostModal()" class="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow">
+        <button onclick="openHostModal()" class="flex items-center gap-1 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow shrink-0">
           <i data-lucide="plus-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
           <span>Host</span>
         </button>
@@ -107,11 +108,11 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="bg-[#18181b] text-white pt-10 sm:pt-12 pb-14 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
-    <div class="max-w-4xl mx-auto text-center space-y-6">
+  <section class="bg-[#18181b] text-white pt-9 sm:pt-12 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-8 border-b border-zinc-800">
+    <div class="max-w-4xl mx-auto text-center space-y-5 sm:space-y-6">
       
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs sm:text-sm font-medium">
-        <i data-lucide="sparkles" class="w-4 h-4 text-[#be1e2d]"></i>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs font-medium">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
         <span>Community-Powered School Giving</span>
       </div>
 
@@ -119,35 +120,35 @@
         Hosted Hangouts
       </h1>
 
-      <p class="text-sm sm:text-lg lg:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed px-1">
+      <p class="text-xs sm:text-base lg:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed px-1">
         A backyard movie night? Cupcake Wars? A parents-versus-kids game show where the grown-ups finally get to prove they know something? We’re looking for HSH families to host our next round of Hosted Hangouts!
       </p>
 
-      <!-- Guest vs Host Decision Buttons (Mobile Optimized) -->
-      <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-        <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="compass" class="w-4 h-4 sm:w-5 sm:h-5 text-[#be1e2d]"></i>
+      <!-- Guest vs Host Decision Buttons -->
+      <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4">
+        <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+          <i data-lucide="compass" class="w-4 h-4 text-[#be1e2d]"></i>
           <span>Are you a Guest? Browse Hangouts</span>
         </a>
-        <button onclick="openHostModal()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="party-popper" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+        <button onclick="openHostModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+          <i data-lucide="party-popper" class="w-4 h-4"></i>
           <span>Are you a Host? Pitch Your Idea</span>
         </button>
       </div>
 
-      <!-- Live Tuition Assistance Impact Stats (Clean 3-Box Layout, Support Goal Removed) -->
-      <div class="grid grid-cols-3 gap-2.5 sm:gap-4 pt-6 text-left max-w-2xl mx-auto">
-        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
-          <div class="text-lg sm:text-2xl font-bold text-[#f87171] mt-1.5" id="stat-raised">$0</div>
+      <!-- Live Tuition Assistance Impact Stats -->
+      <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-5 sm:pt-6 text-left max-w-2xl mx-auto">
+        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
+          <div class="text-base sm:text-2xl font-bold text-[#f87171] mt-1" id="stat-raised">$0</div>
         </div>
-        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
-          <div class="text-lg sm:text-2xl font-bold text-white mt-1.5" id="stat-spots">82 / 210</div>
+        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
+          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-spots">82 / 210</div>
         </div>
-        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
-          <div class="text-lg sm:text-2xl font-bold text-white mt-1.5" id="stat-events">8</div>
+        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
+          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-events">8</div>
         </div>
       </div>
     </div>
@@ -157,14 +158,14 @@
   <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full" id="catalog-section">
 
     <!-- Section Header & Controls -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-zinc-200">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5 pb-4 border-b border-zinc-200">
       <div>
         <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading">Upcoming</h2>
         <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar.</p>
       </div>
 
       <!-- Controls: Dropdowns & View Switchers -->
-      <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
         
         <!-- Browse Hangouts Dropdown Menu -->
         <div class="relative inline-block text-left w-full sm:w-auto">
@@ -175,7 +176,7 @@
             <option value="sort-cost">Sort by Cost</option>
             <option value="view-calendar">View Calendar</option>
           </select>
-          <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
         <!-- Grade Filter Dropdown Menu -->
@@ -192,46 +193,46 @@
             <option value="5th Grade">5th Grade</option>
             <option value="6th Grade">6th Grade</option>
           </select>
-          <i data-lucide="filter" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
+          <i data-lucide="filter" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
         <!-- Toggle View: Grid vs Calendar -->
         <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
           <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
             <span>Grid</span>
           </button>
           <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="calendar" class="w-4 h-4"></i>
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
             <span>Calendar</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Category Pill Filters (No lateral bleed on mobile) -->
-    <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3.5 w-full">
-      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
-      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
-      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
-      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
-      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
-      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
+    <!-- Category Pill Filters -->
+    <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3 w-full">
+      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
+      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
+      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
+      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
+      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
+      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
     </div>
 
     <!-- Grid Catalog -->
-    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-2">
       <!-- Populated dynamically via JS -->
     </div>
 
     <!-- Integrated Calendar View -->
-    <div id="calendar-container" class="hidden space-y-6 pt-4">
+    <div id="calendar-container" class="hidden space-y-5 pt-4">
       
       <!-- School Sync Notification Banner -->
-      <div class="bg-red-50 border border-red-200 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-red-950">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
-            <i data-lucide="calendar-check-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+      <div class="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-red-950">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
+            <i data-lucide="calendar-check-2" class="w-4 h-4"></i>
           </div>
           <div class="text-xs sm:text-sm">
             <span class="font-bold">Hollywood Schoolhouse Schedule Integrated:</span> Showing hosted hangouts alongside official school calendar events.
@@ -244,11 +245,9 @@
       </div>
 
       <!-- Calendar Header with Month Selector Dropdown & Previous/Next Month Arrows -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white p-3.5 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
         
-        <!-- Left: Month Display + Arrows + Month/Year Dropdown Menu -->
         <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-          
           <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
             <button onclick="prevMonth()" title="Previous Month" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -258,7 +257,7 @@
             </button>
           </div>
 
-          <h3 class="font-bold text-base sm:text-xl text-zinc-900 font-heading min-w-[140px] sm:min-w-[170px]" id="calendar-month-label">
+          <h3 class="font-bold text-base sm:text-xl text-zinc-900 font-heading min-w-[130px] sm:min-w-[170px]" id="calendar-month-label">
             November 2026
           </h3>
 
@@ -282,7 +281,6 @@
           </button>
         </div>
 
-        <!-- Right: Color Legend -->
         <div class="flex items-center gap-3 sm:gap-4 text-xs font-semibold pt-1 sm:pt-0">
           <span class="flex items-center gap-1.5 text-zinc-700">
             <span class="w-2.5 h-2.5 rounded-full bg-[#be1e2d]"></span> Hosted Hangout
@@ -293,10 +291,10 @@
         </div>
       </div>
 
-      <!-- Calendar Grid Table (Responsive Overflow for Mobile) -->
+      <!-- Calendar Grid Table -->
       <div class="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-x-auto">
-        <div class="min-w-[620px]">
-          <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-3 uppercase tracking-wider">
+        <div class="min-w-[600px]">
+          <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-2.5 uppercase tracking-wider">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
           </div>
           <div class="grid grid-cols-7 gap-px bg-zinc-200" id="calendar-days-grid">
@@ -306,18 +304,18 @@
       </div>
     </div>
 
-    <!-- Past Hangouts Showcase (Real Uploaded Flyers with Click to Enlarge) -->
-    <section class="mt-14 pt-10 border-t border-zinc-200">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6">
+    <!-- Past Hangouts Showcase -->
+    <section class="mt-14 pt-8 border-t border-zinc-200">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5">
         <div>
           <div class="text-xs uppercase font-bold tracking-widest text-[#be1e2d]">Memories & Inspiration</div>
           <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1 font-heading">Past Hangouts Showcase</h3>
-          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Click any flyer below to expand, read the full event details, and see how simple it is to host!</p>
+          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Click any flyer below to expand and read the event details!</p>
         </div>
       </div>
 
       <!-- 4 Real Past Hangout Flyers Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         
         <!-- Flyer 1: Shelby Jazz Class -->
         <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openFlyerModal('HOSTED_HANGOUT_SHELBY.jpeg', 'Feel Good Jazz Class with Shelby Rabara Shum')">
@@ -325,7 +323,7 @@
             <img src="HOSTED_HANGOUT_SHELBY.jpeg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="Feel Good Jazz Class Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
-                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read
               </span>
             </div>
             <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
@@ -350,7 +348,7 @@
             <img src="karoke%20HH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=700&q=80';" alt="Presidents Karaoke Night Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
-                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read
               </span>
             </div>
             <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
@@ -375,7 +373,7 @@
             <img src="HOSTED_HANGOUT_SOUND_BATH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80';" alt="Sound Bath Meditation Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
-                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read
               </span>
             </div>
             <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
@@ -400,7 +398,7 @@
             <img src="HOSTED_HANGOUT_ICE_SKATING.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=700&q=80';" alt="Ice Skating Party Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
               <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
-                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read
               </span>
             </div>
             <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
@@ -444,22 +442,22 @@
   <!-- ==================== MODALS ==================== -->
 
   <!-- 1. Who's Going Attendee Modal -->
-  <div id="attendees-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+  <div id="attendees-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
     <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      <div class="px-6 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
         <div>
-          <h3 class="font-bold text-lg font-heading" id="modal-attendees-title">Who's Going</h3>
+          <h3 class="font-bold text-base sm:text-lg font-heading" id="modal-attendees-title">Who's Going</h3>
           <p class="text-xs text-red-100" id="modal-attendees-sub">Classmates and parents attending</p>
         </div>
         <button onclick="closeModal('attendees-modal')" class="text-white/80 hover:text-white p-1">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div class="p-6 max-h-96 overflow-y-auto custom-scrollbar space-y-3" id="modal-attendees-list">
+      <div class="p-4 sm:p-6 max-h-80 sm:max-h-96 overflow-y-auto custom-scrollbar space-y-3" id="modal-attendees-list">
         <!-- Roster injected here -->
       </div>
-      <div class="p-4 bg-zinc-50 border-t border-zinc-200 text-right">
-        <button onclick="closeModal('attendees-modal')" class="px-4 py-2 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-sm font-semibold transition">
+      <div class="p-3.5 bg-zinc-50 border-t border-zinc-200 text-right">
+        <button onclick="closeModal('attendees-modal')" class="px-4 py-1.5 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs sm:text-sm font-semibold transition">
           Close
         </button>
       </div>
@@ -467,11 +465,11 @@
   </div>
 
   <!-- 2. Booking & Dual Payment Modal -->
-  <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+  <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
     <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      <div class="px-6 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
         <div>
-          <h3 class="font-bold text-lg font-heading" id="booking-event-title">Reserve Spot</h3>
+          <h3 class="font-bold text-base sm:text-lg font-heading" id="booking-event-title">Reserve Spot</h3>
           <p class="text-xs text-red-100" id="booking-event-price">$0 per spot</p>
         </div>
         <button onclick="closeModal('booking-modal')" class="text-white/80 hover:text-white p-1">
@@ -479,7 +477,7 @@
         </button>
       </div>
 
-      <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="p-6 space-y-4">
+      <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="p-5 sm:p-6 space-y-3.5">
         <input type="hidden" id="booking-event-id">
 
         <div>
@@ -490,7 +488,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">HSH Child's Grade</label>
-            <select id="book-grade" required class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <select id="book-grade" required class="w-full px-3 py-2.5 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
               <option value="Parents Only">Parents Only (Adults)</option>
               <option value="Kindergarten">Kindergarten</option>
               <option value="1st Grade">1st Grade</option>
@@ -503,7 +501,7 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Number of Spots</label>
-            <select id="book-spots" onchange="updateBookingTotal()" class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <select id="book-spots" onchange="updateBookingTotal()" class="w-full px-3 py-2.5 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
               <option value="1">1 spot</option>
               <option value="2">2 spots</option>
               <option value="3">3 spots</option>
@@ -515,37 +513,36 @@
         <div>
           <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Payment Method</label>
           <div class="grid grid-cols-2 gap-3">
-            <label class="border border-zinc-300 rounded-lg p-3 flex items-center gap-2.5 cursor-pointer hover:border-[#be1e2d] has-[:checked]:border-[#be1e2d] has-[:checked]:bg-red-50/50">
+            <label class="border border-zinc-300 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 cursor-pointer hover:border-[#be1e2d] has-[:checked]:border-[#be1e2d] has-[:checked]:bg-red-50/50">
               <input type="radio" name="pay-method" value="card" checked class="text-[#be1e2d] focus:ring-[#be1e2d]">
               <span class="text-xs font-semibold text-zinc-800">Credit Card</span>
             </label>
-            <label class="border border-zinc-300 rounded-lg p-3 flex items-center gap-2.5 cursor-pointer hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50/50">
+            <label class="border border-zinc-300 rounded-lg p-2.5 sm:p-3 flex items-center gap-2 cursor-pointer hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50/50">
               <input type="radio" name="pay-method" value="venmo" class="text-blue-600 focus:ring-blue-500">
               <span class="text-xs font-semibold text-zinc-800">Venmo Pay</span>
             </label>
           </div>
         </div>
 
-        <div class="p-3.5 bg-zinc-50 rounded-xl border border-zinc-200 flex items-center justify-between">
+        <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-200 flex items-center justify-between">
           <span class="text-xs font-medium text-zinc-600">Total Tax-Deductible Donation:</span>
-          <span class="text-lg font-bold text-zinc-900" id="booking-total-display">$0</span>
+          <span class="text-base sm:text-lg font-bold text-zinc-900" id="booking-total-display">$0</span>
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-sm shadow transition">
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-xs sm:text-sm shadow transition">
           Confirm Sign-Up & Support HSH
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 3. Host a Hangout Proposal Pitch Modal (With Integrated Idea Inspo List) -->
+  <!-- 3. Host a Hangout Proposal Pitch Modal -->
   <div id="host-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
     <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
       
-      <!-- Modal Header -->
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div>
-          <h3 class="font-bold text-lg font-heading">Pitch a Hosted Hangout</h3>
+          <h3 class="font-bold text-base sm:text-lg font-heading">Pitch a Hosted Hangout</h3>
           <p class="text-xs text-red-100">Propose an event to raise tuition assistance funds</p>
         </div>
         <button onclick="closeModal('host-modal')" class="text-white/80 hover:text-white p-1">
@@ -553,11 +550,10 @@
         </button>
       </div>
 
-      <!-- Inspo Banner: Toggle Concepts List -->
       <div class="p-3 bg-amber-50 border-b border-amber-200 flex items-center justify-between text-xs text-amber-900 shrink-0">
         <span class="flex items-center gap-1.5 font-semibold">
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
-          <span>Need inspiration or want to see what's being planned?</span>
+          <span>Want inspiration on what to host?</span>
         </span>
         <button type="button" onclick="toggleHostInspoList()" id="inspo-toggle-btn" class="font-bold text-[#be1e2d] hover:underline flex items-center gap-1">
           <span>See Potential Events</span>
@@ -565,15 +561,11 @@
         </button>
       </div>
 
-      <!-- Collapsible Potential Events List (Hosts + Concepts Only) -->
       <div id="host-inspo-drawer" class="hidden bg-zinc-50 border-b border-zinc-200 p-4 max-h-56 overflow-y-auto custom-scrollbar shrink-0">
         <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-2">Other Planned & Prospective Events:</div>
-        <div class="space-y-2 text-xs" id="host-inspo-list-items">
-          <!-- Populated via JS with just host + concept -->
-        </div>
+        <div class="space-y-2 text-xs" id="host-inspo-list-items"></div>
       </div>
 
-      <!-- Pitch Form Body -->
       <form id="host-pitch-form" onsubmit="handleHostPitch(event)" class="p-5 sm:p-6 space-y-3.5 overflow-y-auto custom-scrollbar flex-1">
         <div>
           <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Your Name / Family (Host)</label>
@@ -588,7 +580,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Category</label>
-            <select id="pitch-cat" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <select id="pitch-cat" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
               <option value="Creative Arts">Creative Arts</option>
               <option value="Parent Socials">Parent Socials</option>
               <option value="Kids Activities">Kids Activities</option>
@@ -598,7 +590,7 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Target Grade</label>
-            <select id="pitch-grade" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <select id="pitch-grade" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
               <option value="Parents Only">Parents Only (Adults)</option>
               <option value="All Grades">All Grades</option>
               <option value="Kindergarten">Kindergarten</option>
@@ -615,29 +607,29 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Suggested Cost ($)</label>
-            <input type="number" id="pitch-cost" required placeholder="100" min="5" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <input type="number" id="pitch-cost" required placeholder="100" min="5" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
           </div>
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Max Spots Available</label>
-            <input type="number" id="pitch-spots" required placeholder="15" min="1" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <input type="number" id="pitch-spots" required placeholder="15" min="1" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Proposed Date & Location</label>
-          <input type="text" id="pitch-datetime" required placeholder="e.g., Friday Nov 20, 6:00 PM @ Host Home" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+          <input type="text" id="pitch-datetime" required placeholder="e.g., Friday Nov 20, 6:00 PM @ Host Home" class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
         </div>
 
         <div>
           <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Description & What is Included</label>
-          <textarea id="pitch-desc" required rows="3" placeholder="Describe the hangout, what parents/kids should bring, and the fun planned!" class="w-full px-3 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none"></textarea>
+          <textarea id="pitch-desc" required rows="3" placeholder="Describe the hangout, what parents/kids should bring, and the fun planned!" class="w-full px-3.5 py-2 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none"></textarea>
         </div>
 
         <div class="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-950 leading-relaxed">
           <strong>Auto-Email Notification:</strong> Submitting will instantly compose an email to the HSH Hosted Hangout Chairs (<code class="bg-red-100 px-1 py-0.5 rounded text-[#be1e2d] font-bold">hangouts@hshla.org</code>) with your proposal details.
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-sm shadow transition">
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-xs sm:text-sm shadow transition">
           Submit Hangout & Email Chairs
         </button>
       </form>
@@ -673,7 +665,7 @@
     </div>
   </div>
 
-  <!-- 5. Flyer Lightbox Modal (Click to Enlarge Past Hangout Images) -->
+  <!-- 5. Flyer Lightbox Modal -->
   <div id="flyer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden">
     <div class="bg-zinc-950 w-full max-w-2xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[95vh]">
       <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
@@ -698,7 +690,7 @@
             <i data-lucide="clipboard-check" class="w-5 h-5 text-white"></i>
           </div>
           <div>
-            <h3 class="font-bold text-lg font-heading leading-tight">Host & Concept Pipeline Tracker</h3>
+            <h3 class="font-bold text-base sm:text-lg font-heading leading-tight">Host & Concept Pipeline Tracker</h3>
             <p class="text-xs text-red-100">Live planning tracker synced from HSH Hosted Hangouts doc</p>
           </div>
         </div>
@@ -1117,17 +1109,17 @@
             </div>
           </div>
 
-          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
             <div>
               <div class="flex items-center gap-2 text-xs text-[#be1e2d] font-semibold mb-1">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                 <span>${h.displayDate}</span>
               </div>
-              <h3 class="font-bold text-zinc-900 text-lg leading-snug font-heading">${h.title}</h3>
+              <h3 class="font-bold text-zinc-900 text-base sm:text-lg leading-snug font-heading">${h.title}</h3>
               <p class="text-xs text-zinc-500 mt-1">Hosted by <span class="font-medium text-zinc-700">${h.host}</span></p>
               ${h.specialGuest ? `<p class="text-xs text-[#9e1422] font-semibold">✨ With ${h.specialGuest}</p>` : ''}
               <p class="text-xs text-zinc-500 mt-0.5"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${h.location}</p>
-              <p class="text-xs text-zinc-600 mt-2.5 line-clamp-2 leading-relaxed">${h.description}</p>
+              <p class="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed">${h.description}</p>
             </div>
 
             <div class="pt-3 border-t border-zinc-100 space-y-3">
@@ -1287,7 +1279,7 @@
 
       for (let i = 0; i < firstDay; i++) {
         const blank = document.createElement('div');
-        blank.className = "min-h-[105px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
+        blank.className = "min-h-[95px] sm:min-h-[105px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
         grid.appendChild(blank);
       }
 
@@ -1298,7 +1290,7 @@
         const isToday = (isCurrentMonthView && day === realTodayDate);
 
         const cell = document.createElement('div');
-        cell.className = `min-h-[105px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
+        cell.className = `min-h-[95px] sm:min-h-[105px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
           isToday ? 'bg-red-50/60 ring-2 ring-[#be1e2d] ring-inset relative' : 'bg-white hover:bg-zinc-50'
         }`;
         
@@ -1340,7 +1332,6 @@
       const container = document.getElementById('host-inspo-list-items');
       container.innerHTML = '';
 
-      // Only Host Name + Concept
       prospectiveHosts.forEach(item => {
         const row = document.createElement('div');
         row.className = "flex items-start justify-between py-1.5 border-b border-zinc-200/60 gap-3";
@@ -1425,7 +1416,7 @@
           if (item.status === "Canceled") badgeColor = "bg-zinc-200 text-zinc-600 border-zinc-300";
 
           const card = document.createElement('div');
-          card.className = "p-4 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-zinc-300 transition flex flex-col justify-between";
+          card.className = "p-3.5 sm:p-4 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-zinc-300 transition flex flex-col justify-between";
           card.innerHTML = `
             <div>
               <div class="flex items-start justify-between gap-2 mb-1.5">
@@ -1444,8 +1435,8 @@
                 ${item.notes}
               </p>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
-              <span class="truncate max-w-[220px]" title="${item.contact}"><i data-lucide="mail" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${item.contact}</span>
+            <div class="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+              <span class="truncate max-w-[200px]" title="${item.contact}"><i data-lucide="mail" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${item.contact}</span>
             </div>
           `;
           activeContainer.appendChild(card);
@@ -1491,18 +1482,18 @@
       } else {
         h.attendees.forEach(a => {
           const row = document.createElement('div');
-          row.className = "flex items-center justify-between p-3 rounded-xl bg-zinc-50 border border-zinc-200";
+          row.className = "flex items-center justify-between p-2.5 sm:p-3 rounded-xl bg-zinc-50 border border-zinc-200";
           row.innerHTML = `
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-[#be1e2d]/10 text-[#be1e2d] font-bold flex items-center justify-center text-xs">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#be1e2d]/10 text-[#be1e2d] font-bold flex items-center justify-center text-xs">
                 ${a.name.charAt(0)}
               </div>
               <div>
-                <div class="font-bold text-sm text-zinc-900">${a.name}</div>
-                <div class="text-[11px] text-zinc-500">Attendee</div>
+                <div class="font-bold text-xs sm:text-sm text-zinc-900">${a.name}</div>
+                <div class="text-[10px] sm:text-[11px] text-zinc-500">Attendee</div>
               </div>
             </div>
-            <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-zinc-200 text-zinc-700">
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-200 text-zinc-700">
               ${a.grade}
             </span>
           `;
@@ -1641,7 +1632,6 @@
         totalSpotsCapacity += h.totalSpots;
       });
 
-      // Explicitly set to $0 for '26-'27 as requested
       document.getElementById('stat-raised').textContent = `$0`;
       document.getElementById('stat-spots').textContent = `${totalSpotsClaimed} / ${totalSpotsCapacity}`;
       document.getElementById('stat-events').textContent = hangouts.length;
