@@ -150,11 +150,11 @@
         </div>
         <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
           <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
-          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-spots">0 / 0</div>
+          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-spots">82 / 210</div>
         </div>
         <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
           <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
-          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-events">0</div>
+          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-events">8</div>
         </div>
       </div>
     </div>
@@ -323,7 +323,7 @@
       <!-- 6 Real Past Hangout Cards with Interactive Galleries -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         
-        <!-- Showcase 1: Shelby Jazz Class ($50) -> Gallery with Flyer + shelbydance.JPG -->
+        <!-- Showcase 1: Shelby Jazz Class ($50) -->
         <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('shelby')">
           <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
             <img src="HOSTED_HANGOUT_SHELBY.jpeg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="Feel Good Jazz Class" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
@@ -431,7 +431,7 @@
           </div>
         </div>
 
-        <!-- Showcase 4: Ice Skating ($40) -> Gallery with Flyer + iceskating1.jpg, iceskating2.jpg, iceskating3.jpg -->
+        <!-- Showcase 4: Ice Skating ($40) -->
         <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('iceskating')">
           <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
             <img src="HOSTED_HANGOUT_ICE_SKATING.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=700&q=80';" alt="Ice Skating Party" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
@@ -714,7 +714,7 @@
           </button>
           
           <button type="button" onclick="openIdeasGuideModal()" class="px-2.5 py-1 rounded bg-[#be1e2d] text-white font-bold hover:bg-[#9e1422] transition flex items-center gap-1 shadow-xs">
-            <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-amber-300"></i>
+            <i data-lucide="lightbulb" class="w-3 h-3 text-amber-300"></i>
             <span>Need Ideas? Guide</span>
           </button>
         </div>
@@ -1261,7 +1261,7 @@
       { host: "Sonya Boijiyan", concept: "Ceramics & Wine Night" }
     ];
 
-    // Complete Idea Guide (65 Ideas)
+    // Complete Idea Guide (65 Ideas)[cite: 1]
     const completeIdeaGuide = [
       { id: 1, title: "Roller Skating Party", ages: "5–13", minAge: 5, maxAge: 13, category: "Sports & Active", setting: "Off-site venue", desc: "Roller skating session! Moonlight Rollerway offers special school and nonprofit group pricing." },
       { id: 2, title: "Private Karaoke Room Bash", ages: "5–10", minAge: 5, maxAge: 10, category: "Music & Performance", setting: "Off-site venue", desc: "Private karaoke gathering; The Venue accommodates up to 50 people in its XL room." },
@@ -1330,7 +1330,7 @@
       { id: 65, title: "Backyard Cinema Club", ages: "5–11", minAge: 5, maxAge: 11, category: "Movies & Media", setting: "Backyard", desc: "Outdoor projector, lounge seating, warm blankets, artisan pizza, and a family-favorite film." }
     ];
 
-    // Showcase Galleries Data (Including the 2 New Hangouts and their photo files)
+    // Showcase Galleries Data
     const pastGalleries = {
       shelby: {
         title: "Feel Good Jazz Class with Shelby Rabara Shum",
