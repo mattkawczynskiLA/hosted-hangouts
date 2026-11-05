@@ -98,7 +98,7 @@
           <span>Tracker</span>
         </button>
 
-        <!-- Calendar Button -->
+        <!-- Calendar Button (Tablet/Desktop) -->
         <button onclick="toggleCalendarView(true)" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-white/90 hover:text-white hover:bg-white/10 transition shrink-0">
           <i data-lucide="calendar" class="w-3.5 h-3.5 text-white"></i>
           <span>Calendar</span>
@@ -310,7 +310,7 @@
       </div>
     </div>
 
-    <!-- Past Hangouts Showcase (With Interactive Clickable Photo Galleries) -->
+    <!-- Past Hangouts Showcase -->
     <section class="mt-14 pt-8 border-t border-zinc-200">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5">
         <div>
@@ -1003,8 +1003,8 @@
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    // Initial Hangouts Catalog (Upcoming events)
-    let hangouts = [
+    // Initial Upcoming Hangouts Catalog
+    const hangouts = [
       {
         id: 201,
         title: "Living Centerpieces: An Evening in Flowers",
@@ -1261,7 +1261,7 @@
       { host: "Sonya Boijiyan", concept: "Ceramics & Wine Night" }
     ];
 
-    // Complete Idea Guide (65 Ideas)[cite: 1]
+    // Complete Idea Guide (65 Ideas)
     const completeIdeaGuide = [
       { id: 1, title: "Roller Skating Party", ages: "5–13", minAge: 5, maxAge: 13, category: "Sports & Active", setting: "Off-site venue", desc: "Roller skating session! Moonlight Rollerway offers special school and nonprofit group pricing." },
       { id: 2, title: "Private Karaoke Room Bash", ages: "5–10", minAge: 5, maxAge: 10, category: "Music & Performance", setting: "Off-site venue", desc: "Private karaoke gathering; The Venue accommodates up to 50 people in its XL room." },
@@ -1376,78 +1376,582 @@
       }
     };
 
+    // Shared State Variables
+    const schoolEvents = [
+      { date: "2026-11-11", title: "Veterans Day (No Classes)", type: "school" },
+      { date: "2026-11-23", title: "Thanksgiving Break Commences", type: "school" },
+      { date: "2026-11-27", title: "Thanksgiving Break (Campus Closed)", type: "school" },
+      { date: "2026-12-04", title: "HSH Morning Coffee & PA Meeting", type: "school" },
+      { date: "2026-12-11", title: "Early Dismissal / Faculty Planning", type: "school" },
+      { date: "2026-12-17", title: "HSH Winter Sing & Holiday Concert", type: "school" },
+      { date: "2026-12-21", title: "Winter Break Commences (No Classes)", type: "school" },
+      { date: "2027-01-04", title: "School Resumes: First Day Back", type: "school" },
+      { date: "2027-01-18", title: "Martin Luther King Jr. Day (No Classes)", type: "school" }
+    ];
+
+    let currentCategory = 'all';
+    let currentGrade = 'all';
+    let currentSort = 'default';
+
+    const today = new Date();
+    let calYear = today.getFullYear();
+    let calMonth = today.getMonth();
+
     let activeGalleryKey = null;
     let activePhotoIndex = 0;
+    let activeBookingHangout = null;
+    let activePricingTier = 'standard';
 
-    function openShowcaseGallery(key) {
-      activeGalleryKey = key;
-      activePhotoIndex = 0;
-      const g = pastGalleries[key];
-      if (!g) return;
+    // RENDER UPCOMING CARDS
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      if (!container) return;
+      container.innerHTML = '';
 
-      document.getElementById('gallery-title').textContent = g.title;
-      renderActiveGalleryPhoto();
-      openModal('gallery-lightbox-modal');
+      let filtered = hangouts.filter(h => {
+        const matchesCategory = (currentCategory === 'all' || h.category === currentCategory);
+        let matchesGrade = true;
+        if (currentGrade === 'Parents Only') {
+          matchesGrade = (h.grade === 'Parents Only');
+        } else if (currentGrade !== 'all') {
+          matchesGrade = (h.grade === currentGrade || h.grade === 'All Grades');
+        }
+        return matchesCategory && matchesGrade;
+      });
+
+      if (currentSort === 'date') {
+        filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (currentSort === 'cost') {
+        filtered.sort((a, b) => a.price - b.price);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-zinc-300 p-8">
+            <i data-lucide="calendar-x" class="w-12 h-12 text-zinc-400 mx-auto mb-3"></i>
+            <h3 class="font-bold text-zinc-800 text-lg font-heading">No hangouts match this filter</h3>
+            <p class="text-sm text-zinc-500 max-w-sm mx-auto mt-1">Try selecting a different grade or category, or be the first parent to pitch one!</p>
+            <button onclick="openHostModal()" class="mt-4 px-4 py-2 bg-[#be1e2d] text-white font-bold text-xs uppercase rounded-lg">Pitch This Hangout</button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      filtered.forEach(h => {
+        const spotsLeft = h.totalSpots - h.attendees.length;
+        const isFull = spotsLeft <= 0;
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col";
+        
+        const fallbackAttr = h.fallbackImage ? `onerror="this.onerror=null; this.src='${h.fallbackImage}';"` : '';
+
+        card.innerHTML = `
+          <div class="relative h-52 bg-zinc-100 overflow-hidden">
+            <img src="${h.image}" alt="${h.title}" ${fallbackAttr} class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-900/85 text-white backdrop-blur-sm">
+                ${h.category}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold ${h.grade === 'Parents Only' ? 'bg-[#9e1422]/90 text-white' : 'bg-zinc-800/85 text-zinc-200'} backdrop-blur-sm">
+                ${h.grade}
+              </span>
+            </div>
+            <div class="absolute bottom-3 right-3 bg-white/95 px-3 py-1 rounded-full text-xs font-bold text-zinc-900 shadow">
+              $${h.price} / person
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+            <div>
+              <div class="flex items-center gap-2 text-xs text-[#be1e2d] font-semibold mb-1">
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                <span>${h.displayDate}</span>
+              </div>
+              <h3 class="font-bold text-zinc-900 text-base sm:text-lg leading-snug font-heading">${h.title}</h3>
+              <p class="text-xs text-zinc-500 mt-1">Hosted by <span class="font-medium text-zinc-700">${h.host}</span></p>
+              ${h.specialGuest ? `<p class="text-xs text-[#9e1422] font-semibold">✨ With ${h.specialGuest}</p>` : ''}
+              <p class="text-xs text-zinc-500 mt-0.5"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${h.location}</p>
+              <p class="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed">${h.description}</p>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-100 space-y-3">
+              <div class="flex items-center justify-between">
+                <button onclick="viewAttendees(${h.id})" class="text-xs font-semibold text-zinc-600 hover:text-[#be1e2d] flex items-center gap-1.5 transition">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
+                  <span>${h.attendees.length} joined</span>
+                  <span class="text-zinc-400">(${spotsLeft} left)</span>
+                </button>
+                <button onclick="viewAttendees(${h.id})" class="text-[11px] font-bold text-[#be1e2d] hover:underline">
+                  Who's going?
+                </button>
+              </div>
+
+              <button onclick="openBooking(${h.id})" ${isFull ? 'disabled' : ''} class="w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition ${isFull ? 'bg-zinc-200 text-zinc-500 cursor-not-allowed' : 'bg-[#be1e2d] hover:bg-[#d63031] text-white shadow-sm'}">
+                ${isFull ? 'Hangout Full' : `Sign Up • $${h.price}`}
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
     }
 
-    function renderActiveGalleryPhoto() {
-      const g = pastGalleries[activeGalleryKey];
-      if (!g || !g.images.length) return;
+    // FILTER HANDLERS
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm";
+        } else {
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap";
+        }
+      });
+      renderCards();
+    }
 
-      const photo = g.images[activePhotoIndex];
-      const mainImg = document.getElementById('gallery-main-img');
-      mainImg.src = photo.src;
-      mainImg.alt = photo.label;
-
-      document.getElementById('gallery-counter').textContent = `${photo.label} (${activePhotoIndex + 1} of ${g.images.length})`;
-
-      const thumbsStrip = document.getElementById('gallery-thumbs-strip');
-      thumbsStrip.innerHTML = '';
-
-      if (g.images.length <= 1) {
-        thumbsStrip.classList.add('hidden');
-        document.getElementById('gallery-prev-btn').classList.add('hidden');
-        document.getElementById('gallery-next-btn').classList.add('hidden');
+    function handleBrowseFilter(value) {
+      if (value === 'view-calendar') {
+        toggleCalendarView(true);
       } else {
-        thumbsStrip.classList.remove('hidden');
-        document.getElementById('gallery-prev-btn').classList.remove('hidden');
-        document.getElementById('gallery-next-btn').classList.remove('hidden');
+        toggleCalendarView(false);
+        if (value === 'parents-only') {
+          currentGrade = 'Parents Only';
+          document.getElementById('grade-filter-select').value = 'Parents Only';
+          currentSort = 'default';
+        } else if (value === 'sort-date') {
+          currentSort = 'date';
+        } else if (value === 'sort-cost') {
+          currentSort = 'cost';
+        } else {
+          currentGrade = 'all';
+          currentSort = 'default';
+          document.getElementById('grade-filter-select').value = 'all';
+        }
+        renderCards();
+      }
+    }
 
-        g.images.forEach((imgObj, idx) => {
-          const thumb = document.createElement('img');
-          thumb.src = imgObj.src;
-          thumb.className = `w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-md cursor-pointer transition border-2 ${
-            idx === activePhotoIndex ? 'border-[#be1e2d] scale-105 opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
-          }`;
-          thumb.onclick = () => {
-            activePhotoIndex = idx;
-            renderActiveGalleryPhoto();
-          };
-          thumbsStrip.appendChild(thumb);
+    function handleGradeFilter(grade) {
+      currentGrade = grade;
+      toggleCalendarView(false);
+      renderCards();
+    }
+
+    // CALENDAR VIEW TOGGLE
+    function toggleCalendarView(showCalendar) {
+      const cardsEl = document.getElementById('cards-container');
+      const pillsEl = document.getElementById('category-pills-bar');
+      const calEl = document.getElementById('calendar-container');
+      const cardsBtn = document.getElementById('view-cards-btn');
+      const calBtn = document.getElementById('view-cal-btn');
+
+      if (showCalendar) {
+        if (cardsEl) cardsEl.classList.add('hidden');
+        if (pillsEl) pillsEl.classList.add('hidden');
+        if (calEl) calEl.classList.remove('hidden');
+        if (calBtn) calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        if (cardsBtn) cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+        if (calEl) calEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        if (cardsEl) cardsEl.classList.remove('hidden');
+        if (pillsEl) pillsEl.classList.remove('hidden');
+        if (calEl) calEl.classList.add('hidden');
+        if (cardsBtn) cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        if (calBtn) calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+      }
+      lucide.createIcons();
+    }
+
+    // CALENDAR ENGINE
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function prevMonth() {
+      calMonth--;
+      if (calMonth < 0) {
+        calMonth = 11;
+        calYear--;
+      }
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      calMonth++;
+      if (calMonth > 11) {
+        calMonth = 0;
+        calYear++;
+      }
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function onSelectMonthDropdown(val) {
+      const [y, m] = val.split('-');
+      calYear = parseInt(y, 10);
+      calMonth = parseInt(m, 10) - 1;
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function jumpToCurrentMonth() {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function syncCalendarHeader() {
+      const label = document.getElementById('calendar-month-label');
+      if (label) label.textContent = `${monthNames[calMonth]} ${calYear}`;
+      const selectMonth = document.getElementById('calendar-select-month');
+      const valStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+      if (selectMonth) selectMonth.value = valStr;
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById('calendar-days-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      syncCalendarHeader();
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      const realToday = new Date();
+      const isCurrentMonthView = (realToday.getFullYear() === calYear && realToday.getMonth() === calMonth);
+      const realTodayDate = realToday.getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement('div');
+        blank.className = "min-h-[95px] sm:min-h-[105px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
+        grid.appendChild(blank);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayHangouts = hangouts.filter(h => h.date === dateStr);
+        const daySchool = schoolEvents.filter(s => s.date === dateStr);
+        const isToday = (isCurrentMonthView && day === realTodayDate);
+
+        const cell = document.createElement('div');
+        cell.className = `min-h-[95px] sm:min-h-[105px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
+          isToday ? 'bg-red-50/60 ring-2 ring-[#be1e2d] ring-inset relative' : 'bg-white hover:bg-zinc-50'
+        }`;
+        
+        let eventsHtml = '';
+        dayHangouts.forEach(h => {
+          eventsHtml += `
+            <div onclick="openBooking(${h.id})" class="cursor-pointer text-[10px] bg-red-100/90 border border-red-300 text-red-950 px-1.5 py-1 rounded font-semibold truncate hover:bg-red-200 transition mb-1 shadow-xs" title="${h.title}">
+              🎉 ${h.title}
+            </div>
+          `;
+        });
+
+        daySchool.forEach(s => {
+          eventsHtml += `
+            <div class="text-[10px] bg-blue-50 border border-blue-200 text-blue-900 px-1.5 py-1 rounded font-medium truncate mb-1" title="${s.title}">
+              🏫 ${s.title}
+            </div>
+          `;
+        });
+
+        cell.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold ${isToday ? 'w-5 h-5 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-black' : 'text-zinc-700'}">
+                ${day}
+              </span>
+              ${isToday ? `<span class="text-[8px] font-black uppercase text-[#be1e2d] tracking-wider bg-red-100 px-1 rounded">Today</span>` : ''}
+            </div>
+            <div class="mt-1">${eventsHtml}</div>
+          </div>
+        `;
+        grid.appendChild(cell);
+      }
+      lucide.createIcons();
+    }
+
+    // HOST INSPO DRAWER
+    function populateHostInspoDrawer() {
+      const container = document.getElementById('host-inspo-list-items');
+      if (!container) return;
+      container.innerHTML = '';
+
+      prospectiveHosts.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex items-start justify-between py-1.5 border-b border-zinc-200/60 gap-3";
+        row.innerHTML = `
+          <div>
+            <span class="font-bold text-zinc-900">${item.concept}</span>
+            <span class="text-zinc-500 block sm:inline sm:ml-2">— Hosted by ${item.hosts}</span>
+          </div>
+          <span class="text-[10px] font-semibold text-[#be1e2d] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded whitespace-nowrap">${item.status}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function toggleHostInspoList() {
+      const drawer = document.getElementById('host-inspo-drawer');
+      const chevron = document.getElementById('inspo-chevron');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        drawer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    // IDEAS GUIDE ENGINE
+    function filterIdeasGuide() {
+      const q = document.getElementById('idea-search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('idea-category-select').value;
+      const grade = document.getElementById('idea-grade-select').value;
+      renderIdeasGuideGrid(q, cat, grade);
+    }
+
+    function ideaMatchesGrade(idea, grade) {
+      if (!grade || grade === 'all') return true;
+
+      const gradeAgeMap = {
+        'Preschool': { min: 3, max: 5 },
+        'Kindergarten': { min: 5, max: 6 },
+        '1st Grade': { min: 6, max: 7 },
+        '2nd Grade': { min: 7, max: 8 },
+        '3rd Grade': { min: 8, max: 9 },
+        '4th Grade': { min: 9, max: 10 },
+        '5th Grade': { min: 10, max: 11 },
+        '6th Grade': { min: 11, max: 12 }
+      };
+
+      const target = gradeAgeMap[grade];
+      if (!target) return true;
+
+      return !(target.max < idea.minAge || target.min > idea.maxAge);
+    }
+
+    function renderIdeasGuideGrid(query = '', category = 'all', grade = 'all') {
+      const grid = document.getElementById('ideas-catalog-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const filtered = completeIdeaGuide.filter(idea => {
+        const matchesQuery = !query || 
+          idea.title.toLowerCase().includes(query) ||
+          idea.desc.toLowerCase().includes(query) ||
+          idea.setting.toLowerCase().includes(query) ||
+          idea.category.toLowerCase().includes(query);
+
+        const matchesCat = (category === 'all' || idea.category === category);
+        const matchesGrd = ideaMatchesGrade(idea, grade);
+
+        return matchesQuery && matchesCat && matchesGrd;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-zinc-500 italic">No hangout ideas found matching your search. Try adjusting your category or grade filter.</div>`;
+        return;
+      }
+
+      filtered.forEach(idea => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-[#be1e2d]/50 hover:shadow-sm transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-1.5 mb-1.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 uppercase tracking-wide">${idea.category}</span>
+              <span class="text-[10px] font-bold text-[#be1e2d] bg-red-50 px-2 py-0.5 rounded-full">Ages ${idea.ages}</span>
+            </div>
+            <h5 class="text-sm font-bold text-zinc-900 leading-snug">${idea.title}</h5>
+            <p class="text-xs text-zinc-600 mt-1 leading-relaxed">${idea.desc}</p>
+            <div class="text-[11px] text-zinc-400 mt-2 flex items-center gap-1">
+              <i data-lucide="map-pin" class="w-3 h-3 text-zinc-400"></i>
+              <span>${idea.setting}</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-zinc-100">
+            <button onclick="selectIdeaToPitch('${idea.title.replace(/'/g, "\\'")}', '${idea.category}')" class="w-full py-1.5 rounded-lg bg-zinc-900 hover:bg-[#be1e2d] text-white font-bold text-xs transition flex items-center justify-center gap-1.5">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Host This Idea</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function selectIdeaToPitch(title, category) {
+      closeModal('ideas-modal');
+      openHostModal();
+      document.getElementById('pitch-title').value = title;
+      
+      const catSelect = document.getElementById('pitch-cat');
+      if (category.includes('Cooking') || category.includes('Food')) catSelect.value = 'Food & Drink';
+      else if (category.includes('Sports') || category.includes('Active')) catSelect.value = 'Fitness & Sports';
+      else if (category.includes('Creative') || category.includes('Workshop') || category.includes('Media')) catSelect.value = 'Creative Arts';
+      else if (category.includes('Social') || category.includes('Party')) catSelect.value = 'Parent Socials';
+      else catSelect.value = 'Kids Activities';
+
+      document.getElementById('pitch-title').focus();
+    }
+
+    function openIdeasGuideModal() {
+      openModal('ideas-modal');
+      renderIdeasGuideGrid();
+    }
+
+    function openCheatSheetModal() {
+      openModal('cheatsheet-modal');
+    }
+
+    function openTrackerModal() {
+      openModal('tracker-modal');
+      renderTrackerList();
+    }
+
+    function filterTrackerList() {
+      const q = document.getElementById('tracker-search-input').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('tracker-status-select').value;
+      renderTrackerList(q, statusFilter);
+    }
+
+    function renderTrackerList(searchQuery = '', statusFilter = 'all') {
+      const activeContainer = document.getElementById('active-tracker-container');
+      const pastContainer = document.getElementById('reapproach-tracker-container');
+      if (!activeContainer || !pastContainer) return;
+
+      activeContainer.innerHTML = '';
+      pastContainer.innerHTML = '';
+
+      const filteredActive = prospectiveHosts.filter(item => {
+        const matchesQuery = !searchQuery || 
+          item.hosts.toLowerCase().includes(searchQuery) ||
+          item.concept.toLowerCase().includes(searchQuery) ||
+          item.date.toLowerCase().includes(searchQuery) ||
+          item.notes.toLowerCase().includes(searchQuery);
+
+        let matchesStatus = true;
+        if (statusFilter === 'Go') matchesStatus = item.status === 'Go';
+        else if (statusFilter === 'Waiting') matchesStatus = (item.status === 'Waiting' || item.status === 'In Progress' || item.status === 'Planning');
+        else if (statusFilter === 'Reapproach') matchesStatus = false;
+
+        return matchesQuery && matchesStatus;
+      });
+
+      const countEl = document.getElementById('active-hosts-count');
+      if (countEl) countEl.textContent = `${filteredActive.length} Concepts`;
+
+      if (filteredActive.length === 0) {
+        activeContainer.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-zinc-400 italic">No prospective hosts match this search.</div>`;
+      } else {
+        filteredActive.forEach(item => {
+          let badgeColor = "bg-amber-100 text-amber-900 border-amber-300";
+          if (item.status === "Go") badgeColor = "bg-emerald-100 text-emerald-900 border-emerald-300";
+          if (item.status === "Canceled") badgeColor = "bg-zinc-200 text-zinc-600 border-zinc-300";
+
+          const card = document.createElement('div');
+          card.className = "p-3.5 sm:p-4 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-zinc-300 transition flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-1.5">
+                <span class="text-xs font-bold text-[#be1e2d] uppercase tracking-wide">${item.concept}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeColor} whitespace-nowrap">
+                  ${item.status}
+                </span>
+              </div>
+              <h5 class="text-sm font-bold text-zinc-900 leading-snug">${item.hosts}</h5>
+              <div class="flex items-center gap-2 text-xs text-zinc-500 mt-1">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-zinc-400"></i>
+                <span class="font-medium text-zinc-700">${item.date}</span>
+                <span>• HSH Child: ${item.student}</span>
+              </div>
+              <p class="text-xs text-zinc-600 mt-2 bg-zinc-50 p-2 rounded-lg border border-zinc-150 leading-relaxed">
+                ${item.notes}
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+              <span class="truncate max-w-[200px]" title="${item.contact}"><i data-lucide="mail" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${item.contact}</span>
+            </div>
+          `;
+          activeContainer.appendChild(card);
+        });
+      }
+
+      if (statusFilter === 'all' || statusFilter === 'Reapproach') {
+        const filteredPast = pastHostsIdeas.filter(item => {
+          if (!searchQuery) return true;
+          return item.host.toLowerCase().includes(searchQuery) || item.concept.toLowerCase().includes(searchQuery);
+        });
+
+        filteredPast.forEach(item => {
+          const chip = document.createElement('div');
+          chip.className = "p-3 rounded-lg border border-zinc-200 bg-zinc-50/70 hover:bg-white transition flex flex-col justify-between";
+          chip.innerHTML = `
+            <div class="font-bold text-xs text-zinc-900">${item.concept}</div>
+            <div class="text-[11px] text-zinc-500 mt-1 flex items-center justify-between">
+              <span class="truncate">${item.host}</span>
+              <span class="text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 shrink-0">Reapproach</span>
+            </div>
+          `;
+          pastContainer.appendChild(chip);
         });
       }
 
       lucide.createIcons();
     }
 
-    function prevGalleryPhoto() {
-      const g = pastGalleries[activeGalleryKey];
-      if (!g || g.images.length <= 1) return;
-      activePhotoIndex = (activePhotoIndex - 1 + g.images.length) % g.images.length;
-      renderActiveGalleryPhoto();
+    // VIEW ATTENDEES MODAL
+    function viewAttendees(hangoutId) {
+      const h = hangouts.find(item => item.id === hangoutId);
+      if (!h) return;
+
+      document.getElementById('modal-attendees-title').textContent = h.title;
+      document.getElementById('modal-attendees-sub').textContent = `Hosted by ${h.host} • ${h.attendees.length} Signed Up (${h.totalSpots - h.attendees.length} spots remaining)`;
+
+      const listContainer = document.getElementById('modal-attendees-list');
+      listContainer.innerHTML = '';
+
+      if (h.attendees.length === 0) {
+        listContainer.innerHTML = `<p class="text-sm text-zinc-500 italic text-center py-4">No one has registered yet. Be the first to join!</p>`;
+      } else {
+        h.attendees.forEach(a => {
+          const row = document.createElement('div');
+          row.className = "flex items-center justify-between p-2.5 sm:p-3 rounded-xl bg-zinc-50 border border-zinc-200";
+          row.innerHTML = `
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#be1e2d]/10 text-[#be1e2d] font-bold flex items-center justify-center text-xs">
+                ${a.name.charAt(0)}
+              </div>
+              <div>
+                <div class="font-bold text-xs sm:text-sm text-zinc-900">${a.name}</div>
+                <div class="text-[10px] sm:text-[11px] text-zinc-500">Attendee</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-200 text-zinc-700">
+              ${a.grade}
+            </span>
+          `;
+          listContainer.appendChild(row);
+        });
+      }
+
+      openModal('attendees-modal');
     }
 
-    function nextGalleryPhoto() {
-      const g = pastGalleries[activeGalleryKey];
-      if (!g || g.images.length <= 1) return;
-      activePhotoIndex = (activePhotoIndex + 1) % g.images.length;
-      renderActiveGalleryPhoto();
-    }
-
-    // Booking Flow with "Pay What You Can"
-    let activeBookingHangout = null;
-    let activePricingTier = 'standard';
-
+    // BOOKING ENGINE WITH "PAY WHAT YOU CAN"
     function openBooking(hangoutId) {
       activeBookingHangout = hangouts.find(h => h.id === hangoutId);
       if (!activeBookingHangout) return;
@@ -1468,22 +1972,24 @@
       const custAmountInput = document.getElementById('custom-donation-amount');
       const stdLabel = document.getElementById('tier-standard-label');
 
-      if (activeBookingHangout) {
+      if (activeBookingHangout && stdLabel) {
         stdLabel.textContent = `Standard ($${activeBookingHangout.price})`;
       }
 
       if (tier === 'standard') {
-        stdBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
-        custBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
-        customWrap.classList.add('hidden');
+        if (stdBtn) stdBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (custBtn) custBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (customWrap) customWrap.classList.add('hidden');
       } else {
-        stdBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
-        custBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
-        customWrap.classList.remove('hidden');
-        if (!custAmountInput.value && activeBookingHangout) {
-          custAmountInput.value = activeBookingHangout.price;
+        if (stdBtn) stdBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (custBtn) custBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (customWrap) {
+          customWrap.classList.remove('hidden');
+          if (!custAmountInput.value && activeBookingHangout) {
+            custAmountInput.value = activeBookingHangout.price;
+          }
+          custAmountInput.focus();
         }
-        custAmountInput.focus();
       }
 
       updateBookingTotal();
@@ -1502,7 +2008,8 @@
         total = spots * activeBookingHangout.price;
       }
 
-      document.getElementById('booking-total-display').textContent = `$${total.toLocaleString()}`;
+      const totalDisplay = document.getElementById('booking-total-display');
+      if (totalDisplay) totalDisplay.textContent = `$${total.toLocaleString()}`;
     }
 
     function handleBookingSubmit(e) {
@@ -1625,6 +2132,28 @@
       if (statRaised) statRaised.textContent = `$0`;
       if (statSpots) statSpots.textContent = `${totalSpotsClaimed} / ${totalSpotsCapacity}`;
       if (statEvents) statEvents.textContent = hangouts.length;
+    }
+
+    // INITIAL EXECUTION ON LOAD
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCards();
+      renderCalendar();
+      renderTrackerList();
+      populateHostInspoDrawer();
+      renderIdeasGuideGrid();
+      updateImpactStats();
+      lucide.createIcons();
+    });
+
+    // Fallback execution in case DOMContentLoaded has already fired
+    if (document.readyState === "interactive" || document.readyState === "complete") {
+      renderCards();
+      renderCalendar();
+      renderTrackerList();
+      populateHostInspoDrawer();
+      renderIdeasGuideGrid();
+      updateImpactStats();
+      lucide.createIcons();
     }
   </script>
 </body>
