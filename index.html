@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Hosted Hangouts | Hollywood Schoolhouse</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,6 +18,11 @@
       --hsh-red: #be1e2d;
       --hsh-red-dark: #9e1422;
       --hsh-red-light: #d63031;
+    }
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
     body {
       font-family: 'DM Sans', sans-serif;
@@ -40,52 +45,61 @@
       border-radius: 9999px;
     }
     .modal-backdrop {
-      background-color: rgba(18, 18, 18, 0.75);
-      backdrop-filter: blur(4px);
+      background-color: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col antialiased overflow-x-hidden w-full">
 
   <!-- Top Announcement Bar (HSH Crimson Red) -->
-  <div class="bg-[#9e1422] text-white text-xs sm:text-sm py-2 px-4 text-center font-medium tracking-wide">
+  <div class="bg-[#9e1422] text-white text-xs sm:text-sm py-2 px-3 text-center font-medium tracking-wide">
     🌟 100% of proceeds from Hosted Hangouts support the Hollywood Schoolhouse Tuition Assistance Fund.
   </div>
 
   <!-- Header Navigation (HSH Signature Red) -->
   <header class="sticky top-0 z-40 bg-[#be1e2d] border-b border-[#9e1422] text-white shadow-md transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
       
       <!-- School Branding (Top Left) -->
-      <a href="#" class="flex items-center gap-3 group text-decoration-none">
-        <div class="w-10 h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-2xl group-hover:scale-105 transition-transform shadow-sm">
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none shrink-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-xl sm:text-2xl group-hover:scale-105 transition-transform shadow-sm">
           h
         </div>
         <div class="flex flex-col">
-          <span class="font-brand font-bold text-base sm:text-lg text-white lowercase leading-none tracking-tight group-hover:text-red-100 transition-colors">
+          <span class="font-brand font-bold text-sm sm:text-lg text-white lowercase leading-none tracking-tight group-hover:text-red-100 transition-colors">
             hollywood schoolhouse
           </span>
-          <span class="text-[10px] tracking-[0.2em] uppercase text-white/90 font-bold mt-1">
+          <span class="text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-white/90 font-bold mt-1">
             Hosted Hangouts
           </span>
         </div>
       </a>
 
       <!-- Quick Nav Buttons -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <!-- Questions / Cheat Sheet Button -->
+        <button onclick="openCheatSheetModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20" title="Frequently Asked Questions & Cheat Sheet">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white"></i>
+          <span class="hidden sm:inline">Questions</span>
+          <span class="sm:hidden">FAQ</span>
+        </button>
+
         <!-- Host Tracker Button -->
-        <button onclick="openTrackerModal()" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner" title="View prospective hosts and concepts tracker">
-          <i data-lucide="clipboard-list" class="w-4 h-4 text-white"></i>
+        <button onclick="openTrackerModal()" class="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner" title="View prospective hosts and concepts tracker">
+          <i data-lucide="clipboard-list" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white"></i>
           <span>Tracker</span>
         </button>
 
-        <button onclick="toggleCalendarView(true)" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition">
+        <!-- Calendar Button -->
+        <button onclick="toggleCalendarView(true)" class="hidden md:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition">
           <i data-lucide="calendar" class="w-4 h-4 text-white"></i>
-          <span class="hidden sm:inline">Calendar</span>
+          <span>Calendar</span>
         </button>
         
-        <button onclick="openHostModal()" class="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <!-- Host a Hangout Trigger -->
+        <button onclick="openHostModal()" class="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
           <span>Host</span>
         </button>
       </div>
@@ -93,7 +107,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="bg-[#18181b] text-white pt-12 pb-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
+  <section class="bg-[#18181b] text-white pt-10 sm:pt-12 pb-14 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
     <div class="max-w-4xl mx-auto text-center space-y-6">
       
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs sm:text-sm font-medium">
@@ -101,76 +115,72 @@
         <span>Community-Powered School Giving</span>
       </div>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white font-heading">
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white font-heading">
         Hosted Hangouts
       </h1>
 
-      <p class="text-base sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-sm sm:text-lg lg:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed px-1">
         A backyard movie night? Cupcake Wars? A parents-versus-kids game show where the grown-ups finally get to prove they know something? We’re looking for HSH families to host our next round of Hosted Hangouts!
       </p>
 
       <!-- Guest vs Host Decision Buttons (Mobile Optimized) -->
-      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="compass" class="w-5 h-5 text-[#be1e2d]"></i>
+      <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+          <i data-lucide="compass" class="w-4 h-4 sm:w-5 sm:h-5 text-[#be1e2d]"></i>
           <span>Are you a Guest? Browse Hangouts</span>
         </a>
-        <button onclick="openHostModal()" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="party-popper" class="w-5 h-5"></i>
+        <button onclick="openHostModal()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+          <i data-lucide="party-popper" class="w-4 h-4 sm:w-5 sm:h-5"></i>
           <span>Are you a Host? Pitch Your Idea</span>
         </button>
       </div>
 
-      <!-- Live Tuition Assistance Impact Stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-8 text-left max-w-3xl mx-auto">
-        <div class="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800">
-          <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold">Funds Raised</div>
-          <div class="text-xl sm:text-2xl font-bold text-[#f87171] mt-1" id="stat-raised">$17,250</div>
+      <!-- Live Tuition Assistance Impact Stats (Clean 3-Box Layout, Support Goal Removed) -->
+      <div class="grid grid-cols-3 gap-2.5 sm:gap-4 pt-6 text-left max-w-2xl mx-auto">
+        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
+          <div class="text-lg sm:text-2xl font-bold text-[#f87171] mt-1.5" id="stat-raised">$0</div>
         </div>
-        <div class="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800">
-          <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold">Spots Claimed</div>
-          <div class="text-xl sm:text-2xl font-bold text-white mt-1" id="stat-spots">82 / 210</div>
+        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
+          <div class="text-lg sm:text-2xl font-bold text-white mt-1.5" id="stat-spots">82 / 210</div>
         </div>
-        <div class="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800">
-          <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold">Active Hangouts</div>
-          <div class="text-xl sm:text-2xl font-bold text-white mt-1" id="stat-events">8</div>
-        </div>
-        <div class="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800">
-          <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold">Support Goal</div>
-          <div class="text-xl sm:text-2xl font-bold text-emerald-400 mt-1">100% Tuition</div>
+        <div class="p-3 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+          <div class="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
+          <div class="text-lg sm:text-2xl font-bold text-white mt-1.5" id="stat-events">8</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Main Content Area -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full" id="catalog-section">
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full" id="catalog-section">
 
     <!-- Section Header & Controls -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-zinc-200">
       <div>
         <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading">Upcoming</h2>
-        <p class="text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar.</p>
+        <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar.</p>
       </div>
 
       <!-- Controls: Dropdowns & View Switchers -->
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
         
         <!-- Browse Hangouts Dropdown Menu -->
         <div class="relative inline-block text-left w-full sm:w-auto">
-          <select id="browse-filter-select" onchange="handleBrowseFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2.5 pl-3 pr-8 rounded-lg text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+          <select id="browse-filter-select" onchange="handleBrowseFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
             <option value="all">Browse Hangouts: All</option>
             <option value="parents-only">Parents Only Hangouts</option>
             <option value="sort-date">Sort by Date</option>
             <option value="sort-cost">Sort by Cost</option>
             <option value="view-calendar">View Calendar</option>
           </select>
-          <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3.5 pointer-events-none"></i>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
         <!-- Grade Filter Dropdown Menu -->
         <div class="relative inline-block text-left w-full sm:w-auto">
-          <select id="grade-filter-select" onchange="handleGradeFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2.5 pl-3 pr-8 rounded-lg text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+          <select id="grade-filter-select" onchange="handleGradeFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
             <option value="all">All Grades / Ages</option>
             <option value="Parents Only">Parents Only (Adults)</option>
             <option value="Preschool">Preschool / Early Childhood</option>
@@ -182,16 +192,16 @@
             <option value="5th Grade">5th Grade</option>
             <option value="6th Grade">6th Grade</option>
           </select>
-          <i data-lucide="filter" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3.5 pointer-events-none"></i>
+          <i data-lucide="filter" class="w-4 h-4 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
         <!-- Toggle View: Grid vs Calendar -->
         <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
-          <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
+          <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
             <i data-lucide="layout-grid" class="w-4 h-4"></i>
             <span>Grid</span>
           </button>
-          <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
+          <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
             <i data-lucide="calendar" class="w-4 h-4"></i>
             <span>Calendar</span>
           </button>
@@ -199,18 +209,18 @@
       </div>
     </div>
 
-    <!-- Category Pill Filters (For Grid View) -->
-    <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
-      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
-      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
-      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
-      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
-      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
+    <!-- Category Pill Filters (No lateral bleed on mobile) -->
+    <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3.5 w-full">
+      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
+      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
+      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
+      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
+      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
+      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
     </div>
 
     <!-- Grid Catalog -->
-    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-2">
+    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
       <!-- Populated dynamically via JS -->
     </div>
 
@@ -218,12 +228,12 @@
     <div id="calendar-container" class="hidden space-y-6 pt-4">
       
       <!-- School Sync Notification Banner -->
-      <div class="bg-red-50 border border-red-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-red-950">
+      <div class="bg-red-50 border border-red-200 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-red-950">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
-            <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
+            <i data-lucide="calendar-check-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
           </div>
-          <div class="text-sm">
+          <div class="text-xs sm:text-sm">
             <span class="font-bold">Hollywood Schoolhouse Schedule Integrated:</span> Showing hosted hangouts alongside official school calendar events.
           </div>
         </div>
@@ -234,26 +244,26 @@
       </div>
 
       <!-- Calendar Header with Month Selector Dropdown & Previous/Next Month Arrows -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-zinc-200 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white p-3.5 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
         
         <!-- Left: Month Display + Arrows + Month/Year Dropdown Menu -->
-        <div class="flex items-center gap-3 flex-wrap">
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
           
           <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
-            <button onclick="prevMonth()" title="Previous Month" class="p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+            <button onclick="prevMonth()" title="Previous Month" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <button onclick="nextMonth()" title="Next Month" class="p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+            <button onclick="nextMonth()" title="Next Month" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
               <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </button>
           </div>
 
-          <h3 class="font-bold text-xl text-zinc-900 font-heading min-w-[170px]" id="calendar-month-label">
+          <h3 class="font-bold text-base sm:text-xl text-zinc-900 font-heading min-w-[140px] sm:min-w-[170px]" id="calendar-month-label">
             November 2026
           </h3>
 
           <div class="relative inline-block text-left">
-            <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-xs font-semibold py-2 pl-3 pr-8 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+            <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-[11px] sm:text-xs font-semibold py-1.5 sm:py-2 pl-2.5 pr-7 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
               <option value="2026-10">October 2026</option>
               <option value="2026-11" selected>November 2026 (Current)</option>
               <option value="2026-12">December 2026</option>
@@ -264,16 +274,16 @@
               <option value="2027-05">May 2027</option>
               <option value="2027-06">June 2027</option>
             </select>
-            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-500 absolute right-2.5 top-2.5 pointer-events-none"></i>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-500 absolute right-2 top-2 pointer-events-none"></i>
           </div>
 
-          <button onclick="jumpToCurrentMonth()" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-zinc-200 text-zinc-600 hover:bg-zinc-100 transition">
-            Jump to Today
+          <button onclick="jumpToCurrentMonth()" class="text-[11px] sm:text-xs font-semibold px-2 py-1.5 rounded-md border border-zinc-200 text-zinc-600 hover:bg-zinc-100 transition">
+            Today
           </button>
         </div>
 
         <!-- Right: Color Legend -->
-        <div class="flex items-center gap-4 text-xs font-semibold">
+        <div class="flex items-center gap-3 sm:gap-4 text-xs font-semibold pt-1 sm:pt-0">
           <span class="flex items-center gap-1.5 text-zinc-700">
             <span class="w-2.5 h-2.5 rounded-full bg-[#be1e2d]"></span> Hosted Hangout
           </span>
@@ -285,7 +295,7 @@
 
       <!-- Calendar Grid Table (Responsive Overflow for Mobile) -->
       <div class="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-x-auto">
-        <div class="min-w-[640px]">
+        <div class="min-w-[620px]">
           <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-3 uppercase tracking-wider">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
           </div>
@@ -296,67 +306,119 @@
       </div>
     </div>
 
-    <!-- Previous Hangouts Video Showcase Section -->
-    <section class="mt-16 pt-12 border-t border-zinc-200">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+    <!-- Past Hangouts Showcase (Real Uploaded Flyers with Click to Enlarge) -->
+    <section class="mt-14 pt-10 border-t border-zinc-200">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6">
         <div>
-          <div class="text-xs uppercase font-bold tracking-widest text-[#be1e2d]">Memories & Impact</div>
+          <div class="text-xs uppercase font-bold tracking-widest text-[#be1e2d]">Memories & Inspiration</div>
           <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1 font-heading">Past Hangouts Showcase</h3>
-          <p class="text-sm text-zinc-500 mt-1">Check out videos and snapshots from earlier parent-hosted events.</p>
+          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Click any flyer below to expand, read the full event details, and see how simple it is to host!</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Video Card 1 -->
-        <div class="bg-white rounded-xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow transition">
-          <div class="relative aspect-video bg-zinc-900 flex items-center justify-center group cursor-pointer" onclick="playVideo('Past Hangout: 2025 Backyard Pizza Night', 'https://www.w3schools.com/html/mov_bbb.mp4')">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80" alt="Pizza Making" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-white/90 text-zinc-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                <i data-lucide="play" class="w-5 h-5 fill-zinc-900 translate-x-0.5"></i>
-              </div>
+      <!-- 4 Real Past Hangout Flyers Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Flyer 1: Shelby Jazz Class -->
+        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openFlyerModal('HOSTED_HANGOUT_SHELBY.jpeg', 'Feel Good Jazz Class with Shelby Rabara Shum')">
+          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+            <img src="HOSTED_HANGOUT_SHELBY.jpeg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="Feel Good Jazz Class Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+              </span>
             </div>
-            <span class="absolute bottom-2 right-2 bg-zinc-950/80 text-white text-[11px] px-2 py-0.5 rounded font-mono">1:45</span>
+            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+              Dance & Fitness
+            </span>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-zinc-900 font-heading">Wood-Fired Pizza & Gelato Night</h4>
-            <p class="text-xs text-zinc-500 mt-1">Hosted by The Morales Family • Raised $1,800</p>
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Feel Good Jazz Class</h4>
+              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Shelby Rabara Shum</p>
+            </div>
+            <div class="text-[11px] font-bold text-[#be1e2d] mt-2 flex items-center gap-1">
+              <span>View Full Flyer</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </div>
           </div>
         </div>
 
-        <!-- Video Card 2 -->
-        <div class="bg-white rounded-xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow transition">
-          <div class="relative aspect-video bg-zinc-900 flex items-center justify-center group cursor-pointer" onclick="playVideo('Past Hangout: Kids Soccer Skills Clinic', 'https://www.w3schools.com/html/mov_bbb.mp4')">
-            <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=700&q=80" alt="Soccer clinic" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-white/90 text-zinc-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                <i data-lucide="play" class="w-5 h-5 fill-zinc-900 translate-x-0.5"></i>
-              </div>
+        <!-- Flyer 2: Presidents' Karaoke Night -->
+        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openFlyerModal('karoke%20HH.jpg', 'Presidents Karaoke Night')">
+          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+            <img src="karoke%20HH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=700&q=80';" alt="Presidents Karaoke Night Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+              </span>
             </div>
-            <span class="absolute bottom-2 right-2 bg-zinc-950/80 text-white text-[11px] px-2 py-0.5 rounded font-mono">2:10</span>
+            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+              Parent Social
+            </span>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-zinc-900 font-heading">Hollywood Park Soccer Saturday</h4>
-            <p class="text-xs text-zinc-500 mt-1">Hosted by Coach Dave • Raised $1,200</p>
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Presidents' Karaoke Night</h4>
+              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Christy, Michelle, Daisy, Alicia & Brianne</p>
+            </div>
+            <div class="text-[11px] font-bold text-[#be1e2d] mt-2 flex items-center gap-1">
+              <span>View Full Flyer</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </div>
           </div>
         </div>
 
-        <!-- Video Card 3 -->
-        <div class="bg-white rounded-xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow transition">
-          <div class="relative aspect-video bg-zinc-900 flex items-center justify-center group cursor-pointer" onclick="playVideo('Past Hangout: Sunset Wine Tasting & DJ', 'https://www.w3schools.com/html/mov_bbb.mp4')">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80" alt="Wine tasting" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-12 h-12 rounded-full bg-white/90 text-zinc-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                <i data-lucide="play" class="w-5 h-5 fill-zinc-900 translate-x-0.5"></i>
-              </div>
+        <!-- Flyer 3: Sound Bath -->
+        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openFlyerModal('HOSTED_HANGOUT_SOUND_BATH.jpg', 'Rooftop Sound Bath Meditation')">
+          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+            <img src="HOSTED_HANGOUT_SOUND_BATH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80';" alt="Sound Bath Meditation Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+              </span>
             </div>
-            <span class="absolute bottom-2 right-2 bg-zinc-950/80 text-white text-[11px] px-2 py-0.5 rounded font-mono">1:15</span>
+            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+              Wellness & Sound
+            </span>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-zinc-900 font-heading">Sunset Sounds & Natural Wines</h4>
-            <p class="text-xs text-zinc-500 mt-1">Hosted by The Asay-Kawczynski Family • Raised $3,200</p>
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Sunset Sound Bath</h4>
+              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Elizabeth Sbardellati</p>
+            </div>
+            <div class="text-[11px] font-bold text-[#be1e2d] mt-2 flex items-center gap-1">
+              <span>View Full Flyer</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </div>
           </div>
         </div>
+
+        <!-- Flyer 4: Ice Skating -->
+        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openFlyerModal('HOSTED_HANGOUT_ICE_SKATING.jpg', 'Community Ice Skating Party')">
+          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+            <img src="HOSTED_HANGOUT_ICE_SKATING.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=700&q=80';" alt="Ice Skating Party Flyer" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3 py-1.5 rounded-full bg-white/95 text-zinc-900 font-bold text-xs shadow flex items-center gap-1.5">
+                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to Read Flyer
+              </span>
+            </div>
+            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+              All-School Family
+            </span>
+          </div>
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Community Ice Skating</h4>
+              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Jean, Brandee, Janet, Dawn & Julie</p>
+            </div>
+            <div class="text-[11px] font-bold text-[#be1e2d] mt-2 flex items-center gap-1">
+              <span>View Full Flyer</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -476,22 +538,45 @@
     </div>
   </div>
 
-  <!-- 3. Host a Hangout Proposal Pitch Modal (With Email Generation) -->
-  <div id="host-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      <div class="px-6 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
+  <!-- 3. Host a Hangout Proposal Pitch Modal (With Integrated Idea Inspo List) -->
+  <div id="host-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Header -->
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div>
           <h3 class="font-bold text-lg font-heading">Pitch a Hosted Hangout</h3>
-          <p class="text-xs text-red-100">Propose an event to raise tuition funds</p>
+          <p class="text-xs text-red-100">Propose an event to raise tuition assistance funds</p>
         </div>
         <button onclick="closeModal('host-modal')" class="text-white/80 hover:text-white p-1">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <form id="host-pitch-form" onsubmit="handleHostPitch(event)" class="p-6 space-y-3.5 max-h-[80vh] overflow-y-auto custom-scrollbar">
+      <!-- Inspo Banner: Toggle Concepts List -->
+      <div class="p-3 bg-amber-50 border-b border-amber-200 flex items-center justify-between text-xs text-amber-900 shrink-0">
+        <span class="flex items-center gap-1.5 font-semibold">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
+          <span>Need inspiration or want to see what's being planned?</span>
+        </span>
+        <button type="button" onclick="toggleHostInspoList()" id="inspo-toggle-btn" class="font-bold text-[#be1e2d] hover:underline flex items-center gap-1">
+          <span>See Potential Events</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5" id="inspo-chevron"></i>
+        </button>
+      </div>
+
+      <!-- Collapsible Potential Events List (Hosts + Concepts Only) -->
+      <div id="host-inspo-drawer" class="hidden bg-zinc-50 border-b border-zinc-200 p-4 max-h-56 overflow-y-auto custom-scrollbar shrink-0">
+        <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-2">Other Planned & Prospective Events:</div>
+        <div class="space-y-2 text-xs" id="host-inspo-list-items">
+          <!-- Populated via JS with just host + concept -->
+        </div>
+      </div>
+
+      <!-- Pitch Form Body -->
+      <form id="host-pitch-form" onsubmit="handleHostPitch(event)" class="p-5 sm:p-6 space-y-3.5 overflow-y-auto custom-scrollbar flex-1">
         <div>
-          <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Your Name (Host)</label>
+          <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Your Name / Family (Host)</label>
           <input type="text" id="pitch-host" required placeholder="e.g., The Miller Family" class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
         </div>
 
@@ -559,11 +644,54 @@
     </div>
   </div>
 
-  <!-- 4. Host Pipeline Tracker Modal (Doc Synced) -->
+  <!-- 4. Questions & Cheat Sheet Modal -->
+  <div id="cheatsheet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
+    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+          <i data-lucide="help-circle" class="w-5 h-5 text-white"></i>
+          <div>
+            <h3 class="font-bold text-base sm:text-lg font-heading leading-tight">Hosted Hangouts Questions & Cheat Sheet</h3>
+            <p class="text-xs text-red-100">Everything you need to know about hosting and attending</p>
+          </div>
+        </div>
+        <button onclick="closeModal('cheatsheet-modal')" class="text-white/80 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div class="p-3 sm:p-6 overflow-y-auto custom-scrollbar flex items-center justify-center bg-zinc-900/95 flex-1">
+        <img src="HH%20cheat%20sheet.jpg" onerror="this.onerror=null; this.src='HH cheat sheet.jpg';" alt="Hosted Hangouts Cheat Sheet" class="w-full h-auto max-h-[75vh] object-contain rounded-lg shadow-lg">
+      </div>
+
+      <div class="p-3.5 bg-zinc-50 border-t border-zinc-200 flex items-center justify-between text-xs text-zinc-600 shrink-0">
+        <span>Still have a question? Email <a href="mailto:hangouts@hshla.org" class="font-bold text-[#be1e2d] underline">hangouts@hshla.org</a></span>
+        <button onclick="closeModal('cheatsheet-modal')" class="px-4 py-1.5 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 font-semibold transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Flyer Lightbox Modal (Click to Enlarge Past Hangout Images) -->
+  <div id="flyer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden">
+    <div class="bg-zinc-950 w-full max-w-2xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[95vh]">
+      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
+        <h4 class="font-bold text-xs sm:text-sm truncate pr-4" id="flyer-modal-title">Past Hangout Flyer</h4>
+        <button onclick="closeModal('flyer-modal')" class="text-zinc-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-2 sm:p-4 overflow-y-auto custom-scrollbar flex items-center justify-center bg-black flex-1">
+        <img id="flyer-modal-img" src="" alt="Full Flyer" class="max-w-full max-h-[82vh] object-contain rounded shadow-2xl">
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Host Pipeline Tracker Modal -->
   <div id="tracker-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
       
-      <!-- Tracker Modal Header -->
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
@@ -579,11 +707,10 @@
         </button>
       </div>
 
-      <!-- Tracker Filter & Search Controls -->
-      <div class="p-4 bg-zinc-50 border-b border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+      <div class="p-3.5 sm:p-4 bg-zinc-50 border-b border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
         <div class="relative w-full sm:w-72">
-          <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3 top-3 pointer-events-none"></i>
-          <input type="text" id="tracker-search-input" oninput="filterTrackerList()" placeholder="Search host, concept, or date..." class="w-full pl-9 pr-3 py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none bg-white">
+          <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3 top-2.5 pointer-events-none"></i>
+          <input type="text" id="tracker-search-input" oninput="filterTrackerList()" placeholder="Search host, concept, or date..." class="w-full pl-9 pr-3 py-1.5 sm:py-2 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none bg-white">
         </div>
         <div class="flex items-center gap-2 w-full sm:w-auto">
           <select id="tracker-status-select" onchange="filterTrackerList()" class="w-full sm:w-auto text-xs py-2 px-3 rounded-lg border border-zinc-300 bg-white font-medium text-zinc-700 focus:outline-none focus:ring-2 focus:ring-[#be1e2d]">
@@ -599,10 +726,7 @@
         </div>
       </div>
 
-      <!-- Tracker Content (Scrollable) -->
       <div class="p-4 sm:p-6 overflow-y-auto custom-scrollbar space-y-6 flex-1">
-        
-        <!-- 2026-27 Active Hosts Section -->
         <div>
           <div class="flex items-center justify-between mb-3">
             <h4 class="font-bold text-sm sm:text-base text-zinc-900 flex items-center gap-2">
@@ -617,7 +741,6 @@
           </div>
         </div>
 
-        <!-- 2025-2026 Past Hosts / To Reapproach Section -->
         <div class="pt-4 border-t border-zinc-200">
           <div class="flex items-center justify-between mb-3">
             <h4 class="font-bold text-sm sm:text-base text-zinc-900 flex items-center gap-2">
@@ -631,34 +754,13 @@
             <!-- Injected via JS -->
           </div>
         </div>
-
       </div>
 
-      <!-- Tracker Modal Footer -->
-      <div class="p-4 bg-zinc-50 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 shrink-0">
+      <div class="p-3.5 bg-zinc-50 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-zinc-500 shrink-0">
         <div>💡 Notes and contact points synced from the official HSH committee roster.</div>
-        <button onclick="closeModal('tracker-modal')" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 font-semibold transition">
+        <button onclick="closeModal('tracker-modal')" class="w-full sm:w-auto px-4 py-1.5 sm:py-2 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 font-semibold transition">
           Close Tracker
         </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- 5. Video Player Modal -->
-  <div id="video-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
-    <div class="bg-zinc-950 w-full max-w-2xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden">
-      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between">
-        <h4 class="font-bold text-sm" id="video-modal-title">Past Hangout Video</h4>
-        <button onclick="closeModal('video-modal')" class="text-zinc-400 hover:text-white p-1">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-      <div class="aspect-video bg-black flex items-center justify-center">
-        <video id="video-player" controls class="w-full h-full">
-          <source src="" type="video/mp4">
-          Your browser does not support HTML video.
-        </video>
       </div>
     </div>
   </div>
@@ -830,7 +932,7 @@
       }
     ];
 
-    // Data Synced Directly from Prospective Hosts Google Spreadsheet
+    // Prospective Hosts and Concepts Data
     const prospectiveHosts = [
       {
         hosts: "Emma Ludbrook, Sarah Newkirk Simon, Ben Dickey, Matt Rodriguez, Christian Stavros and spouses",
@@ -845,7 +947,7 @@
         hosts: "Lauren Escobar Slater / Sam Napolitano & 2 other parents",
         concept: "Bob Baker Marionette Theater Puppet Show",
         status: "Go",
-        date: "Upcoming (Dates checking)",
+        date: "Upcoming",
         notes: "Checking available dates with Bob Baker troupe.",
         contact: "laurenmescobar@gmail.com",
         student: "Janet"
@@ -951,6 +1053,7 @@
       renderCards();
       renderCalendar();
       renderTrackerList();
+      populateHostInspoDrawer();
       updateImpactStats();
     });
 
@@ -1056,9 +1159,9 @@
       currentCategory = cat;
       document.querySelectorAll('.cat-pill').forEach(btn => {
         if (btn.dataset.cat === cat) {
-          btn.className = "cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm";
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm";
         } else {
-          btn.className = "cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap";
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap";
         }
       });
       renderCards();
@@ -1106,21 +1209,19 @@
         cardsEl.classList.add('hidden');
         pillsEl.classList.add('hidden');
         calEl.classList.remove('hidden');
-        calBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
-        cardsBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+        calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
         calEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         cardsEl.classList.remove('hidden');
         pillsEl.classList.remove('hidden');
         calEl.classList.add('hidden');
-        cardsBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
-        calBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+        cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
       }
     }
 
-    // ============================================
-    // DYNAMIC CALENDAR ENGINE
-    // ============================================
+    // Calendar Engine
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
@@ -1186,7 +1287,7 @@
 
       for (let i = 0; i < firstDay; i++) {
         const blank = document.createElement('div');
-        blank.className = "min-h-[110px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
+        blank.className = "min-h-[105px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
         grid.appendChild(blank);
       }
 
@@ -1197,7 +1298,7 @@
         const isToday = (isCurrentMonthView && day === realTodayDate);
 
         const cell = document.createElement('div');
-        cell.className = `min-h-[110px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
+        cell.className = `min-h-[105px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
           isToday ? 'bg-red-50/60 ring-2 ring-[#be1e2d] ring-inset relative' : 'bg-white hover:bg-zinc-50'
         }`;
         
@@ -1221,12 +1322,12 @@
         cell.innerHTML = `
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold ${isToday ? 'w-6 h-6 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-black' : 'text-zinc-700'}">
+              <span class="text-xs font-bold ${isToday ? 'w-5 h-5 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-black' : 'text-zinc-700'}">
                 ${day}
               </span>
-              ${isToday ? `<span class="text-[9px] font-black uppercase text-[#be1e2d] tracking-wider bg-red-100 px-1.5 py-0.5 rounded">Today</span>` : ''}
+              ${isToday ? `<span class="text-[8px] font-black uppercase text-[#be1e2d] tracking-wider bg-red-100 px-1 rounded">Today</span>` : ''}
             </div>
-            <div class="mt-1.5">${eventsHtml}</div>
+            <div class="mt-1">${eventsHtml}</div>
           </div>
         `;
         grid.appendChild(cell);
@@ -1234,9 +1335,52 @@
       lucide.createIcons();
     }
 
-    // ============================================
-    // HOST PIPELINE TRACKER ENGINE
-    // ============================================
+    // Host Inspo Drawer Inside Host Modal (Host + Concept Only)
+    function populateHostInspoDrawer() {
+      const container = document.getElementById('host-inspo-list-items');
+      container.innerHTML = '';
+
+      // Only Host Name + Concept
+      prospectiveHosts.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex items-start justify-between py-1.5 border-b border-zinc-200/60 gap-3";
+        row.innerHTML = `
+          <div>
+            <span class="font-bold text-zinc-900">${item.concept}</span>
+            <span class="text-zinc-500 block sm:inline sm:ml-2">— Hosted by ${item.hosts}</span>
+          </div>
+          <span class="text-[10px] font-semibold text-[#be1e2d] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded whitespace-nowrap">${item.status}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function toggleHostInspoList() {
+      const drawer = document.getElementById('host-inspo-drawer');
+      const chevron = document.getElementById('inspo-chevron');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        drawer.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    // Cheat Sheet Modal Handler
+    function openCheatSheetModal() {
+      openModal('cheatsheet-modal');
+    }
+
+    // Flyer Lightbox Modal (Click to Enlarge Past Hangout Flyers)
+    function openFlyerModal(imgSrc, title) {
+      document.getElementById('flyer-modal-title').textContent = title;
+      const img = document.getElementById('flyer-modal-img');
+      img.src = imgSrc;
+      openModal('flyer-modal');
+    }
+
+    // Host Pipeline Tracker Engine
     function openTrackerModal() {
       openModal('tracker-modal');
       renderTrackerList();
@@ -1255,7 +1399,6 @@
       activeContainer.innerHTML = '';
       pastContainer.innerHTML = '';
 
-      // 1. Filter and render active 2026-27 hosts
       const filteredActive = prospectiveHosts.filter(item => {
         const matchesQuery = !searchQuery || 
           item.hosts.toLowerCase().includes(searchQuery) ||
@@ -1309,7 +1452,6 @@
         });
       }
 
-      // 2. Filter and render past hosts to reapproach
       if (statusFilter === 'all' || statusFilter === 'Reapproach') {
         const filteredPast = pastHostsIdeas.filter(item => {
           if (!searchQuery) return true;
@@ -1481,41 +1623,26 @@
       window.location.href = `mailto:hangouts@hshla.org?cc=info@hshla.org&subject=${subject}&body=${body}`;
     }
 
-    // Video Player
-    function playVideo(title, url) {
-      document.getElementById('video-modal-title').textContent = title;
-      const player = document.getElementById('video-player');
-      player.src = url;
-      openModal('video-modal');
-      player.play().catch(() => {});
-    }
-
     // Modal Helpers
     function openModal(id) {
       document.getElementById(id).classList.remove('hidden');
     }
     function closeModal(id) {
       document.getElementById(id).classList.add('hidden');
-      if (id === 'video-modal') {
-        const player = document.getElementById('video-player');
-        player.pause();
-        player.src = '';
-      }
     }
 
     // Update Stats
     function updateImpactStats() {
-      let totalRaised = 0;
       let totalSpotsClaimed = 0;
       let totalSpotsCapacity = 0;
 
       hangouts.forEach(h => {
-        totalRaised += (h.attendees.length * h.price);
         totalSpotsClaimed += h.attendees.length;
         totalSpotsCapacity += h.totalSpots;
       });
 
-      document.getElementById('stat-raised').textContent = `$${totalRaised.toLocaleString()}`;
+      // Explicitly set to $0 for '26-'27 as requested
+      document.getElementById('stat-raised').textContent = `$0`;
       document.getElementById('stat-spots').textContent = `${totalSpotsClaimed} / ${totalSpotsCapacity}`;
       document.getElementById('stat-events').textContent = hangouts.length;
     }
