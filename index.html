@@ -78,33 +78,27 @@
 
       <!-- Quick Nav Buttons -->
       <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-        
-        <!-- Questions / FAQ Button -->
         <button onclick="openCheatSheetModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20 shrink-0" title="Questions & FAQ">
           <i data-lucide="help-circle" class="w-3.5 h-3.5 text-white"></i>
           <span class="hidden sm:inline">Questions</span>
           <span class="sm:hidden">FAQ</span>
         </button>
 
-        <!-- Need Ideas Button -->
         <button onclick="openIdeasGuideModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-amber-400 text-amber-950 hover:bg-amber-300 transition shadow-sm shrink-0" title="65+ Hangout Ideas Guide">
           <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-amber-950"></i>
           <span>Ideas</span>
         </button>
 
-        <!-- Host Pipeline Tracker Button -->
         <button onclick="openTrackerModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner shrink-0" title="View prospective hosts and concepts tracker">
           <i data-lucide="clipboard-list" class="w-3.5 h-3.5 text-white"></i>
           <span>Tracker</span>
         </button>
 
-        <!-- Calendar Button -->
         <button onclick="toggleCalendarView(true)" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-white/90 hover:text-white hover:bg-white/10 transition shrink-0">
           <i data-lucide="calendar" class="w-3.5 h-3.5 text-white"></i>
           <span>Calendar</span>
         </button>
         
-        <!-- Host a Hangout Trigger -->
         <button onclick="openHostModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow shrink-0">
           <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
           <span>Host</span>
@@ -116,7 +110,6 @@
   <!-- Hero Section -->
   <section class="bg-[#18181b] text-white pt-9 sm:pt-12 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-8 border-b border-zinc-800">
     <div class="max-w-4xl mx-auto text-center space-y-5 sm:space-y-6">
-      
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs font-medium">
         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
         <span>Community-Powered School Giving</span>
@@ -130,7 +123,6 @@
         A backyard movie night? Cupcake Wars? A parents-versus-kids game show where the grown-ups finally get to prove they know something? We’re looking for HSH families to host our next round of Hosted Hangouts!
       </p>
 
-      <!-- Guest vs Host Decision Buttons -->
       <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4">
         <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
           <i data-lucide="compass" class="w-4 h-4 text-[#be1e2d]"></i>
@@ -142,7 +134,6 @@
         </button>
       </div>
 
-      <!-- Live Tuition Assistance Impact Stats -->
       <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-5 sm:pt-6 text-left max-w-2xl mx-auto">
         <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
           <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
@@ -163,17 +154,13 @@
   <!-- Main Content Area: Upcoming Hangouts Section -->
   <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full" id="catalog-section">
 
-    <!-- Section Header & Controls -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5 pb-4 border-b border-zinc-200">
       <div>
         <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading">Upcoming</h2>
         <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar. Tap any image to see the full photo!</p>
       </div>
 
-      <!-- Controls: Dropdowns & View Switchers -->
       <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-        
-        <!-- Browse Hangouts Dropdown Menu -->
         <div class="relative inline-block text-left w-full sm:w-auto">
           <select id="browse-filter-select" onchange="handleBrowseFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
             <option value="all">Browse Hangouts: All</option>
@@ -185,7 +172,6 @@
           <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
-        <!-- Grade Filter Dropdown Menu -->
         <div class="relative inline-block text-left w-full sm:w-auto">
           <select id="grade-filter-select" onchange="handleGradeFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
             <option value="all">All Grades / Ages</option>
@@ -202,7 +188,6 @@
           <i data-lucide="filter" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
         </div>
 
-        <!-- Toggle View: Grid vs Calendar -->
         <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
           <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
             <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
@@ -218,23 +203,19 @@
 
     <!-- Category Pill Filters -->
     <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3 w-full">
-      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
-      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
-      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
-      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
-      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
-      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
+      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
+      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
+      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
+      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
+      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
+      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
     </div>
 
-    <!-- Grid Catalog (Upcoming Hangouts Cards Container) -->
-    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-2">
-      <!-- Populated dynamically via JS -->
-    </div>
+    <!-- Grid Catalog Container -->
+    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-2"></div>
 
     <!-- Integrated Calendar View -->
     <div id="calendar-container" class="hidden space-y-5 pt-4">
-      
-      <!-- School Sync Notification Banner -->
       <div class="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-red-950">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
@@ -250,9 +231,7 @@
         </a>
       </div>
 
-      <!-- Calendar Header with Month Selector Dropdown & Previous/Next Month Arrows -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
-        
         <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
           <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
             <button onclick="prevMonth()" title="Previous Month" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
@@ -297,20 +276,17 @@
         </div>
       </div>
 
-      <!-- Calendar Grid Table -->
       <div class="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-x-auto">
         <div class="min-w-[600px]">
           <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-2.5 uppercase tracking-wider">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
           </div>
-          <div class="grid grid-cols-7 gap-px bg-zinc-200" id="calendar-days-grid">
-            <!-- Calendar cells populated via JavaScript -->
-          </div>
+          <div class="grid grid-cols-7 gap-px bg-zinc-200" id="calendar-days-grid"></div>
         </div>
       </div>
     </div>
 
-    <!-- Past Hangouts Showcase (With Interactive Clickable Photo Galleries) -->
+    <!-- Past Hangouts Showcase -->
     <section class="mt-14 pt-8 border-t border-zinc-200">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5">
         <div>
@@ -320,232 +296,7 @@
         </div>
       </div>
 
-      <!-- 6 Real Past Hangout Cards with Interactive Galleries -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        
-        <!-- Showcase 1: Shelby Jazz Class ($50) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('shelby')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="HOSTED_HANGOUT_SHELBY.jpeg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="Feel Good Jazz Class" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Dance & Fitness
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> 2 Photos
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Feel Good Jazz Class</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Shelby Rabara Shum</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $50 / person
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Showcase 2: Presidents' Karaoke Night ($100) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('karaoke')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="karoke%20HH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=700&q=80';" alt="Presidents Karaoke Night" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Parent Social
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> Flyer
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Presidents' Karaoke Night</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Christy, Michelle, Daisy, Alicia & Brianne</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $100 / person
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Showcase 3: Sound Bath ($75) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('soundbath')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="HOSTED_HANGOUT_SOUND_BATH.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80';" alt="Sound Bath Meditation" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Wellness & Sound
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> Flyer
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Sunset Sound Bath</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Elizabeth Sbardellati</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $75 / person
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Showcase 4: Ice Skating ($40) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('iceskating')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="HOSTED_HANGOUT_ICE_SKATING.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=700&q=80';" alt="Ice Skating Party" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              All-School Family
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> 4 Photos
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Community Ice Skating</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Jean, Brandee, Janet, Dawn & Julie</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $40 / person
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Showcase 5: Grown-Ups & Kiddos ECE Dance Class ($35) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('ecedance')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="HOSTED_HANGOUT_ECE_DANCE.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=700&q=80';" alt="ECE Dance Class" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Early Childhood & Family
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> 2 Photos
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Grown-Ups & Kiddos Dance Class</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Caroline Keichian • Led by Savanna Stone</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $35 / family
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Showcase 6: Hollywood Distillery Tour & Tasting ($65) -->
-        <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer" onclick="openShowcaseGallery('distillery')">
-          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
-            <img src="HOSTED_HANGOUT_DISTLLERY.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80';" alt="Distillery Tour and Tasting" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
-                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
-                <span>Click for gallery</span>
-              </span>
-            </div>
-            
-            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
-              Parent Social & Tasting
-            </span>
-
-            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
-              <i data-lucide="image" class="w-3 h-3"></i> 2 Photos
-            </span>
-          </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-zinc-900 text-sm leading-snug">Hollywood Distillery Tasting & Tour</h4>
-              <p class="text-xs text-zinc-500 mt-0.5">Hosted by Carrie Clifford, Kay Lee & Lauren Delp</p>
-            </div>
-            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                $65 / person
-              </span>
-              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
-                <span>View Gallery</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="past-showcase-grid"></div>
     </section>
 
   </main>
@@ -569,30 +320,53 @@
 
   <!-- ==================== MODALS ==================== -->
 
-  <!-- 1. Who's Going Attendee Modal -->
-  <div id="attendees-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-base sm:text-lg font-heading" id="modal-attendees-title">Who's Going</h3>
-          <p class="text-xs text-red-100" id="modal-attendees-sub">Classmates and parents attending</p>
-        </div>
-        <button onclick="closeModal('attendees-modal')" class="text-white/80 hover:text-white p-1">
+  <!-- Single Image Lightbox Modal -->
+  <div id="image-preview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('image-preview-modal')">
+    <div class="bg-zinc-950 w-full max-w-3xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden flex flex-col max-h-[95vh]">
+      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
+        <h4 class="font-bold text-xs sm:text-sm truncate pr-4" id="image-preview-title">Hangout Photo</h4>
+        <button onclick="closeModal('image-preview-modal')" class="text-zinc-400 hover:text-white p-1">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div class="p-4 sm:p-6 max-h-80 sm:max-h-96 overflow-y-auto custom-scrollbar space-y-3" id="modal-attendees-list"></div>
-      <div class="p-3.5 bg-zinc-50 border-t border-zinc-200 text-right">
-        <button onclick="closeModal('attendees-modal')" class="px-4 py-1.5 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs sm:text-sm font-semibold transition">
-          Close
-        </button>
+      <div class="p-2 sm:p-4 overflow-y-auto custom-scrollbar flex items-center justify-center bg-black flex-1">
+        <img id="image-preview-img" src="" alt="Full Preview" class="max-w-full max-h-[82vh] object-contain rounded shadow-2xl">
       </div>
     </div>
   </div>
 
-  <!-- 2. Booking & Dual Payment Modal -->
-  <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+  <!-- Multi-Photo Showcase Lightbox Gallery Modal -->
+  <div id="gallery-lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('gallery-lightbox-modal')">
+    <div class="bg-zinc-950 w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden flex flex-col max-h-[96vh]">
+      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
+        <div>
+          <h4 class="font-bold text-xs sm:text-base truncate" id="gallery-title">Past Hangout Gallery</h4>
+          <p class="text-[11px] text-zinc-400" id="gallery-counter">Photo 1 of 1</p>
+        </div>
+        <button onclick="closeModal('gallery-lightbox-modal')" class="text-zinc-400 hover:text-white p-1 rounded-md hover:bg-zinc-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="relative p-2 sm:p-4 flex items-center justify-center bg-black flex-1 min-h-[300px] sm:min-h-[460px]">
+        <button id="gallery-prev-btn" onclick="prevGalleryPhoto()" class="absolute left-3 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-white text-white hover:text-black border border-white/20 flex items-center justify-center transition shadow-lg">
+          <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </button>
+
+        <img id="gallery-main-img" src="" alt="Gallery Photo" class="max-w-full max-h-[68vh] object-contain rounded-lg shadow-2xl transition duration-200">
+
+        <button id="gallery-next-btn" onclick="nextGalleryPhoto()" class="absolute right-3 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-white text-white hover:text-black border border-white/20 flex items-center justify-center transition shadow-lg">
+          <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </button>
+      </div>
+
+      <div class="p-2 sm:p-3 bg-zinc-900 border-t border-zinc-800 overflow-x-auto custom-scrollbar flex items-center justify-center gap-2 sm:gap-3 shrink-0" id="gallery-thumbs-strip"></div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('booking-modal')">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
         <div>
           <h3 class="font-bold text-base sm:text-lg font-heading" id="booking-event-title">Reserve Spot</h3>
@@ -636,7 +410,6 @@
           </div>
         </div>
 
-        <!-- Pricing Tier / Pay What You Can Switcher -->
         <div class="pt-1">
           <div class="flex items-center justify-between mb-1.5">
             <label class="block text-xs font-bold text-zinc-700 uppercase">Contribution Amount</label>
@@ -645,17 +418,16 @@
           
           <div class="grid grid-cols-2 gap-2 mb-2">
             <button type="button" id="tier-standard-btn" onclick="setPricingTier('standard')" class="py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition">
-              <i data-lucide="check-circle-2" class="w-3.5 h-3.5" id="tier-standard-icon"></i>
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
               <span id="tier-standard-label">Standard ($0)</span>
             </button>
-
             <button type="button" id="tier-custom-btn" onclick="setPricingTier('custom')" class="py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition">
-              <i data-lucide="heart" class="w-3.5 h-3.5 text-zinc-400" id="tier-custom-icon"></i>
+              <i data-lucide="heart" class="w-3.5 h-3.5 text-zinc-400"></i>
               <span>Pay What You Can</span>
             </button>
           </div>
 
-          <div id="custom-donation-wrap" class="hidden p-3 bg-red-50/40 border border-red-200 rounded-lg space-y-1.5 animate-in fade-in duration-150">
+          <div id="custom-donation-wrap" class="hidden p-3 bg-red-50/40 border border-red-200 rounded-lg space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-zinc-900">Custom Giving Amount ($):</span>
               <span class="text-[10px] text-zinc-500 italic">Enter what feels right for your family</span>
@@ -693,10 +465,30 @@
     </div>
   </div>
 
-  <!-- 3. Host a Hangout Proposal Pitch Modal -->
-  <div id="host-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
-      
+  <!-- Who's Going Attendee Modal -->
+  <div id="attendees-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('attendees-modal')">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden">
+      <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-base sm:text-lg font-heading" id="modal-attendees-title">Who's Going</h3>
+          <p class="text-xs text-red-100" id="modal-attendees-sub">Classmates and parents attending</p>
+        </div>
+        <button onclick="closeModal('attendees-modal')" class="text-white/80 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-6 max-h-80 sm:max-h-96 overflow-y-auto custom-scrollbar space-y-3" id="modal-attendees-list"></div>
+      <div class="p-3.5 bg-zinc-50 border-t border-zinc-200 text-right">
+        <button onclick="closeModal('attendees-modal')" class="px-4 py-1.5 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-800 text-xs sm:text-sm font-semibold transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Host Pitch Modal -->
+  <div id="host-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('host-modal')">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div>
           <h3 class="font-bold text-base sm:text-lg font-heading">Pitch a Hosted Hangout</h3>
@@ -707,7 +499,6 @@
         </button>
       </div>
 
-      <!-- Inspo Action Bar -->
       <div class="p-2.5 bg-amber-50 border-b border-amber-200 flex flex-wrap items-center justify-between gap-2 text-xs text-amber-950 shrink-0">
         <span class="font-semibold flex items-center gap-1.5">
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
@@ -718,7 +509,6 @@
             <span>Potential Events</span>
             <i data-lucide="chevron-down" class="w-3 h-3" id="inspo-chevron"></i>
           </button>
-          
           <button type="button" onclick="openIdeasGuideModal()" class="px-2.5 py-1 rounded bg-[#be1e2d] text-white font-bold hover:bg-[#9e1422] transition flex items-center gap-1 shadow-xs">
             <i data-lucide="lightbulb" class="w-3 h-3 text-amber-300"></i>
             <span>Need Ideas? Guide</span>
@@ -726,7 +516,6 @@
         </div>
       </div>
 
-      <!-- Collapsible Potential Events Drawer -->
       <div id="host-inspo-drawer" class="hidden bg-zinc-50 border-b border-zinc-200 p-4 max-h-52 overflow-y-auto custom-scrollbar shrink-0">
         <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-2">Other Planned & Prospective Events:</div>
         <div class="space-y-2 text-xs" id="host-inspo-list-items"></div>
@@ -802,10 +591,9 @@
     </div>
   </div>
 
-  <!-- 4. Complete Idea Guide Modal -->
-  <div id="ideas-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
-      
+  <!-- Ideas Guide Modal -->
+  <div id="ideas-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('ideas-modal')">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-amber-400 text-amber-950 flex items-center justify-center font-bold">
@@ -875,9 +663,9 @@
     </div>
   </div>
 
-  <!-- 5. Questions & Cheat Sheet Modal -->
-  <div id="cheatsheet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
+  <!-- Cheat Sheet Modal -->
+  <div id="cheatsheet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('cheatsheet-modal')">
+    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
           <i data-lucide="help-circle" class="w-5 h-5 text-white"></i>
@@ -904,55 +692,9 @@
     </div>
   </div>
 
-  <!-- 6. Single Image Lightbox Modal (For Upcoming Hangouts Image Preview) -->
-  <div id="image-preview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden">
-    <div class="bg-zinc-950 w-full max-w-3xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[95vh]">
-      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
-        <h4 class="font-bold text-xs sm:text-sm truncate pr-4" id="image-preview-title">Hangout Photo</h4>
-        <button onclick="closeModal('image-preview-modal')" class="text-zinc-400 hover:text-white p-1">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-      <div class="p-2 sm:p-4 overflow-y-auto custom-scrollbar flex items-center justify-center bg-black flex-1">
-        <img id="image-preview-img" src="" alt="Full Preview" class="max-w-full max-h-[82vh] object-contain rounded shadow-2xl">
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. Multi-Photo Showcase Lightbox Gallery Modal -->
-  <div id="gallery-lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden">
-    <div class="bg-zinc-950 w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[96vh]">
-      
-      <div class="px-4 py-3 bg-zinc-900 text-white flex items-center justify-between shrink-0 border-b border-zinc-800">
-        <div>
-          <h4 class="font-bold text-xs sm:text-base truncate" id="gallery-title">Past Hangout Gallery</h4>
-          <p class="text-[11px] text-zinc-400" id="gallery-counter">Photo 1 of 1</p>
-        </div>
-        <button onclick="closeModal('gallery-lightbox-modal')" class="text-zinc-400 hover:text-white p-1 rounded-md hover:bg-zinc-800 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="relative p-2 sm:p-4 flex items-center justify-center bg-black flex-1 min-h-[300px] sm:min-h-[460px]">
-        <button id="gallery-prev-btn" onclick="prevGalleryPhoto()" class="absolute left-3 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-white text-white hover:text-black border border-white/20 flex items-center justify-center transition shadow-lg">
-          <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-        </button>
-
-        <img id="gallery-main-img" src="" alt="Gallery Photo" class="max-w-full max-h-[68vh] object-contain rounded-lg shadow-2xl transition duration-200">
-
-        <button id="gallery-next-btn" onclick="nextGalleryPhoto()" class="absolute right-3 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-white text-white hover:text-black border border-white/20 flex items-center justify-center transition shadow-lg">
-          <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-        </button>
-      </div>
-
-      <div class="p-2 sm:p-3 bg-zinc-900 border-t border-zinc-800 overflow-x-auto custom-scrollbar flex items-center justify-center gap-2 sm:gap-3 shrink-0" id="gallery-thumbs-strip"></div>
-    </div>
-  </div>
-
-  <!-- 8. Host Pipeline Tracker Modal -->
-  <div id="tracker-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden">
-    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
-      
+  <!-- Host Pipeline Tracker Modal -->
+  <div id="tracker-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('tracker-modal')">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[90vh]">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
@@ -1022,9 +764,9 @@
     </div>
   </div>
 
-  <!-- ==================== JAVASCRIPT ==================== -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // PREVIEW SINGLE IMAGE (For upcoming hangouts)
+    // PREVIEW UPCOMING IMAGE
     function openImagePreview(imgSrc, title) {
       const modal = document.getElementById('image-preview-modal');
       const img = document.getElementById('image-preview-img');
@@ -1036,7 +778,7 @@
       openModal('image-preview-modal');
     }
 
-    // MODAL HELPERS
+    // MODAL TOGGLES
     function openModal(id) {
       const el = document.getElementById(id);
       if (el) el.classList.remove('hidden');
@@ -1046,135 +788,154 @@
       if (el) el.classList.add('hidden');
     }
 
-    // RENDER UPCOMING CARDS WITH CLICKABLE IMAGES
-    function renderCards() {
-      const container = document.getElementById('cards-container');
+    // RENDER PAST SHOWCASE CARDS DYNAMICALLY
+    function renderPastShowcase() {
+      const container = document.getElementById('past-showcase-grid');
       if (!container) return;
       container.innerHTML = '';
 
-      let filtered = hangouts.filter(h => {
-        const matchesCategory = (currentCategory === 'all' || h.category === currentCategory);
-        let matchesGrade = true;
-        if (currentGrade === 'Parents Only') {
-          matchesGrade = (h.grade === 'Parents Only');
-        } else if (currentGrade !== 'all') {
-          matchesGrade = (h.grade === currentGrade || h.grade === 'All Grades');
-        }
-        return matchesCategory && matchesGrade;
-      });
+      const showcaseItems = [
+        { key: 'shelby', title: "Feel Good Jazz Class", host: "Hosted by Shelby Rabara Shum", price: "$50 / person", category: "Dance & Fitness", cover: "HOSTED_HANGOUT_SHELBY.jpeg", count: "2 Photos" },
+        { key: 'karaoke', title: "Presidents' Karaoke Night", host: "Hosted by Christy, Michelle, Daisy, Alicia & Brianne", price: "$100 / person", category: "Parent Social", cover: "karoke%20HH.jpg", count: "Flyer" },
+        { key: 'soundbath', title: "Sunset Sound Bath", host: "Hosted by Elizabeth Sbardellati", price: "$75 / person", category: "Wellness & Sound", cover: "HOSTED_HANGOUT_SOUND_BATH.jpg", count: "Flyer" },
+        { key: 'iceskating', title: "Community Ice Skating", host: "Hosted by Jean, Brandee, Janet, Dawn & Julie", price: "$40 / person", category: "All-School Family", cover: "HOSTED_HANGOUT_ICE_SKATING.jpg", count: "4 Photos" },
+        { key: 'ecedance', title: "Grown-Ups & Kiddos Dance Class", host: "Hosted by Caroline Keichian • Led by Savanna Stone", price: "$35 / family", category: "Early Childhood", cover: "HOSTED_HANGOUT_ECE_DANCE.jpg", count: "2 Photos" },
+        { key: 'distillery', title: "Hollywood Distillery Tasting & Tour", host: "Hosted by Carrie Clifford, Kay Lee & Lauren Delp", price: "$65 / person", category: "Parent Social", cover: "HOSTED_HANGOUT_DISTLLERY.jpg", count: "2 Photos" }
+      ];
 
-      if (currentSort === 'date') {
-        filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-      } else if (currentSort === 'cost') {
-        filtered.sort((a, b) => a.price - b.price);
-      }
-
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-zinc-300 p-8">
-            <i data-lucide="calendar-x" class="w-12 h-12 text-zinc-400 mx-auto mb-3"></i>
-            <h3 class="font-bold text-zinc-800 text-lg font-heading">No hangouts match this filter</h3>
-            <p class="text-sm text-zinc-500 max-w-sm mx-auto mt-1">Try selecting a different grade or category, or be the first parent to pitch one!</p>
-            <button onclick="openHostModal()" class="mt-4 px-4 py-2 bg-[#be1e2d] text-white font-bold text-xs uppercase rounded-lg">Pitch This Hangout</button>
-          </div>
-        `;
-        lucide.createIcons();
-        return;
-      }
-
-      filtered.forEach(h => {
-        const spotsLeft = h.totalSpots - h.attendees.length;
-        const isFull = spotsLeft <= 0;
-
+      showcaseItems.forEach(item => {
         const card = document.createElement('div');
-        card.className = "bg-white rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col";
-        
-        const fallbackAttr = h.fallbackImage ? `onerror="this.onerror=null; this.src='${h.fallbackImage}';"` : '';
-
-        // Safe title string for onclick attribute
-        const escapedTitle = h.title.replace(/'/g, "\\'");
+        card.className = "bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer";
+        card.onclick = () => openShowcaseGallery(item.key);
 
         card.innerHTML = `
-          <!-- Clickable Image Banner to View Full Image -->
-          <div class="relative h-52 bg-zinc-100 overflow-hidden cursor-pointer group/img" onclick="openImagePreview('${h.image}', '${escapedTitle}')" title="Click to view full image">
-            <img src="${h.image}" alt="${h.title}" ${fallbackAttr} class="w-full h-full object-cover group-hover/img:scale-105 transition duration-300">
+          <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+            <img src="${item.cover}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             
-            <div class="absolute inset-0 bg-black/25 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="px-3 py-1.5 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-md flex items-center gap-1.5">
-                <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to view full image
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+              <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
+                <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
+                <span>Click for gallery</span>
               </span>
             </div>
+            
+            <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+              ${item.category}
+            </span>
 
-            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5 pointer-events-none">
-              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-900/85 text-white backdrop-blur-sm">
-                ${h.category}
-              </span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-bold ${h.grade === 'Parents Only' ? 'bg-[#9e1422]/90 text-white' : 'bg-zinc-800/85 text-zinc-200'} backdrop-blur-sm">
-                ${h.grade}
-              </span>
-            </div>
-            
-            <div class="absolute bottom-3 right-3 bg-white/95 px-3 py-1 rounded-full text-xs font-bold text-zinc-900 shadow pointer-events-none">
-              $${h.price} / person
-            </div>
+            <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
+              <i data-lucide="image" class="w-3 h-3"></i> ${item.count}
+            </span>
           </div>
-
-          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
             <div>
-              <div class="flex items-center gap-2 text-xs text-[#be1e2d] font-semibold mb-1">
-                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-                <span>${h.displayDate}</span>
-              </div>
-              <h3 class="font-bold text-zinc-900 text-base sm:text-lg leading-snug font-heading">${h.title}</h3>
-              <p class="text-xs text-zinc-500 mt-1">Hosted by <span class="font-medium text-zinc-700">${h.host}</span></p>
-              ${h.specialGuest ? `<p class="text-xs text-[#9e1422] font-semibold">✨ With ${h.specialGuest}</p>` : ''}
-              <p class="text-xs text-zinc-500 mt-0.5"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${h.location}</p>
-              <p class="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed">${h.description}</p>
+              <h4 class="font-bold text-zinc-900 text-sm leading-snug">${item.title}</h4>
+              <p class="text-xs text-zinc-500 mt-0.5">${item.host}</p>
             </div>
-
-            <div class="pt-3 border-t border-zinc-100 space-y-3">
-              <div class="flex items-center justify-between">
-                <button onclick="viewAttendees(${h.id})" class="text-xs font-semibold text-zinc-600 hover:text-[#be1e2d] flex items-center gap-1.5 transition">
-                  <i data-lucide="users" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
-                  <span>${h.attendees.length} joined</span>
-                  <span class="text-zinc-400">(${spotsLeft} left)</span>
-                </button>
-                <button onclick="viewAttendees(${h.id})" class="text-[11px] font-bold text-[#be1e2d] hover:underline">
-                  Who's going?
-                </button>
-              </div>
-
-              <button onclick="openBooking(${h.id})" ${isFull ? 'disabled' : ''} class="w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition ${isFull ? 'bg-zinc-200 text-zinc-500 cursor-not-allowed' : 'bg-[#be1e2d] hover:bg-[#d63031] text-white shadow-sm'}">
-                ${isFull ? 'Hangout Full' : `Sign Up • $${h.price}`}
-              </button>
+            <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
+                ${item.price}
+              </span>
+              <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
+                <span>View Gallery</span>
+                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </span>
             </div>
           </div>
         `;
         container.appendChild(card);
       });
+    }
 
+    // MULTI-PHOTO GALLERY ENGINE
+    function openShowcaseGallery(key) {
+      activeGalleryKey = key;
+      activePhotoIndex = 0;
+      const g = pastGalleries[key];
+      if (!g) return;
+
+      const titleEl = document.getElementById('gallery-title');
+      if (titleEl) titleEl.textContent = g.title;
+      renderActiveGalleryPhoto();
+      openModal('gallery-lightbox-modal');
+    }
+
+    function renderActiveGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || !g.images || !g.images.length) return;
+
+      const photo = g.images[activePhotoIndex];
+      const mainImg = document.getElementById('gallery-main-img');
+      const counter = document.getElementById('gallery-counter');
+      if (mainImg) {
+        mainImg.src = photo.src;
+        mainImg.alt = photo.label;
+      }
+      if (counter) {
+        counter.textContent = `${photo.label} (${activePhotoIndex + 1} of ${g.images.length})`;
+      }
+
+      const thumbsStrip = document.getElementById('gallery-thumbs-strip');
+      const prevBtn = document.getElementById('gallery-prev-btn');
+      const nextBtn = document.getElementById('gallery-next-btn');
+
+      if (thumbsStrip) {
+        thumbsStrip.innerHTML = '';
+        if (g.images.length <= 1) {
+          thumbsStrip.classList.add('hidden');
+          if (prevBtn) prevBtn.classList.add('hidden');
+          if (nextBtn) nextBtn.classList.add('hidden');
+        } else {
+          thumbsStrip.classList.remove('hidden');
+          if (prevBtn) prevBtn.classList.remove('hidden');
+          if (nextBtn) nextBtn.classList.remove('hidden');
+
+          g.images.forEach((imgObj, idx) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgObj.src;
+            thumb.className = `w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-md cursor-pointer transition border-2 ${
+              idx === activePhotoIndex ? 'border-[#be1e2d] scale-105 opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
+            }`;
+            thumb.onclick = () => {
+              activePhotoIndex = idx;
+              renderActiveGalleryPhoto();
+            };
+            thumbsStrip.appendChild(thumb);
+          });
+        }
+      }
       lucide.createIcons();
     }
 
-    // INITIAL EXECUTION ON LOAD
-    document.addEventListener("DOMContentLoaded", () => {
-      renderCards();
-      renderCalendar();
-      renderTrackerList();
-      populateHostInspoDrawer();
-      renderIdeasGuideGrid();
-      updateImpactStats();
-      lucide.createIcons();
-    });
+    function prevGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || g.images.length <= 1) return;
+      activePhotoIndex = (activePhotoIndex - 1 + g.images.length) % g.images.length;
+      renderActiveGalleryPhoto();
+    }
 
-    if (document.readyState === "interactive" || document.readyState === "complete") {
+    function nextGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || g.images.length <= 1) return;
+      activePhotoIndex = (activePhotoIndex + 1) % g.images.length;
+      renderActiveGalleryPhoto();
+    }
+
+    // INIT ALL ON READY
+    function initAll() {
       renderCards();
+      renderPastShowcase();
       renderCalendar();
       renderTrackerList();
       populateHostInspoDrawer();
       renderIdeasGuideGrid();
       updateImpactStats();
       lucide.createIcons();
+    }
+
+    document.addEventListener("DOMContentLoaded", initAll);
+    if (document.readyState === "interactive" || document.readyState === "complete") {
+      initAll();
     }
   </script>
 </body>
