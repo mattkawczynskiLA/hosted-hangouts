@@ -52,7 +52,7 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased overflow-x-hidden w-full">
 
-  <!-- Top Announcement Bar (HSH Crimson Red) -->
+  <!-- Top Announcement Bar -->
   <div class="bg-[#9e1422] text-white text-[11px] sm:text-sm py-1.5 px-3 text-center font-medium tracking-wide">
     🌟 100% of proceeds support the Hollywood Schoolhouse Tuition Assistance Fund.
   </div>
@@ -62,7 +62,7 @@
     <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-1.5 sm:gap-3">
       
       <!-- School Branding (Left Side) -->
-      <a href="#" class="flex items-center gap-1.5 sm:gap-3 group text-decoration-none min-w-0 shrink">
+      <a href="#" onclick="showPublicSite(); return false;" class="flex items-center gap-1.5 sm:gap-3 group text-decoration-none min-w-0 shrink">
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#be1e2d] flex items-center justify-center font-brand font-black text-lg sm:text-2xl group-hover:scale-105 transition-transform shadow-sm shrink-0">
           h
         </div>
@@ -79,418 +79,388 @@
       <!-- Quick Nav Buttons -->
       <div class="flex items-center gap-1 sm:gap-2 shrink-0">
         
-        <!-- Questions / FAQ Button -->
         <button onclick="openCheatSheetModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20 shrink-0" title="Questions & FAQ">
           <i data-lucide="help-circle" class="w-3.5 h-3.5 text-white"></i>
           <span class="hidden sm:inline">Questions</span>
           <span class="sm:hidden">FAQ</span>
         </button>
 
-        <!-- Need Ideas Button -->
         <button onclick="openIdeasGuideModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-amber-400 text-amber-950 hover:bg-amber-300 transition shadow-sm shrink-0" title="65+ Hangout Ideas Guide">
           <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-amber-950"></i>
           <span>Ideas</span>
         </button>
 
-        <!-- Host Pipeline Tracker Button -->
         <button onclick="openTrackerModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-red-950/40 text-red-100 hover:text-white hover:bg-red-950/70 border border-red-400/30 transition shadow-inner shrink-0" title="View prospective hosts and concepts tracker">
           <i data-lucide="clipboard-list" class="w-3.5 h-3.5 text-white"></i>
           <span>Tracker</span>
         </button>
 
-        <!-- Calendar Button -->
         <button onclick="toggleCalendarView(true)" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-white/90 hover:text-white hover:bg-white/10 transition shrink-0">
           <i data-lucide="calendar" class="w-3.5 h-3.5 text-white"></i>
           <span>Calendar</span>
         </button>
         
-        <!-- Host a Hangout Trigger -->
-        <button onclick="openHostModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow shrink-0">
+        <button onclick="openHostModal()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-white text-[#be1e2d] hover:bg-red-50 transition shadow-sm hover:shadow shrink-0">
           <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
           <span>Host</span>
         </button>
 
-        <!-- ADMIN LOGIN BUTTON (Top Right) -->
-        <button onclick="openAdminModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-zinc-950/80 text-zinc-100 hover:text-white hover:bg-black transition border border-zinc-700/60 shadow-sm shrink-0" title="Administrator Back-Office Portal">
+        <!-- Admin Login / Portal Button -->
+        <button id="admin-nav-btn" onclick="toggleAdminView()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-zinc-950 text-white hover:bg-black transition border border-zinc-700 shadow-sm shrink-0">
           <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-400"></i>
-          <span class="hidden sm:inline">Admin Login</span>
-          <span class="sm:hidden">Admin</span>
+          <span id="admin-nav-text">Admin Login</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-[#18181b] text-white pt-9 sm:pt-12 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-8 border-b border-zinc-800">
-    <div class="max-w-4xl mx-auto text-center space-y-5 sm:space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs font-medium">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
-        <span>Community-Powered School Giving</span>
-      </div>
-
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white font-heading">
-        Hosted Hangouts
-      </h1>
-
-      <p class="text-xs sm:text-base lg:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed px-1">
-        A backyard movie night? Cupcake Wars? A parents-versus-kids game show where the grown-ups finally get to prove they know something? We’re looking for HSH families to host our next round of Hosted Hangouts!
-      </p>
-
-      <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4">
-        <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="compass" class="w-4 h-4 text-[#be1e2d]"></i>
-          <span>Are you a Guest? Browse Hangouts</span>
-        </a>
-        <button onclick="openHostModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-          <i data-lucide="party-popper" class="w-4 h-4"></i>
-          <span>Are you a Host? Pitch Your Idea</span>
-        </button>
-      </div>
-
-      <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-5 sm:pt-6 text-left max-w-2xl mx-auto">
-        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
-          <div class="text-base sm:text-2xl font-bold text-[#f87171] mt-1" id="stat-raised">$0</div>
-        </div>
-        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
-          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-spots">0 / 0</div>
-        </div>
-        <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
-          <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
-          <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-events">0</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Upcoming Catalog Section -->
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full" id="catalog-section">
-
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5 pb-4 border-b border-zinc-200">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading">Upcoming</h2>
-        <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar. Tap any image to see the full photo!</p>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-        <div class="relative inline-block text-left w-full sm:w-auto">
-          <select id="browse-filter-select" onchange="handleBrowseFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
-            <option value="all">Browse Hangouts: All</option>
-            <option value="parents-only">Parents Only Hangouts</option>
-            <option value="sort-date">Sort by Date</option>
-            <option value="sort-cost">Sort by Cost</option>
-            <option value="view-calendar">View Calendar</option>
-          </select>
-          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
+  <!-- ==================== VIEW 1: PUBLIC HOMEPAGE ==================== -->
+  <div id="public-site-view">
+    <!-- Hero Section -->
+    <section class="bg-[#18181b] text-white pt-9 sm:pt-12 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-8 border-b border-zinc-800">
+      <div class="max-w-4xl mx-auto text-center space-y-5 sm:space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-red-300 text-xs font-medium">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
+          <span>Community-Powered School Giving</span>
         </div>
 
-        <div class="relative inline-block text-left w-full sm:w-auto">
-          <select id="grade-filter-select" onchange="handleGradeFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
-            <option value="all">All Grades / Ages</option>
-            <option value="Parents Only">Parents Only (Adults)</option>
-            <option value="Preschool">Preschool / Early Childhood</option>
-            <option value="Kindergarten">Kindergarten</option>
-            <option value="1st Grade">1st Grade</option>
-            <option value="2nd Grade">2nd Grade</option>
-            <option value="3rd Grade">3rd Grade</option>
-            <option value="4th Grade">4th Grade</option>
-            <option value="5th Grade">5th Grade</option>
-            <option value="6th Grade">6th Grade</option>
-          </select>
-          <i data-lucide="filter" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
-        </div>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white font-heading">
+          Hosted Hangouts
+        </h1>
 
-        <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
-          <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-            <span>Grid</span>
-          </button>
-          <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-            <span>Calendar</span>
-          </button>
-        </div>
-      </div>
-    </div>
+        <p class="text-xs sm:text-base lg:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed px-1">
+          A backyard movie night? Cupcake Wars? A parents-versus-kids game show where the grown-ups finally get to prove they know something? We’re looking for HSH families to host our next round of Hosted Hangouts!
+        </p>
 
-    <!-- Category Pill Filters -->
-    <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3 w-full">
-      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
-      <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
-      <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
-      <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
-      <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
-      <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
-    </div>
-
-    <!-- Grid Container for Upcoming Cards -->
-    <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-2"></div>
-
-    <!-- Calendar View -->
-    <div id="calendar-container" class="hidden space-y-5 pt-4">
-      <div class="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-red-950">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
-            <i data-lucide="calendar-check-2" class="w-4 h-4"></i>
-          </div>
-          <div class="text-xs sm:text-sm">
-            <span class="font-bold">Hollywood Schoolhouse Schedule Integrated:</span> Showing hosted hangouts alongside official school calendar events.
-          </div>
-        </div>
-        <a href="https://www.hshla.org/calendar" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#be1e2d] hover:text-[#9e1422] underline shrink-0">
-          <span>Official HSH Calendar Link</span>
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-        </a>
-      </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
-        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-          <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
-            <button onclick="prevMonth()" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
-              <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            </button>
-            <button onclick="nextMonth()" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </button>
-          </div>
-
-          <h3 class="font-bold text-base sm:text-xl text-zinc-900 font-heading min-w-[130px] sm:min-w-[170px]" id="calendar-month-label">
-            November 2026
-          </h3>
-
-          <div class="relative inline-block text-left">
-            <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-[11px] sm:text-xs font-semibold py-1.5 sm:py-2 pl-2.5 pr-7 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
-              <option value="2026-10">October 2026</option>
-              <option value="2026-11" selected>November 2026 (Current)</option>
-              <option value="2026-12">December 2026</option>
-              <option value="2027-01">January 2027</option>
-              <option value="2027-02">February 2027</option>
-              <option value="2027-03">March 2027</option>
-              <option value="2027-04">April 2027</option>
-              <option value="2027-05">May 2027</option>
-              <option value="2027-06">June 2027</option>
-            </select>
-            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-500 absolute right-2 top-2 pointer-events-none"></i>
-          </div>
-
-          <button onclick="jumpToCurrentMonth()" class="text-[11px] sm:text-xs font-semibold px-2 py-1.5 rounded-md border border-zinc-200 text-zinc-600 hover:bg-zinc-100 transition">
-            Today
+        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4">
+          <a href="#catalog-section" onclick="toggleCalendarView(false)" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-[#be1e2d]"></i>
+            <span>Are you a Guest? Browse Hangouts</span>
+          </a>
+          <button onclick="openHostModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#be1e2d] hover:bg-[#d63031] text-white font-bold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+            <i data-lucide="party-popper" class="w-4 h-4"></i>
+            <span>Are you a Host? Pitch Your Idea</span>
           </button>
         </div>
 
-        <div class="flex items-center gap-3 sm:gap-4 text-xs font-semibold pt-1 sm:pt-0">
-          <span class="flex items-center gap-1.5 text-zinc-700">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#be1e2d]"></span> Hosted Hangout
-          </span>
-          <span class="flex items-center gap-1.5 text-zinc-700">
-            <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Official HSH Event
-          </span>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-x-auto">
-        <div class="min-w-[600px]">
-          <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-2.5 uppercase tracking-wider">
-            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-5 sm:pt-6 text-left max-w-2xl mx-auto">
+          <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+            <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Funds Raised '26-'27</div>
+            <div class="text-base sm:text-2xl font-bold text-[#f87171] mt-1" id="stat-raised">$0</div>
           </div>
-          <div class="grid grid-cols-7 gap-px bg-zinc-200" id="calendar-days-grid"></div>
+          <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+            <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Spots Claimed</div>
+            <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-spots">0 / 0</div>
+          </div>
+          <div class="p-2.5 sm:p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between">
+            <div class="text-[9px] sm:text-xs uppercase tracking-wider text-zinc-400 font-semibold leading-tight">Active Events</div>
+            <div class="text-base sm:text-2xl font-bold text-white mt-1" id="stat-events">0</div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Past Hangouts Showcase -->
-    <section class="mt-14 pt-8 border-t border-zinc-200">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5">
-        <div>
-          <div class="text-xs uppercase font-bold tracking-widest text-[#be1e2d]">Memories & Inspiration</div>
-          <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1 font-heading">Past Hangouts Showcase</h3>
-          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Click any hangout below to explore photo galleries from past events!</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="past-showcase-grid"></div>
     </section>
 
-  </main>
+    <!-- Upcoming Catalog Section -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full" id="catalog-section">
 
-  <!-- Footer -->
-  <footer class="bg-zinc-900 border-t border-zinc-800 text-zinc-400 py-10 mt-16 text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-bold font-brand text-lg">
-          h
-        </div>
-        <p class="text-xs sm:text-sm text-zinc-300">
-          Hollywood Schoolhouse Hosted Hangouts • Dedicated to Tuition Assistance
-        </p>
-      </div>
-      <div class="text-xs text-zinc-500 text-center md:text-right">
-        1233 N McCadden Pl, Los Angeles, CA 90038 • (323) 465-1320
-      </div>
-    </div>
-  </footer>
-
-  <!-- ==================== MODALS ==================== -->
-
-  <!-- 1. Admin Login & Back-Office Modal (Modeled after OnlinePartyBook) -->
-  <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('admin-modal')">
-    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[94vh]">
-      
-      <!-- Admin Header -->
-      <div class="px-5 py-4 bg-[#9e1422] text-white flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-            <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
-          </div>
-          <div>
-            <h3 class="font-bold text-base sm:text-lg font-heading leading-tight">HSH Hosted Hangouts Back-Office Portal</h3>
-            <p class="text-[11px] text-red-200">OnlinePartyBook Administration & Real-Time Roster Manager</p>
-          </div>
-        </div>
-        <button onclick="closeModal('admin-modal')" class="text-white/80 hover:text-white p-1 rounded-md hover:bg-white/10 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <!-- State 1: Login Form (If not logged in) -->
-      <div id="admin-login-view" class="p-6 sm:p-10 flex flex-col items-center justify-center max-w-md mx-auto w-full my-auto text-center space-y-5">
-        <div class="w-14 h-14 rounded-full bg-red-50 text-[#be1e2d] flex items-center justify-center mx-auto border border-red-200">
-          <i data-lucide="lock" class="w-7 h-7"></i>
-        </div>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5 pb-4 border-b border-zinc-200">
         <div>
-          <h4 class="font-bold text-lg text-zinc-900 font-heading">Committee & Administrator Log-In</h4>
-          <p class="text-xs text-zinc-500 mt-1">Please enter your authorized HSH committee credentials to access event rosters, revenue manifests, and attendee lists.</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading">Upcoming</h2>
+          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Explore upcoming parent-hosted hangouts or view the school-wide calendar. Tap any image to see the full photo!</p>
         </div>
 
-        <form onsubmit="handleAdminLogin(event)" class="w-full text-left space-y-3.5">
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Username / Email</label>
-            <input type="text" id="admin-user-input" required placeholder="pa@hshla.org" class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none bg-white">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div class="relative inline-block text-left w-full sm:w-auto">
+            <select id="browse-filter-select" onchange="handleBrowseFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+              <option value="all">Browse Hangouts: All</option>
+              <option value="parents-only">Parents Only Hangouts</option>
+              <option value="sort-date">Sort by Date</option>
+              <option value="sort-cost">Sort by Cost</option>
+              <option value="view-calendar">View Calendar</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
           </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">Password</label>
-            <input type="password" id="admin-pass-input" required placeholder="••••••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none bg-white">
-          </div>
-          
-          <button type="submit" class="w-full py-2.5 rounded-xl bg-[#be1e2d] hover:bg-[#9e1422] text-white font-bold text-sm shadow transition mt-2">
-            Log In to Back Office
-          </button>
 
-          <!-- Quick access demo helper -->
-          <div class="text-center pt-2">
-            <button type="button" onclick="bypassAdminLogin()" class="text-xs font-bold text-zinc-500 hover:text-[#be1e2d] underline">
-              Demo Quick Access (Click to view Back-Office Dashboard)
+          <div class="relative inline-block text-left w-full sm:w-auto">
+            <select id="grade-filter-select" onchange="handleGradeFilter(this.value)" class="w-full sm:w-auto appearance-none bg-white border border-zinc-300 text-zinc-800 py-2 sm:py-2.5 pl-3 pr-8 rounded-lg text-xs sm:text-sm font-medium shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+              <option value="all">All Grades / Ages</option>
+              <option value="Parents Only">Parents Only (Adults)</option>
+              <option value="Preschool">Preschool / Early Childhood</option>
+              <option value="Kindergarten">Kindergarten</option>
+              <option value="1st Grade">1st Grade</option>
+              <option value="2nd Grade">2nd Grade</option>
+              <option value="3rd Grade">3rd Grade</option>
+              <option value="4th Grade">4th Grade</option>
+              <option value="5th Grade">5th Grade</option>
+              <option value="6th Grade">6th Grade</option>
+            </select>
+            <i data-lucide="filter" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-3 pointer-events-none"></i>
+          </div>
+
+          <div class="inline-flex rounded-lg border border-zinc-300 bg-white p-1 shadow-sm w-full sm:w-auto justify-center">
+            <button id="view-cards-btn" onclick="toggleCalendarView(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition">
+              <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+              <span>Grid</span>
+            </button>
+            <button id="view-cal-btn" onclick="toggleCalendarView(true)" class="flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              <span>Calendar</span>
             </button>
           </div>
-        </form>
+        </div>
       </div>
 
-      <!-- State 2: Back-Office Dashboard (Toggled upon authentication) -->
-      <div id="admin-dashboard-view" class="hidden flex-1 overflow-y-auto custom-scrollbar flex flex-col">
-        
-        <!-- Live Admin Metrics Strip -->
-        <div class="p-4 sm:p-5 bg-zinc-50 border-b border-zinc-200 grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0">
-          <div class="p-3 bg-white rounded-xl border border-zinc-200">
-            <div class="text-[10px] uppercase font-bold text-zinc-400">Live Proceeds</div>
-            <div class="text-xl font-bold text-emerald-600 mt-0.5" id="admin-metric-revenue">$0</div>
-          </div>
-          <div class="p-3 bg-white rounded-xl border border-zinc-200">
-            <div class="text-[10px] uppercase font-bold text-zinc-400">Total Bookings</div>
-            <div class="text-xl font-bold text-zinc-900 mt-0.5" id="admin-metric-spots">0</div>
-          </div>
-          <div class="p-3 bg-white rounded-xl border border-zinc-200">
-            <div class="text-[10px] uppercase font-bold text-zinc-400">Active Hangouts</div>
-            <div class="text-xl font-bold text-zinc-900 mt-0.5" id="admin-metric-events">8</div>
-          </div>
-          <div class="p-3 bg-white rounded-xl border border-zinc-200">
-            <div class="text-[10px] uppercase font-bold text-zinc-400">Portal Status</div>
-            <div class="text-xs font-bold text-[#be1e2d] mt-1 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Synchronized
+      <!-- Category Pill Filters -->
+      <div id="category-pills-bar" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-3 w-full">
+        <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm">All</button>
+        <button onclick="setCategoryFilter('Creative Arts')" data-cat="Creative Arts" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Creative Arts</button>
+        <button onclick="setCategoryFilter('Parent Socials')" data-cat="Parent Socials" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Parent Socials</button>
+        <button onclick="setCategoryFilter('Fitness & Sports')" data-cat="Fitness & Sports" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Fitness & Sports</button>
+        <button onclick="setCategoryFilter('Kids Activities')" data-cat="Kids Activities" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Kids Activities</button>
+        <button onclick="setCategoryFilter('Food & Drink')" data-cat="Food & Drink" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap">Food & Drink</button>
+      </div>
+
+      <!-- Grid Container for Upcoming Cards -->
+      <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-2"></div>
+
+      <!-- Calendar View -->
+      <div id="calendar-container" class="hidden space-y-5 pt-4">
+        <div class="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-red-950">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-[#be1e2d]/10 text-[#be1e2d] flex items-center justify-center shrink-0">
+              <i data-lucide="calendar-check-2" class="w-4 h-4"></i>
             </div>
+            <div class="text-xs sm:text-sm">
+              <span class="font-bold">Hollywood Schoolhouse Schedule Integrated:</span> Showing hosted hangouts alongside official school calendar events.
+            </div>
+          </div>
+          <a href="https://www.hshla.org/calendar" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#be1e2d] hover:text-[#9e1422] underline shrink-0">
+            <span>Official HSH Calendar Link</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-xl border border-zinc-200 shadow-sm">
+          <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-0.5 shadow-sm">
+              <button onclick="prevMonth()" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button onclick="nextMonth()" class="p-1.5 sm:p-2 rounded-md hover:bg-white text-zinc-700 hover:text-zinc-950 transition">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <h3 class="font-bold text-base sm:text-xl text-zinc-900 font-heading min-w-[130px] sm:min-w-[170px]" id="calendar-month-label">
+              November 2026
+            </h3>
+
+            <div class="relative inline-block text-left">
+              <select id="calendar-select-month" onchange="onSelectMonthDropdown(this.value)" class="appearance-none bg-zinc-50 border border-zinc-300 text-zinc-800 text-[11px] sm:text-xs font-semibold py-1.5 sm:py-2 pl-2.5 pr-7 rounded-lg shadow-sm hover:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#be1e2d] cursor-pointer">
+                <option value="2026-10">October 2026</option>
+                <option value="2026-11" selected>November 2026 (Current)</option>
+                <option value="2026-12">December 2026</option>
+                <option value="2027-01">January 2027</option>
+                <option value="2027-02">February 2027</option>
+                <option value="2027-03">March 2027</option>
+                <option value="2027-04">April 2027</option>
+                <option value="2027-05">May 2027</option>
+                <option value="2027-06">June 2027</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-500 absolute right-2 top-2 pointer-events-none"></i>
+            </div>
+
+            <button onclick="jumpToCurrentMonth()" class="text-[11px] sm:text-xs font-semibold px-2 py-1.5 rounded-md border border-zinc-200 text-zinc-600 hover:bg-zinc-100 transition">
+              Today
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3 sm:gap-4 text-xs font-semibold pt-1 sm:pt-0">
+            <span class="flex items-center gap-1.5 text-zinc-700">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#be1e2d]"></span> Hosted Hangout
+            </span>
+            <span class="flex items-center gap-1.5 text-zinc-700">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Official HSH Event
+            </span>
           </div>
         </div>
 
-        <!-- Dashboard Content Tabs / Section -->
-        <div class="p-4 sm:p-6 space-y-6 flex-1">
-          
-          <!-- Master Events Control Table -->
+        <div class="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-x-auto">
+          <div class="min-w-[600px]">
+            <div class="grid grid-cols-7 border-b border-zinc-200 bg-zinc-50 text-center text-xs font-bold text-zinc-500 py-2.5 uppercase tracking-wider">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="grid grid-cols-7 gap-px bg-zinc-200" id="calendar-days-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past Hangouts Showcase -->
+      <section class="mt-14 pt-8 border-t border-zinc-200">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5">
           <div>
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-              <div>
-                <h4 class="font-bold text-zinc-900 text-sm sm:text-base font-heading">Event Manifests & Ticket Limits</h4>
-                <p class="text-xs text-zinc-500">Monitor host availability, ticket allocations, and real-time revenue splits.</p>
-              </div>
-              <a href="https://hshla.onlinepartybook.com/checkout.php?rand=867195697" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50 shrink-0">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
-                <span>Open OnlinePartyBook Portal</span>
-              </a>
-            </div>
-
-            <div class="bg-white rounded-xl border border-zinc-200 overflow-x-auto shadow-xs">
-              <table class="w-full text-left text-xs text-zinc-700 min-w-[620px]">
-                <thead class="bg-zinc-100/75 border-b border-zinc-200 text-zinc-900 uppercase font-bold text-[10px] tracking-wider">
-                  <tr>
-                    <th class="py-2.5 px-3.5">Hangout Title</th>
-                    <th class="py-2.5 px-3">Date</th>
-                    <th class="py-2.5 px-3">Host Contact</th>
-                    <th class="py-2.5 px-3">Price</th>
-                    <th class="py-2.5 px-3">Sold / Cap</th>
-                    <th class="py-2.5 px-3 text-right">Gross</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-events-tbody" class="divide-y divide-zinc-200">
-                  <!-- Populated via JS -->
-                </tbody>
-              </table>
-            </div>
+            <div class="text-xs uppercase font-bold tracking-widest text-[#be1e2d]">Memories & Inspiration</div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mt-1 font-heading">Past Hangouts Showcase</h3>
+            <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Click any hangout below to explore photo galleries from past events!</p>
           </div>
-
-          <!-- Master Attendees & Payment Roster -->
-          <div class="pt-4 border-t border-zinc-200">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-              <div>
-                <h4 class="font-bold text-zinc-900 text-sm sm:text-base font-heading">Master Attendee Registration List</h4>
-                <p class="text-xs text-zinc-500">Search attendees, check guest attendance, and inspect custom contributions.</p>
-              </div>
-              <div class="relative w-full sm:w-64">
-                <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-2.5 pointer-events-none"></i>
-                <input type="text" id="admin-roster-search" oninput="filterAdminRoster()" placeholder="Search guest or event..." class="w-full pl-8 pr-3 py-1.5 rounded-lg border border-zinc-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-[#be1e2d]">
-              </div>
-            </div>
-
-            <div class="bg-white rounded-xl border border-zinc-200 overflow-x-auto shadow-xs">
-              <table class="w-full text-left text-xs text-zinc-700 min-w-[600px]">
-                <thead class="bg-zinc-100/75 border-b border-zinc-200 text-zinc-900 uppercase font-bold text-[10px] tracking-wider">
-                  <tr>
-                    <th class="py-2.5 px-3.5">Guest Name</th>
-                    <th class="py-2.5 px-3">Registered Hangout</th>
-                    <th class="py-2.5 px-3">Child's Grade</th>
-                    <th class="py-2.5 px-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-roster-tbody" class="divide-y divide-zinc-200">
-                  <!-- Populated via JS -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Back Office Footer -->
-        <div class="p-3.5 bg-zinc-100 border-t border-zinc-200 flex items-center justify-between text-xs text-zinc-500 shrink-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="past-showcase-grid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== VIEW 2: DEDICATED ADMIN HOME PAGE (PARTY #33392 BACK OFFICE) ==================== -->
+  <div id="admin-page-view" class="hidden flex-1 w-full bg-[#faf9f6]">
+    <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-8 space-y-8">
+      
+      <!-- Back Office Breadcrumb Banner -->
+      <div class="bg-white rounded-2xl border border-zinc-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>Logged in as <strong>HSH Admin</strong></span>
+            <span class="px-2.5 py-1 rounded-full bg-red-100 text-[#be1e2d] text-xs font-bold">HSH Back Office</span>
+            <span class="text-xs text-zinc-500 font-semibold">PartyBook ID #33392 • Official Record</span>
           </div>
-          <div class="flex items-center gap-2">
-            <button onclick="lockAdminBackOffice()" class="text-zinc-600 hover:text-[#be1e2d] font-semibold underline">
-              Log Out
-            </button>
-            <button onclick="closeModal('admin-modal')" class="px-3.5 py-1.5 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-900 font-bold transition">
-              Close
-            </button>
+          <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 font-heading mt-1.5">Living Centerpieces with The Plum Dahlia</h2>
+          <p class="text-xs sm:text-sm text-zinc-500 mt-0.5">Administrative Event Management & Live Check-in Dossier</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="showPublicSite()" class="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-bold transition flex items-center gap-2 shadow">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Exit Admin & Back to Site</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Real-Time Metrics Strip for Event #33392 -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+        <div class="bg-white p-4 rounded-xl border border-zinc-200 shadow-xs">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Total Confirmed Revenue</div>
+          <div class="text-2xl font-bold text-emerald-600 mt-1">$600.00</div>
+          <div class="text-[11px] text-zinc-500 mt-0.5">4 tickets claimed @ $150/ea</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-zinc-200 shadow-xs">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Available Spots Left</div>
+          <div class="text-2xl font-bold text-zinc-900 mt-1">11 / 15</div>
+          <div class="text-[11px] text-zinc-500 mt-0.5">Capacity strictly capped</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-zinc-200 shadow-xs">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Target Group</div>
+          <div class="text-2xl font-bold text-purple-700 mt-1">Parents Only</div>
+          <div class="text-[11px] text-zinc-500 mt-0.5">Adult social & workshop</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-zinc-200 shadow-xs">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">OnlinePartyBook Status</div>
+          <div class="text-2xl font-bold text-[#be1e2d] mt-1 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Open
+          </div>
+          <div class="text-[11px] text-zinc-500 mt-0.5">Party #33392 is active</div>
+        </div>
+      </div>
+
+      <!-- Event Details Dossier (Formatted exactly from OnlinePartyBook) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: Party Dossier & Instructions -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-zinc-200 p-6 shadow-sm space-y-6">
+          <h3 class="text-lg font-bold text-zinc-900 font-heading border-b border-zinc-200 pb-3 flex items-center gap-2">
+            <i data-lucide="file-text" class="w-5 h-5 text-[#be1e2d]"></i>
+            <span>Party Information & Host Specifications</span>
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-200">
+              <span class="text-zinc-400 font-bold uppercase text-[10px] block">Date & Time</span>
+              <span class="text-zinc-900 font-bold text-sm block mt-0.5">Friday, November 13, 2026</span>
+              <span class="text-zinc-600 block">5:30 PM – 8:00 PM (Activity starts 6:00 PM)</span>
+            </div>
+            <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-200">
+              <span class="text-zinc-400 font-bold uppercase text-[10px] block">Host Residence</span>
+              <span class="text-zinc-900 font-bold text-sm block mt-0.5">Daisy Hutton's House</span>
+              <span class="text-zinc-600 block">6301 Arrowhead Pl, Los Angeles, CA 90068</span>
+            </div>
+            <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-200">
+              <span class="text-zinc-400 font-bold uppercase text-[10px] block">Co-Hosts (PA Board)</span>
+              <span class="text-zinc-900 font-bold text-sm block mt-0.5">Daisy Hutton, Brianne Watson & Alicia Quinonez</span>
+              <span class="text-zinc-600 block">pa@hshla.org</span>
+            </div>
+            <div class="p-3 bg-zinc-50 rounded-xl border border-zinc-200">
+              <span class="text-zinc-400 font-bold uppercase text-[10px] block">Featured Artist / Instructor</span>
+              <span class="text-zinc-900 font-bold text-sm block mt-0.5">Brooke Wetzel (The Plum Dahlia)</span>
+              <span class="text-zinc-600 block">30+ years in botanical art and sustainable floral design</span>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs text-zinc-700 leading-relaxed">
+            <h4 class="font-bold text-zinc-900 text-sm">Description & Workshop Details:</h4>
+            <p>Join Brooke Wetzel, founder of <em>The Plum Dahlia</em>, for an intimate evening in flowers and botanical design in the Hollywood Hills. Each guest crafts their own living botanical centerpiece using sustainable mosses, flowers, and natural vessels to bring home.</p>
+            <p class="text-zinc-500 italic">Includes welcome beverages, natural wines, light bites, and all floral tools and botanical materials.</p>
+          </div>
+
+          <!-- Live Check-In Roster for Party #33392 -->
+          <div class="pt-4 border-t border-zinc-200">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-bold text-zinc-900 text-sm">Registered Guests (Party #33392 Manifest)</h4>
+              <span class="text-xs font-semibold text-zinc-500">4 / 15 Checked</span>
+            </div>
+            <div class="overflow-x-auto border border-zinc-200 rounded-xl">
+              <table class="w-full text-left text-xs text-zinc-700">
+                <thead class="bg-zinc-100 text-zinc-900 uppercase font-bold text-[10px]">
+                  <tr>
+                    <th class="py-2.5 px-3">Guest Name</th>
+                    <th class="py-2.5 px-3">Student Grade</th>
+                    <th class="py-2.5 px-3">Amount Paid</th>
+                    <th class="py-2.5 px-3">Check-in Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200">
+                  <tr class="hover:bg-zinc-50">
+                    <td class="py-2 px-3 font-bold text-zinc-900">Alma Kawczynski</td>
+                    <td class="py-2 px-3 text-zinc-600">2nd Grade</td>
+                    <td class="py-2 px-3 font-semibold text-emerald-700">$150.00</td>
+                    <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Confirmed</span></td>
+                  </tr>
+                  <tr class="hover:bg-zinc-50">
+                    <td class="py-2 px-3 font-bold text-zinc-900">Claire Foster</td>
+                    <td class="py-2 px-3 text-zinc-600">5th Grade</td>
+                    <td class="py-2 px-3 font-semibold text-emerald-700">$150.00</td>
+                    <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Confirmed</span></td>
+                  </tr>
+                  <tr class="hover:bg-zinc-50">
+                    <td class="py-2 px-3 font-bold text-zinc-900">Sarah B.</td>
+                    <td class="py-2 px-3 text-zinc-600">1st Grade</td>
+                    <td class="py-2 px-3 font-semibold text-emerald-700">$150.00</td>
+                    <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Confirmed</span></td>
+                  </tr>
+                  <tr class="hover:bg-zinc-50">
+                    <td class="py-2 px-3 font-bold text-zinc-900">Elena Ross</td>
+                    <td class="py-2 px-3 text-zinc-600">5th Grade</td>
+                    <td class="py-2 px-3 font-semibold text-emerald-700">$150.00</td>
+                    <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Confirmed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Official Flyer & Quick Actions -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-2xl border border-zinc-200 p-5 shadow-sm space-y-4">
+            <h4 class="font-bold text-sm text-zinc-900 font-heading">Official Event Flyer</h4>
+            <div class="rounded-xl overflow-hidden border border-zinc-200 aspect-[3/4] bg-zinc-100">
+              <img src="Living%20Centerpieces%20HH%20Inviteb.jpeg" alt="Living Centerpieces" class="w-full h-full object-cover">
+            </div>
+            <a href="Living%20Centerpieces%20HH%20Inviteb.jpeg" target="_blank" class="w-full py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold text-center block transition">
+              Download Full-Resolution Flyer
+            </a>
+          </div>
+
+          <div class="bg-red-50 rounded-2xl border border-red-200 p-5 text-xs text-red-950 space-y-2">
+            <span class="font-bold block uppercase tracking-wider text-[10px] text-[#be1e2d]">Tuition Assistance Allocation</span>
+            <p>100% of the proceeds generated from this event directly fund the <strong>Hollywood Schoolhouse Scholarship & Tuition Assistance Fund</strong>.</p>
           </div>
         </div>
 
@@ -498,6 +468,8 @@
 
     </div>
   </div>
+
+  <!-- ==================== MODALS ==================== -->
 
   <!-- Single Image Lightbox Modal -->
   <div id="image-preview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('image-preview-modal')">
@@ -565,7 +537,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-zinc-700 uppercase mb-1">HSH Child's Grade</label>
-            <select id="book-grade" required class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
+            <select id="book-grade" required class="w-full px-3 py-2.5 rounded-lg border border-zinc-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#be1e2d] focus:outline-none">
               <option value="Parents Only">Parents Only (Adults)</option>
               <option value="Kindergarten">Kindergarten</option>
               <option value="1st Grade">1st Grade</option>
@@ -642,7 +614,7 @@
     </div>
   </div>
 
-  <!-- Who's Going Attendee Modal -->
+  <!-- Attendee List Modal -->
   <div id="attendees-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-backdrop hidden" onclick="if(event.target === this) closeModal('attendees-modal')">
     <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden">
       <div class="px-5 py-4 bg-[#be1e2d] text-white flex items-center justify-between">
@@ -941,145 +913,843 @@
     </div>
   </div>
 
-  <!-- Unified Main JavaScript -->
+  <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    // ADMIN PORTAL & BACK-OFFICE LOGIC
-    let isAdminLoggedIn = false;
+    // Navigation between Public Site and Admin Home Page
+    let currentAdminPageActive = false;
 
-    function openAdminModal() {
-      openModal('admin-modal');
-      if (isAdminLoggedIn) {
-        showAdminDashboard();
+    function toggleAdminView() {
+      if (currentAdminPageActive) {
+        showPublicSite();
       } else {
-        document.getElementById('admin-login-view').classList.remove('hidden');
-        document.getElementById('admin-dashboard-view').classList.add('hidden');
+        showAdminPage();
+      }
+    }
+
+    function showAdminPage() {
+      currentAdminPageActive = true;
+      document.getElementById('public-site-view').classList.add('hidden');
+      document.getElementById('admin-page-view').classList.remove('hidden');
+      
+      const adminNavBtn = document.getElementById('admin-nav-btn');
+      const adminNavText = document.getElementById('admin-nav-text');
+      adminNavBtn.className = "flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-white text-[#be1e2d] hover:bg-zinc-100 transition border border-white shadow-sm shrink-0";
+      adminNavText.textContent = "Exit Admin";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function showPublicSite() {
+      currentAdminPageActive = false;
+      document.getElementById('public-site-view').classList.remove('hidden');
+      document.getElementById('admin-page-view').classList.add('hidden');
+      
+      const adminNavBtn = document.getElementById('admin-nav-btn');
+      const adminNavText = document.getElementById('admin-nav-text');
+      adminNavBtn.className = "flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-zinc-950 text-white hover:bg-black transition border border-zinc-700 shadow-sm shrink-0";
+      adminNavText.textContent = "Admin Login";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Modal Helpers
+    function openImagePreview(imgSrc, title) {
+      const modal = document.getElementById('image-preview-modal');
+      const img = document.getElementById('image-preview-img');
+      const titleEl = document.getElementById('image-preview-title');
+      if (!modal || !img) return;
+      img.src = imgSrc;
+      if (titleEl) titleEl.textContent = title || 'Event Image';
+      openModal('image-preview-modal');
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+
+    // Render Cards in Catalog
+    function renderCards() {
+      try {
+        const container = document.getElementById('cards-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        let filtered = hangouts.filter(h => {
+          const matchesCategory = (currentCategory === 'all' || h.category === currentCategory);
+          let matchesGrade = true;
+          if (currentGrade === 'Parents Only') {
+            matchesGrade = (h.grade === 'Parents Only');
+          } else if (currentGrade !== 'all') {
+            matchesGrade = (h.grade === currentGrade || h.grade === 'All Grades');
+          }
+          return matchesCategory && matchesGrade;
+        });
+
+        if (currentSort === 'date') {
+          filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+        } else if (currentSort === 'cost') {
+          filtered.sort((a, b) => a.price - b.price);
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-zinc-300 p-8">
+              <i data-lucide="calendar-x" class="w-12 h-12 text-zinc-400 mx-auto mb-3"></i>
+              <h3 class="font-bold text-zinc-800 text-lg font-heading">No hangouts match this filter</h3>
+              <p class="text-sm text-zinc-500 max-w-sm mx-auto mt-1">Try selecting a different grade or category, or be the first parent to pitch one!</p>
+              <button onclick="openHostModal()" class="mt-4 px-4 py-2 bg-[#be1e2d] text-white font-bold text-xs uppercase rounded-lg">Pitch This Hangout</button>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(h => {
+          const spotsLeft = h.totalSpots - h.attendees.length;
+          const isFull = spotsLeft <= 0;
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col";
+          const fallbackAttr = h.fallbackImage ? `onerror="this.onerror=null; this.src='${h.fallbackImage}';"` : '';
+          const escapedTitle = h.title.replace(/'/g, "\\'");
+
+          card.innerHTML = `
+            <div class="relative h-52 bg-zinc-100 overflow-hidden cursor-pointer group/img" onclick="openImagePreview('${h.image}', '${escapedTitle}')" title="Click to view full image">
+              <img src="${h.image}" alt="${h.title}" ${fallbackAttr} class="w-full h-full object-cover group-hover/img:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-black/25 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="px-3 py-1.5 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-md flex items-center gap-1.5">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5 text-[#be1e2d]"></i> Click to view full image
+                </span>
+              </div>
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5 pointer-events-none">
+                <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-900/85 text-white backdrop-blur-sm">${h.category}</span>
+                <span class="px-2.5 py-1 rounded-full text-xs font-bold ${h.grade === 'Parents Only' ? 'bg-[#9e1422]/90 text-white' : 'bg-zinc-800/85 text-zinc-200'} backdrop-blur-sm">${h.grade}</span>
+              </div>
+              <div class="absolute bottom-3 right-3 bg-white/95 px-3 py-1 rounded-full text-xs font-bold text-zinc-900 shadow pointer-events-none">
+                $${h.price} / person
+              </div>
+            </div>
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3.5">
+              <div>
+                <div class="flex items-center gap-2 text-xs text-[#be1e2d] font-semibold mb-1">
+                  <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                  <span>${h.displayDate}</span>
+                </div>
+                <h3 class="font-bold text-zinc-900 text-base sm:text-lg leading-snug font-heading">${h.title}</h3>
+                <p class="text-xs text-zinc-500 mt-1">Hosted by <span class="font-medium text-zinc-700">${h.host}</span></p>
+                ${h.specialGuest ? `<p class="text-xs text-[#9e1422] font-semibold">✨ With ${h.specialGuest}</p>` : ''}
+                <p class="text-xs text-zinc-500 mt-0.5"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${h.location}</p>
+                <p class="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed">${h.description}</p>
+              </div>
+              <div class="pt-3 border-t border-zinc-100 space-y-3">
+                <div class="flex items-center justify-between">
+                  <button onclick="viewAttendees(${h.id})" class="text-xs font-semibold text-zinc-600 hover:text-[#be1e2d] flex items-center gap-1.5 transition">
+                    <i data-lucide="users" class="w-3.5 h-3.5 text-[#be1e2d]"></i>
+                    <span>${h.attendees.length} joined</span>
+                    <span class="text-zinc-400">(${spotsLeft} left)</span>
+                  </button>
+                  <button onclick="viewAttendees(${h.id})" class="text-[11px] font-bold text-[#be1e2d] hover:underline">Who's going?</button>
+                </div>
+                <button onclick="openBooking(${h.id})" ${isFull ? 'disabled' : ''} class="w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition ${isFull ? 'bg-zinc-200 text-zinc-500 cursor-not-allowed' : 'bg-[#be1e2d] hover:bg-[#d63031] text-white shadow-sm'}">
+                  ${isFull ? 'Hangout Full' : `Sign Up • $${h.price}`}
+                </button>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error in renderCards:", err);
+      }
+    }
+
+    // Render Past Showcase Cards with Galleries
+    function renderPastShowcase() {
+      try {
+        const container = document.getElementById('past-showcase-grid');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const showcaseItems = [
+          { key: 'shelby', title: "Feel Good Jazz Class", host: "Hosted by Shelby Rabara Shum", price: "$50 / person", category: "Dance & Fitness", cover: "HOSTED_HANGOUT_SHELBY.jpeg", count: "2 Photos" },
+          { key: 'karaoke', title: "Presidents' Karaoke Night", host: "Hosted by Christy, Michelle, Daisy, Alicia & Brianne", price: "$100 / person", category: "Parent Social", cover: "karoke%20HH.jpg", count: "Flyer" },
+          { key: 'soundbath', title: "Sunset Sound Bath", host: "Hosted by Elizabeth Sbardellati", price: "$75 / person", category: "Wellness & Sound", cover: "HOSTED_HANGOUT_SOUND_BATH.jpg", count: "Flyer" },
+          { key: 'iceskating', title: "Community Ice Skating", host: "Hosted by Jean, Brandee, Janet, Dawn & Julie", price: "$40 / person", category: "All-School Family", cover: "HOSTED_HANGOUT_ICE_SKATING.jpg", count: "4 Photos" },
+          { key: 'ecedance', title: "Grown-Ups & Kiddos Dance Class", host: "Hosted by Caroline Keichian • Led by Savanna Stone", price: "$35 / family", category: "Early Childhood", cover: "HOSTED_HANGOUT_ECE_DANCE.jpg", count: "2 Photos" },
+          { key: 'distillery', title: "Hollywood Distillery Tasting & Tour", host: "Hosted by Carrie Clifford, Kay Lee & Lauren Delp", price: "$65 / person", category: "Parent Social", cover: "HOSTED_HANGOUT_DISTLLERY.jpg", count: "2 Photos" }
+        ];
+
+        showcaseItems.forEach(item => {
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group cursor-pointer";
+          card.onclick = () => openShowcaseGallery(item.key);
+
+          card.innerHTML = `
+            <div class="relative aspect-[3/4] bg-zinc-100 overflow-hidden">
+              <img src="${item.cover}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80';" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+                <span class="px-3.5 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-zinc-200">
+                  <i data-lucide="images" class="w-4 h-4 text-[#be1e2d]"></i>
+                  <span>Click for gallery</span>
+                </span>
+              </div>
+              <span class="absolute top-2.5 left-2.5 bg-black/75 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">${item.category}</span>
+              <span class="absolute bottom-2.5 right-2.5 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 backdrop-blur-xs">
+                <i data-lucide="image" class="w-3 h-3"></i> ${item.count}
+              </span>
+            </div>
+            <div class="p-3.5 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="font-bold text-zinc-900 text-sm leading-snug">${item.title}</h4>
+                <p class="text-xs text-zinc-500 mt-0.5">${item.host}</p>
+              </div>
+              <div class="pt-2.5 mt-2 border-t border-zinc-100 flex items-center justify-between">
+                <span class="text-xs font-bold text-[#be1e2d] bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">${item.price}</span>
+                <span class="text-[11px] font-bold text-zinc-700 flex items-center gap-1 group-hover:text-[#be1e2d] transition">
+                  <span>View Gallery</span>
+                  <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                </span>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error in renderPastShowcase:", err);
+      }
+    }
+
+    // Gallery Lightbox Viewer Logic
+    function openShowcaseGallery(key) {
+      activeGalleryKey = key;
+      activePhotoIndex = 0;
+      const g = pastGalleries[key];
+      if (!g) return;
+
+      const titleEl = document.getElementById('gallery-title');
+      if (titleEl) titleEl.textContent = g.title;
+      renderActiveGalleryPhoto();
+      openModal('gallery-lightbox-modal');
+    }
+
+    function renderActiveGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || !g.images || !g.images.length) return;
+
+      const photo = g.images[activePhotoIndex];
+      const mainImg = document.getElementById('gallery-main-img');
+      const counter = document.getElementById('gallery-counter');
+      if (mainImg) {
+        mainImg.src = photo.src;
+        mainImg.alt = photo.label;
+      }
+      if (counter) {
+        counter.textContent = `${photo.label} (${activePhotoIndex + 1} of ${g.images.length})`;
+      }
+
+      const thumbsStrip = document.getElementById('gallery-thumbs-strip');
+      const prevBtn = document.getElementById('gallery-prev-btn');
+      const nextBtn = document.getElementById('gallery-next-btn');
+
+      if (thumbsStrip) {
+        thumbsStrip.innerHTML = '';
+        if (g.images.length <= 1) {
+          thumbsStrip.classList.add('hidden');
+          if (prevBtn) prevBtn.classList.add('hidden');
+          if (nextBtn) nextBtn.classList.add('hidden');
+        } else {
+          thumbsStrip.classList.remove('hidden');
+          if (prevBtn) prevBtn.classList.remove('hidden');
+          if (nextBtn) nextBtn.classList.remove('hidden');
+
+          g.images.forEach((imgObj, idx) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgObj.src;
+            thumb.className = `w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-md cursor-pointer transition border-2 ${
+              idx === activePhotoIndex ? 'border-[#be1e2d] scale-105 opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
+            }`;
+            thumb.onclick = () => {
+              activePhotoIndex = idx;
+              renderActiveGalleryPhoto();
+            };
+            thumbsStrip.appendChild(thumb);
+          });
+        }
       }
       lucide.createIcons();
     }
 
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      const user = document.getElementById('admin-user-input').value.trim();
-      const pass = document.getElementById('admin-pass-input').value.trim();
-      
-      // Standard credentials check (matches PA administrative access)
-      if ((user.toLowerCase() === 'pa@hshla.org' || user.toLowerCase() === 'admin') && pass.length >= 4) {
-        isAdminLoggedIn = true;
-        showAdminDashboard();
+    function prevGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || g.images.length <= 1) return;
+      activePhotoIndex = (activePhotoIndex - 1 + g.images.length) % g.images.length;
+      renderActiveGalleryPhoto();
+    }
+
+    function nextGalleryPhoto() {
+      const g = pastGalleries[activeGalleryKey];
+      if (!g || g.images.length <= 1) return;
+      activePhotoIndex = (activePhotoIndex + 1) % g.images.length;
+      renderActiveGalleryPhoto();
+    }
+
+    // Category & Browse Filters
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#be1e2d] text-white transition whitespace-nowrap shadow-sm";
+        } else {
+          btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-700 border border-zinc-200 hover:border-zinc-400 transition whitespace-nowrap";
+        }
+      });
+      renderCards();
+      lucide.createIcons();
+    }
+
+    function handleBrowseFilter(value) {
+      if (value === 'view-calendar') {
+        toggleCalendarView(true);
       } else {
-        alert("Invalid username or password. Please try again or use Demo Quick Access.");
+        toggleCalendarView(false);
+        if (value === 'parents-only') {
+          currentGrade = 'Parents Only';
+          document.getElementById('grade-filter-select').value = 'Parents Only';
+          currentSort = 'default';
+        } else if (value === 'sort-date') {
+          currentSort = 'date';
+        } else if (value === 'sort-cost') {
+          currentSort = 'cost';
+        } else {
+          currentGrade = 'all';
+          currentSort = 'default';
+          document.getElementById('grade-filter-select').value = 'all';
+        }
+        renderCards();
+        lucide.createIcons();
       }
     }
 
-    function bypassAdminLogin() {
-      isAdminLoggedIn = true;
-      showAdminDashboard();
+    function handleGradeFilter(grade) {
+      currentGrade = grade;
+      toggleCalendarView(false);
+      renderCards();
+      lucide.createIcons();
     }
 
-    function lockAdminBackOffice() {
-      isAdminLoggedIn = false;
-      document.getElementById('admin-login-view').classList.remove('hidden');
-      document.getElementById('admin-dashboard-view').classList.add('hidden');
-      document.getElementById('admin-user-input').value = '';
-      document.getElementById('admin-pass-input').value = '';
+    function toggleCalendarView(showCalendar) {
+      const cardsEl = document.getElementById('cards-container');
+      const pillsEl = document.getElementById('category-pills-bar');
+      const calEl = document.getElementById('calendar-container');
+      const cardsBtn = document.getElementById('view-cards-btn');
+      const calBtn = document.getElementById('view-cal-btn');
+
+      if (showCalendar) {
+        if (cardsEl) cardsEl.classList.add('hidden');
+        if (pillsEl) pillsEl.classList.add('hidden');
+        if (calEl) calEl.classList.remove('hidden');
+        if (calBtn) calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        if (cardsBtn) cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+        if (calEl) calEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        if (cardsEl) cardsEl.classList.remove('hidden');
+        if (pillsEl) pillsEl.classList.remove('hidden');
+        if (calEl) calEl.classList.add('hidden');
+        if (cardsBtn) cardsBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold bg-[#be1e2d] text-white flex items-center justify-center gap-1.5 transition";
+        if (calBtn) calBtn.className = "flex-1 sm:flex-none px-3.5 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-950 flex items-center justify-center gap-1.5 transition";
+      }
+      lucide.createIcons();
     }
 
-    function showAdminDashboard() {
-      document.getElementById('admin-login-view').classList.add('hidden');
-      document.getElementById('admin-dashboard-view').classList.remove('hidden');
-      renderAdminDashboard();
+    // Calendar Engine
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    function prevMonth() {
+      calMonth--;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      syncCalendarHeader();
+      renderCalendar();
     }
 
-    function renderAdminDashboard() {
-      // 1. Calculate live stats
-      let totalRaised = 0;
-      let totalClaimed = 0;
-      let allAttendeesList = [];
+    function nextMonth() {
+      calMonth++;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      syncCalendarHeader();
+      renderCalendar();
+    }
 
-      hangouts.forEach(h => {
-        totalRaised += (h.attendees.length * h.price);
-        totalClaimed += h.attendees.length;
-        h.attendees.forEach(a => {
-          allAttendeesList.push({
-            name: a.name,
-            grade: a.grade,
-            hangout: h.title,
-            price: h.price
+    function onSelectMonthDropdown(val) {
+      const [y, m] = val.split('-');
+      calYear = parseInt(y, 10);
+      calMonth = parseInt(m, 10) - 1;
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function jumpToCurrentMonth() {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      syncCalendarHeader();
+      renderCalendar();
+    }
+
+    function syncCalendarHeader() {
+      const label = document.getElementById('calendar-month-label');
+      if (label) label.textContent = `${monthNames[calMonth]} ${calYear}`;
+      const selectMonth = document.getElementById('calendar-select-month');
+      const valStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}`;
+      if (selectMonth) selectMonth.value = valStr;
+    }
+
+    function renderCalendar() {
+      try {
+        const grid = document.getElementById('calendar-days-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        syncCalendarHeader();
+
+        const firstDay = new Date(calYear, calMonth, 1).getDay();
+        const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+        const realToday = new Date();
+        const isCurrentMonthView = (realToday.getFullYear() === calYear && realToday.getMonth() === calMonth);
+        const realTodayDate = realToday.getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+          const blank = document.createElement('div');
+          blank.className = "min-h-[95px] sm:min-h-[105px] bg-zinc-50/70 p-2 text-zinc-300 text-xs";
+          grid.appendChild(blank);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const dayHangouts = hangouts.filter(h => h.date === dateStr);
+          const daySchool = schoolEvents.filter(s => s.date === dateStr);
+          const isToday = (isCurrentMonthView && day === realTodayDate);
+
+          const cell = document.createElement('div');
+          cell.className = `min-h-[95px] sm:min-h-[105px] p-2 flex flex-col justify-between transition border-t border-zinc-100 ${
+            isToday ? 'bg-red-50/60 ring-2 ring-[#be1e2d] ring-inset relative' : 'bg-white hover:bg-zinc-50'
+          }`;
+          
+          let eventsHtml = '';
+          dayHangouts.forEach(h => {
+            eventsHtml += `
+              <div onclick="openBooking(${h.id})" class="cursor-pointer text-[10px] bg-red-100/90 border border-red-300 text-red-950 px-1.5 py-1 rounded font-semibold truncate hover:bg-red-200 transition mb-1 shadow-xs" title="${h.title}">
+                🎉 ${h.title}
+              </div>
+            `;
           });
+
+          daySchool.forEach(s => {
+            eventsHtml += `
+              <div class="text-[10px] bg-blue-50 border border-blue-200 text-blue-900 px-1.5 py-1 rounded font-medium truncate mb-1" title="${s.title}">
+                🏫 ${s.title}
+              </div>
+            `;
+          });
+
+          cell.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold ${isToday ? 'w-5 h-5 rounded-full bg-[#be1e2d] text-white flex items-center justify-center font-black' : 'text-zinc-700'}">
+                  ${day}
+                </span>
+                ${isToday ? `<span class="text-[8px] font-black uppercase text-[#be1e2d] tracking-wider bg-red-100 px-1 rounded">Today</span>` : ''}
+              </div>
+              <div class="mt-1">${eventsHtml}</div>
+            </div>
+          `;
+          grid.appendChild(cell);
+        }
+      } catch (err) {
+        console.error("Error in renderCalendar:", err);
+      }
+    }
+
+    // Booking Flow
+    function openBooking(hangoutId) {
+      activeBookingHangout = hangouts.find(h => h.id === hangoutId);
+      if (!activeBookingHangout) return;
+
+      document.getElementById('booking-event-id').value = activeBookingHangout.id;
+      document.getElementById('booking-event-title').textContent = activeBookingHangout.title;
+      document.getElementById('booking-event-price').textContent = `$${activeBookingHangout.price} suggested / spot`;
+      setPricingTier('standard');
+      openModal('booking-modal');
+    }
+
+    function setPricingTier(tier) {
+      activePricingTier = tier;
+      const stdBtn = document.getElementById('tier-standard-btn');
+      const custBtn = document.getElementById('tier-custom-btn');
+      const customWrap = document.getElementById('custom-donation-wrap');
+      const custAmountInput = document.getElementById('custom-donation-amount');
+      const stdLabel = document.getElementById('tier-standard-label');
+
+      if (activeBookingHangout && stdLabel) {
+        stdLabel.textContent = `Standard ($${activeBookingHangout.price})`;
+      }
+
+      if (tier === 'standard') {
+        if (stdBtn) stdBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (custBtn) custBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (customWrap) customWrap.classList.add('hidden');
+      } else {
+        if (stdBtn) stdBtn.className = "py-2 px-3 rounded-lg border border-zinc-300 bg-white hover:border-[#be1e2d] text-zinc-700 font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (custBtn) custBtn.className = "py-2 px-3 rounded-lg border border-[#be1e2d] bg-red-50 text-[#be1e2d] font-bold text-xs flex items-center justify-center gap-1.5 transition";
+        if (customWrap) {
+          customWrap.classList.remove('hidden');
+          if (!custAmountInput.value && activeBookingHangout) {
+            custAmountInput.value = activeBookingHangout.price;
+          }
+          custAmountInput.focus();
+        }
+      }
+      updateBookingTotal();
+      lucide.createIcons();
+    }
+
+    function updateBookingTotal() {
+      if (!activeBookingHangout) return;
+      const spots = parseInt(document.getElementById('book-spots').value, 10);
+      let total = 0;
+
+      if (activePricingTier === 'custom') {
+        const customVal = parseFloat(document.getElementById('custom-donation-amount').value);
+        total = isNaN(customVal) || customVal < 0 ? 0 : customVal;
+      } else {
+        total = spots * activeBookingHangout.price;
+      }
+
+      const totalDisplay = document.getElementById('booking-total-display');
+      if (totalDisplay) totalDisplay.textContent = `$${total.toLocaleString()}`;
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('book-name').value.trim();
+      const grade = document.getElementById('book-grade').value;
+      const spots = parseInt(document.getElementById('book-spots').value, 10);
+
+      if (!activeBookingHangout || !name) return;
+
+      let finalDonation = (activePricingTier === 'custom') 
+        ? (parseFloat(document.getElementById('custom-donation-amount').value) || 0)
+        : (spots * activeBookingHangout.price);
+
+      for (let i = 0; i < spots; i++) {
+        activeBookingHangout.attendees.push({
+          name: i === 0 ? name : `${name} (+${i})`,
+          grade: grade
         });
+      }
+
+      closeModal('booking-modal');
+      alert(`🎉 Thank you, ${name}! Your spots for ${activeBookingHangout.title} are confirmed with your donation of $${finalDonation}.`);
+      renderCards();
+      renderCalendar();
+      updateImpactStats();
+      e.target.reset();
+    }
+
+    function viewAttendees(hangoutId) {
+      const h = hangouts.find(item => item.id === hangoutId);
+      if (!h) return;
+
+      document.getElementById('modal-attendees-title').textContent = h.title;
+      document.getElementById('modal-attendees-sub').textContent = `Hosted by ${h.host} • ${h.attendees.length} Signed Up (${h.totalSpots - h.attendees.length} spots remaining)`;
+
+      const listContainer = document.getElementById('modal-attendees-list');
+      listContainer.innerHTML = '';
+
+      if (h.attendees.length === 0) {
+        listContainer.innerHTML = `<p class="text-sm text-zinc-500 italic text-center py-4">No one has registered yet. Be the first to join!</p>`;
+      } else {
+        h.attendees.forEach(a => {
+          const row = document.createElement('div');
+          row.className = "flex items-center justify-between p-2.5 sm:p-3 rounded-xl bg-zinc-50 border border-zinc-200";
+          row.innerHTML = `
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#be1e2d]/10 text-[#be1e2d] font-bold flex items-center justify-center text-xs">${a.name.charAt(0)}</div>
+              <div>
+                <div class="font-bold text-xs sm:text-sm text-zinc-900">${a.name}</div>
+                <div class="text-[10px] sm:text-[11px] text-zinc-500">Attendee</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-zinc-200 text-zinc-700">${a.grade}</span>
+          `;
+          listContainer.appendChild(row);
+        });
+      }
+      openModal('attendees-modal');
+    }
+
+    function openHostModal() { openModal('host-modal'); }
+    function openCheatSheetModal() { openModal('cheatsheet-modal'); }
+    function openTrackerModal() { openModal('tracker-modal'); renderTrackerList(); }
+    function openIdeasGuideModal() { openModal('ideas-modal'); renderIdeasGuideGrid(); }
+
+    function populateHostInspoDrawer() {
+      const container = document.getElementById('host-inspo-list-items');
+      if (!container) return;
+      container.innerHTML = '';
+      prospectiveHosts.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex items-start justify-between py-1.5 border-b border-zinc-200/60 gap-3";
+        row.innerHTML = `
+          <div>
+            <span class="font-bold text-zinc-900">${item.concept}</span>
+            <span class="text-zinc-500 block sm:inline sm:ml-2">— Hosted by ${item.hosts}</span>
+          </div>
+          <span class="text-[10px] font-semibold text-[#be1e2d] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded whitespace-nowrap">${item.status}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function toggleHostInspoList() {
+      const drawer = document.getElementById('host-inspo-drawer');
+      const chevron = document.getElementById('inspo-chevron');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        drawer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function handleHostPitch(e) {
+      e.preventDefault();
+      const host = document.getElementById('pitch-host').value.trim();
+      const title = document.getElementById('pitch-title').value.trim();
+      const cat = document.getElementById('pitch-cat').value;
+      const grade = document.getElementById('pitch-grade').value;
+      const cost = parseInt(document.getElementById('pitch-cost').value, 10);
+      const spots = parseInt(document.getElementById('pitch-spots').value, 10);
+      const datetime = document.getElementById('pitch-datetime').value.trim();
+      const desc = document.getElementById('pitch-desc').value.trim();
+
+      const newHangout = {
+        id: Date.now(),
+        title: title,
+        host: host,
+        category: cat,
+        grade: grade,
+        date: "2026-12-19",
+        displayDate: datetime,
+        location: "Host Residence / Campus",
+        price: cost,
+        totalSpots: spots,
+        image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=700&q=80",
+        description: desc,
+        attendees: []
+      };
+
+      hangouts.unshift(newHangout);
+      closeModal('host-modal');
+      e.target.reset();
+
+      renderCards();
+      renderCalendar();
+      updateImpactStats();
+      lucide.createIcons();
+    }
+
+    function filterTrackerList() {
+      const q = document.getElementById('tracker-search-input').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('tracker-status-select').value;
+      renderTrackerList(q, statusFilter);
+    }
+
+    function renderTrackerList(searchQuery = '', statusFilter = 'all') {
+      const activeContainer = document.getElementById('active-tracker-container');
+      const pastContainer = document.getElementById('reapproach-tracker-container');
+      if (!activeContainer || !pastContainer) return;
+
+      activeContainer.innerHTML = '';
+      pastContainer.innerHTML = '';
+
+      const filteredActive = prospectiveHosts.filter(item => {
+        const matchesQuery = !searchQuery || 
+          item.hosts.toLowerCase().includes(searchQuery) ||
+          item.concept.toLowerCase().includes(searchQuery) ||
+          item.date.toLowerCase().includes(searchQuery) ||
+          item.notes.toLowerCase().includes(searchQuery);
+
+        let matchesStatus = true;
+        if (statusFilter === 'Go') matchesStatus = item.status === 'Go';
+        else if (statusFilter === 'Waiting') matchesStatus = (item.status === 'Waiting' || item.status === 'In Progress' || item.status === 'Planning');
+        else if (statusFilter === 'Reapproach') matchesStatus = false;
+
+        return matchesQuery && matchesStatus;
       });
 
-      document.getElementById('admin-metric-revenue').textContent = `$${totalRaised.toLocaleString()}`;
-      document.getElementById('admin-metric-spots').textContent = `${totalClaimed}`;
-      document.getElementById('admin-metric-events').textContent = hangouts.length;
+      const countEl = document.getElementById('active-hosts-count');
+      if (countEl) countEl.textContent = `${filteredActive.length} Concepts`;
 
-      // 2. Render Events Table
-      const eventsTbody = document.getElementById('admin-events-tbody');
-      if (eventsTbody) {
-        eventsTbody.innerHTML = '';
-        hangouts.forEach(h => {
-          const gross = h.attendees.length * h.price;
-          const tr = document.createElement('tr');
-          tr.className = "hover:bg-zinc-50 transition";
-          tr.innerHTML = `
-            <td class="py-2.5 px-3.5 font-bold text-zinc-900">${h.title}</td>
-            <td class="py-2.5 px-3 text-zinc-600">${h.date}</td>
-            <td class="py-2.5 px-3 text-zinc-600 truncate max-w-[180px]" title="${h.host}">${h.host}</td>
-            <td class="py-2.5 px-3 font-semibold text-zinc-800">$${h.price}</td>
-            <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full bg-zinc-100 font-bold text-zinc-700">${h.attendees.length} / ${h.totalSpots}</span></td>
-            <td class="py-2.5 px-3 text-right font-bold text-emerald-700">$${gross.toLocaleString()}</td>
+      filteredActive.forEach(item => {
+        let badgeColor = "bg-amber-100 text-amber-900 border-amber-300";
+        if (item.status === "Go") badgeColor = "bg-emerald-100 text-emerald-900 border-emerald-300";
+        if (item.status === "Canceled") badgeColor = "bg-zinc-200 text-zinc-600 border-zinc-300";
+
+        const card = document.createElement('div');
+        card.className = "p-3.5 sm:p-4 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-zinc-300 transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-1.5">
+              <span class="text-xs font-bold text-[#be1e2d] uppercase tracking-wide">${item.concept}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeColor} whitespace-nowrap">${item.status}</span>
+            </div>
+            <h5 class="text-sm font-bold text-zinc-900 leading-snug">${item.hosts}</h5>
+            <div class="flex items-center gap-2 text-xs text-zinc-500 mt-1">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-zinc-400"></i>
+              <span class="font-medium text-zinc-700">${item.date}</span>
+              <span>• HSH Child: ${item.student}</span>
+            </div>
+            <p class="text-xs text-zinc-600 mt-2 bg-zinc-50 p-2 rounded-lg border border-zinc-150 leading-relaxed">${item.notes}</p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+            <span class="truncate max-w-[200px]" title="${item.contact}"><i data-lucide="mail" class="w-3 h-3 inline mr-1 text-zinc-400"></i>${item.contact}</span>
+          </div>
+        `;
+        activeContainer.appendChild(card);
+      });
+
+      if (statusFilter === 'all' || statusFilter === 'Reapproach') {
+        const filteredPast = pastHostsIdeas.filter(item => {
+          if (!searchQuery) return true;
+          return item.host.toLowerCase().includes(searchQuery) || item.concept.toLowerCase().includes(searchQuery);
+        });
+
+        filteredPast.forEach(item => {
+          const chip = document.createElement('div');
+          chip.className = "p-3 rounded-lg border border-zinc-200 bg-zinc-50/70 hover:bg-white transition flex flex-col justify-between";
+          chip.innerHTML = `
+            <div class="font-bold text-xs text-zinc-900">${item.concept}</div>
+            <div class="text-[11px] text-zinc-500 mt-1 flex items-center justify-between">
+              <span class="truncate">${item.host}</span>
+              <span class="text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 shrink-0">Reapproach</span>
+            </div>
           `;
-          eventsTbody.appendChild(tr);
+          pastContainer.appendChild(chip);
         });
       }
-
-      // 3. Render Master Attendee Roster
-      renderAdminRosterRows(allAttendeesList);
       lucide.createIcons();
     }
 
-    function renderAdminRosterRows(attendees) {
-      const rosterTbody = document.getElementById('admin-roster-tbody');
-      if (!rosterTbody) return;
-      rosterTbody.innerHTML = '';
+    function filterIdeasGuide() {
+      const q = document.getElementById('idea-search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('idea-category-select').value;
+      const grade = document.getElementById('idea-grade-select').value;
+      renderIdeasGuideGrid(q, cat, grade);
+    }
 
-      if (attendees.length === 0) {
-        rosterTbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-zinc-400 italic">No registrations recorded yet.</td></tr>`;
+    function ideaMatchesGrade(idea, grade) {
+      if (!grade || grade === 'all') return true;
+      const gradeAgeMap = {
+        'Preschool': { min: 3, max: 5 },
+        'Kindergarten': { min: 5, max: 6 },
+        '1st Grade': { min: 6, max: 7 },
+        '2nd Grade': { min: 7, max: 8 },
+        '3rd Grade': { min: 8, max: 9 },
+        '4th Grade': { min: 9, max: 10 },
+        '5th Grade': { min: 10, max: 11 },
+        '6th Grade': { min: 11, max: 12 }
+      };
+      const target = gradeAgeMap[grade];
+      if (!target) return true;
+      return !(target.max < idea.minAge || target.min > idea.maxAge);
+    }
+
+    function renderIdeasGuideGrid(query = '', category = 'all', grade = 'all') {
+      const grid = document.getElementById('ideas-catalog-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const filtered = completeIdeaGuide.filter(idea => {
+        const matchesQuery = !query || 
+          idea.title.toLowerCase().includes(query) ||
+          idea.desc.toLowerCase().includes(query) ||
+          idea.setting.toLowerCase().includes(query) ||
+          idea.category.toLowerCase().includes(query);
+
+        const matchesCat = (category === 'all' || idea.category === category);
+        const matchesGrd = ideaMatchesGrade(idea, grade);
+        return matchesQuery && matchesCat && matchesGrd;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-zinc-500 italic">No hangout ideas found matching your search. Try adjusting your filter.</div>`;
         return;
       }
 
-      attendees.forEach(a => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-zinc-50 transition";
-        tr.innerHTML = `
-          <td class="py-2 px-3.5 font-bold text-zinc-900">${a.name}</td>
-          <td class="py-2 px-3 text-zinc-700 font-medium">${a.hangout}</td>
-          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-zinc-100 text-[11px] font-semibold text-zinc-700">${a.grade}</span></td>
-          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold">Confirmed ($${a.price})</span></td>
+      filtered.forEach(idea => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 rounded-xl border border-zinc-200 bg-white shadow-xs hover:border-[#be1e2d]/50 hover:shadow-sm transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-1.5 mb-1.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 uppercase tracking-wide">${idea.category}</span>
+              <span class="text-[10px] font-bold text-[#be1e2d] bg-red-50 px-2 py-0.5 rounded-full">Ages ${idea.ages}</span>
+            </div>
+            <h5 class="text-sm font-bold text-zinc-900 leading-snug">${idea.title}</h5>
+            <p class="text-xs text-zinc-600 mt-1 leading-relaxed">${idea.desc}</p>
+            <div class="text-[11px] text-zinc-400 mt-2 flex items-center gap-1">
+              <i data-lucide="map-pin" class="w-3 h-3 text-zinc-400"></i>
+              <span>${idea.setting}</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-zinc-100">
+            <button onclick="selectIdeaToPitch('${idea.title.replace(/'/g, "\\'")}', '${idea.category}')" class="w-full py-1.5 rounded-lg bg-zinc-900 hover:bg-[#be1e2d] text-white font-bold text-xs transition flex items-center justify-center gap-1.5">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Host This Idea</span>
+            </button>
+          </div>
         `;
-        rosterTbody.appendChild(tr);
+        grid.appendChild(card);
       });
+      lucide.createIcons();
     }
 
-    function filterAdminRoster() {
-      const query = document.getElementById('admin-roster-search').value.toLowerCase().trim();
-      let allAttendeesList = [];
+    function selectIdeaToPitch(title, category) {
+      closeModal('ideas-modal');
+      openHostModal();
+      document.getElementById('pitch-title').value = title;
+      const catSelect = document.getElementById('pitch-cat');
+      if (category.includes('Cooking') || category.includes('Food')) catSelect.value = 'Food & Drink';
+      else if (category.includes('Sports') || category.includes('Active')) catSelect.value = 'Fitness & Sports';
+      else if (category.includes('Creative') || category.includes('Workshop') || category.includes('Media')) catSelect.value = 'Creative Arts';
+      else if (category.includes('Social') || category.includes('Party')) catSelect.value = 'Parent Socials';
+      else catSelect.value = 'Kids Activities';
+      document.getElementById('pitch-title').focus();
+    }
+
+    function updateImpactStats() {
+      let totalSpotsClaimed = 0;
+      let totalSpotsCapacity = 0;
+
       hangouts.forEach(h => {
-        h.attendees.forEach(a => {
-          if (!query || a.name.toLowerCase().includes(query) || h.title.toLowerCase().includes(query) || a.grade.toLowerCase().includes(query)) {
-            allAttendeesList.push({
-              name: a.name,
-              grade: a.grade,
-              hangout: h.title,
-              price: h.price
-            });
-          }
-        });
+        totalSpotsClaimed += h.attendees.length;
+        totalSpotsCapacity += h.totalSpots;
       });
-      renderAdminRosterRows(allAttendeesList);
+
+      const statRaised = document.getElementById('stat-raised');
+      const statSpots = document.getElementById('stat-spots');
+      const statEvents = document.getElementById('stat-events');
+
+      if (statRaised) statRaised.textContent = `$0`;
+      if (statSpots) statSpots.textContent = `${totalSpotsClaimed} / ${totalSpotsCapacity}`;
+      if (statEvents) statEvents.textContent = hangouts.length;
     }
 
-    // INITIAL EXECUTION ON LOAD
+    // Initialize all components
     function initAll() {
       renderCards();
       renderPastShowcase();
